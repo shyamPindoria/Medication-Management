@@ -1,5 +1,5 @@
 import javax.swing.JPanel;
-
+// Body of the application
 public class BodyPanel extends JPanel {
 
 	/**
@@ -8,5 +8,5 @@ public class BodyPanel extends JPanel {
 	public BodyPanel() {
 
 	}
-
+////////////////////////////////////////////////////////////////////////////
 }
