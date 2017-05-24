@@ -20,7 +20,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 
-public class LoginUI extends JFrame {
+public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameTxt;
@@ -33,7 +33,7 @@ public class LoginUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginUI frame = new LoginUI();
+					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class LoginUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LoginUI() {
+	public LoginFrame() {
 		setMinimumSize(new Dimension(740, 485));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 485);
@@ -120,8 +120,8 @@ public class LoginUI extends JFrame {
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.gridx = 1;
 		gbc_btnLogin.gridy = 3;
-		Image go = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnLogin.setIcon(new ImageIcon(go));
+		Image goIcon = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnLogin.setIcon(new ImageIcon(goIcon));
 		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT);
 		loginArea.add(btnLogin, gbc_btnLogin);
 	}
