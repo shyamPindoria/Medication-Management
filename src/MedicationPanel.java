@@ -46,7 +46,7 @@ public class MedicationPanel extends JPanel {
 		lblCurrentMedication.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		panelTitle.add(lblCurrentMedication, BorderLayout.CENTER);
 		
-		JLabel lblAdded = new JLabel("Added: 2");
+		JLabel lblAdded = new JLabel("Added: 5");
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
 		
