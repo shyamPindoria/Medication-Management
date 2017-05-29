@@ -210,7 +210,7 @@ public class HistoryPanel extends JPanel {
 		gbc_lblNewLabel_2.gridy = 3;
 		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Glucphage");
+		JLabel lblNewLabel_3 = new JLabel("Glucophage");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
