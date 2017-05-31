@@ -38,6 +38,7 @@ import javax.swing.JSlider;
 
 
 public class SettingsPanel extends JPanel {
+	///
 	private JTextField titleTextField;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -62,203 +63,6 @@ public class SettingsPanel extends JPanel {
 		add(tabbedPane, BorderLayout.CENTER);
 		
 		Image profilePic = new ImageIcon(this.getClass().getResource("profile.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-		
-		JPanel panelNotifications = new JPanel();
-		tabbedPane.addTab("Notifications", null, panelNotifications, null);
-		GridBagLayout gbl_panelNotifications = new GridBagLayout();
-		gbl_panelNotifications.columnWidths = new int[]{317, 317, 0};
-		gbl_panelNotifications.rowHeights = new int[]{430, 0};
-		gbl_panelNotifications.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panelNotifications.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		panelNotifications.setLayout(gbl_panelNotifications);
-		
-		JPanel previousReminderPanel = new JPanel();
-		previousReminderPanel.setBorder(new TitledBorder(null, "Previous Reminder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		previousReminderPanel.setAutoscrolls(true);
-		GridBagConstraints gbc_previousReminderPanel = new GridBagConstraints();
-		gbc_previousReminderPanel.anchor = GridBagConstraints.WEST;
-		gbc_previousReminderPanel.fill = GridBagConstraints.BOTH;
-		gbc_previousReminderPanel.insets = new Insets(0, 0, 0, 5);
-		gbc_previousReminderPanel.gridx = 0;
-		gbc_previousReminderPanel.gridy = 0;
-		panelNotifications.add(previousReminderPanel, gbc_previousReminderPanel);
-		GridBagLayout gbl_previousReminderPanel = new GridBagLayout();
-		gbl_previousReminderPanel.columnWidths = new int[]{12, 0};
-		gbl_previousReminderPanel.rowHeights = new int[]{25, 0};
-		gbl_previousReminderPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_previousReminderPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		previousReminderPanel.setLayout(gbl_previousReminderPanel);
-		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"\tDiabetes - Evening pills", "\tHigh Fever - Syrup"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		list.setBorder(null);
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.anchor = GridBagConstraints.WEST;
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 0;
-		gbc_list.gridy = 0;
-		previousReminderPanel.add(list, gbc_list);
-		
-		JPanel DetailedSettingPanel = new JPanel();
-		DetailedSettingPanel.setBorder(new TitledBorder(null, "Detailed Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_DetailedSettingPanel = new GridBagConstraints();
-		gbc_DetailedSettingPanel.insets = new Insets(0, 12, 0, 0);
-		gbc_DetailedSettingPanel.fill = GridBagConstraints.BOTH;
-		gbc_DetailedSettingPanel.gridx = 1;
-		gbc_DetailedSettingPanel.gridy = 0;
-		panelNotifications.add(DetailedSettingPanel, gbc_DetailedSettingPanel);
-		GridBagLayout gbl_DetailedSettingPanel = new GridBagLayout();
-		gbl_DetailedSettingPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_DetailedSettingPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		DetailedSettingPanel.setLayout(gbl_DetailedSettingPanel);
-		
-		JLabel lblTitle = new JLabel("Title");
-		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
-		gbc_lblTitle.insets = new Insets(0, 12, 5, 12);
-		gbc_lblTitle.anchor = GridBagConstraints.EAST;
-		gbc_lblTitle.gridx = 0;
-		gbc_lblTitle.gridy = 0;
-		DetailedSettingPanel.add(lblTitle, gbc_lblTitle);
-		
-		titleTextField = new JTextField();
-		titleTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_titleTextField = new GridBagConstraints();
-		gbc_titleTextField.anchor = GridBagConstraints.WEST;
-		gbc_titleTextField.insets = new Insets(0, 0, 5, 12);
-		gbc_titleTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_titleTextField.gridx = 1;
-		gbc_titleTextField.gridy = 0;
-		DetailedSettingPanel.add(titleTextField, gbc_titleTextField);
-		titleTextField.setColumns(10);
-		
-		JLabel lblDescription = new JLabel("Description");
-		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDescription = new GridBagConstraints();
-		gbc_lblDescription.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblDescription.insets = new Insets(0, 12, 5, 12);
-		gbc_lblDescription.gridx = 0;
-		gbc_lblDescription.gridy = 1;
-		DetailedSettingPanel.add(lblDescription, gbc_lblDescription);
-		
-		JScrollPane descScrollPane = new JScrollPane();
-		GridBagConstraints gbc_descScrollPane = new GridBagConstraints();
-		gbc_descScrollPane.insets = new Insets(0, 0, 5, 12);
-		gbc_descScrollPane.fill = GridBagConstraints.BOTH;
-		gbc_descScrollPane.gridx = 1;
-		gbc_descScrollPane.gridy = 1;
-		DetailedSettingPanel.add(descScrollPane, gbc_descScrollPane);
-		
-		JTextArea descTextArea = new JTextArea();
-		descTextArea.setName("");
-		descTextArea.setMaximumSize(new Dimension(50, 50));
-		descTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
-		descTextArea.setDropMode(DropMode.INSERT);
-		descScrollPane.setViewportView(descTextArea);
-		
-		JLabel lblDay = new JLabel("Day (DD/MM/YYYY)");
-		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDay = new GridBagConstraints();
-		gbc_lblDay.anchor = GridBagConstraints.EAST;
-		gbc_lblDay.insets = new Insets(0, 12, 5, 12);
-		gbc_lblDay.gridx = 0;
-		gbc_lblDay.gridy = 2;
-		DetailedSettingPanel.add(lblDay, gbc_lblDay);
-		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 12);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 2;
-		DetailedSettingPanel.add(textField, gbc_textField);
-		textField.setColumns(10);
-		
-		JLabel lblTime = new JLabel("Time");
-		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblTime = new GridBagConstraints();
-		gbc_lblTime.anchor = GridBagConstraints.EAST;
-		gbc_lblTime.insets = new Insets(0, 12, 5, 12);
-		gbc_lblTime.gridx = 0;
-		gbc_lblTime.gridy = 3;
-		DetailedSettingPanel.add(lblTime, gbc_lblTime);
-		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.anchor = GridBagConstraints.WEST;
-		gbc_panel.insets = new Insets(0, 0, 5, 12);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 3;
-		DetailedSettingPanel.add(panel, gbc_panel);
-		
-		JLabel lblH = new JLabel("H");
-		panel.add(lblH);
-		
-		JSpinner spinner_1 = new JSpinner();
-		panel.add(spinner_1);
-		
-		JLabel lblM = new JLabel("M");
-		panel.add(lblM);
-		
-		JSpinner spinner_2 = new JSpinner();
-		panel.add(spinner_2);
-		
-		JLabel lblSendIntervalsmin = new JLabel("Send Intervals(Min)");
-		lblSendIntervalsmin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblSendIntervalsmin = new GridBagConstraints();
-		gbc_lblSendIntervalsmin.anchor = GridBagConstraints.EAST;
-		gbc_lblSendIntervalsmin.insets = new Insets(0, 12, 5, 12);
-		gbc_lblSendIntervalsmin.gridx = 0;
-		gbc_lblSendIntervalsmin.gridy = 4;
-		DetailedSettingPanel.add(lblSendIntervalsmin, gbc_lblSendIntervalsmin);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_spinner = new GridBagConstraints();
-		gbc_spinner.insets = new Insets(0, 0, 5, 12);
-		gbc_spinner.anchor = GridBagConstraints.WEST;
-		gbc_spinner.gridx = 1;
-		gbc_spinner.gridy = 4;
-		DetailedSettingPanel.add(spinner, gbc_spinner);
-		
-		JCheckBox checkBox = new JCheckBox("Activate Smart Medicine Cabinet");
-		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_checkBox = new GridBagConstraints();
-		gbc_checkBox.insets = new Insets(0, 0, 5, 12);
-		gbc_checkBox.gridx = 1;
-		gbc_checkBox.gridy = 5;
-		DetailedSettingPanel.add(checkBox, gbc_checkBox);
-		
-		JButton btnCreate = new JButton("Create");
-		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
-		gbc_btnCreate.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_btnCreate.insets = new Insets(0, 12, 12, 5);
-		gbc_btnCreate.gridx = 0;
-		gbc_btnCreate.gridy = 6;
-		DetailedSettingPanel.add(btnCreate, gbc_btnCreate);
-		
-		JButton btnReset = new JButton("Reset");
-		GridBagConstraints gbc_btnReset = new GridBagConstraints();
-		gbc_btnReset.insets = new Insets(0, 0, 12, 12);
-		gbc_btnReset.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_btnReset.gridx = 1;
-		gbc_btnReset.gridy = 6;
-		DetailedSettingPanel.add(btnReset, gbc_btnReset);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("General", null, scrollPane, null);
@@ -509,6 +313,203 @@ public class SettingsPanel extends JPanel {
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 3;
 		AppearanceSettingsPanel.add(btnCancel, gbc_btnCancel);
+		
+		JPanel panelNotifications = new JPanel();
+		tabbedPane.addTab("Notifications", null, panelNotifications, null);
+		GridBagLayout gbl_panelNotifications = new GridBagLayout();
+		gbl_panelNotifications.columnWidths = new int[]{317, 317, 0};
+		gbl_panelNotifications.rowHeights = new int[]{430, 0};
+		gbl_panelNotifications.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_panelNotifications.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		panelNotifications.setLayout(gbl_panelNotifications);
+		
+		JPanel previousReminderPanel = new JPanel();
+		previousReminderPanel.setBorder(new TitledBorder(null, "Previous Reminder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		previousReminderPanel.setAutoscrolls(true);
+		GridBagConstraints gbc_previousReminderPanel = new GridBagConstraints();
+		gbc_previousReminderPanel.anchor = GridBagConstraints.WEST;
+		gbc_previousReminderPanel.fill = GridBagConstraints.BOTH;
+		gbc_previousReminderPanel.insets = new Insets(0, 0, 0, 5);
+		gbc_previousReminderPanel.gridx = 0;
+		gbc_previousReminderPanel.gridy = 0;
+		panelNotifications.add(previousReminderPanel, gbc_previousReminderPanel);
+		GridBagLayout gbl_previousReminderPanel = new GridBagLayout();
+		gbl_previousReminderPanel.columnWidths = new int[]{12, 0};
+		gbl_previousReminderPanel.rowHeights = new int[]{25, 0};
+		gbl_previousReminderPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_previousReminderPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		previousReminderPanel.setLayout(gbl_previousReminderPanel);
+		
+		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"\tDiabetes - Evening pills", "\tHigh Fever - Syrup"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		list.setBorder(null);
+		GridBagConstraints gbc_list = new GridBagConstraints();
+		gbc_list.anchor = GridBagConstraints.WEST;
+		gbc_list.fill = GridBagConstraints.BOTH;
+		gbc_list.gridx = 0;
+		gbc_list.gridy = 0;
+		previousReminderPanel.add(list, gbc_list);
+		
+		JPanel DetailedSettingPanel = new JPanel();
+		DetailedSettingPanel.setBorder(new TitledBorder(null, "Detailed Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_DetailedSettingPanel = new GridBagConstraints();
+		gbc_DetailedSettingPanel.insets = new Insets(0, 12, 0, 0);
+		gbc_DetailedSettingPanel.fill = GridBagConstraints.BOTH;
+		gbc_DetailedSettingPanel.gridx = 1;
+		gbc_DetailedSettingPanel.gridy = 0;
+		panelNotifications.add(DetailedSettingPanel, gbc_DetailedSettingPanel);
+		GridBagLayout gbl_DetailedSettingPanel = new GridBagLayout();
+		gbl_DetailedSettingPanel.columnWidths = new int[]{0, 0, 0};
+		gbl_DetailedSettingPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		DetailedSettingPanel.setLayout(gbl_DetailedSettingPanel);
+		
+		JLabel lblTitle = new JLabel("Title");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblTitle = new GridBagConstraints();
+		gbc_lblTitle.insets = new Insets(0, 12, 5, 12);
+		gbc_lblTitle.anchor = GridBagConstraints.EAST;
+		gbc_lblTitle.gridx = 0;
+		gbc_lblTitle.gridy = 0;
+		DetailedSettingPanel.add(lblTitle, gbc_lblTitle);
+		
+		titleTextField = new JTextField();
+		titleTextField.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_titleTextField = new GridBagConstraints();
+		gbc_titleTextField.anchor = GridBagConstraints.WEST;
+		gbc_titleTextField.insets = new Insets(0, 0, 5, 12);
+		gbc_titleTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_titleTextField.gridx = 1;
+		gbc_titleTextField.gridy = 0;
+		DetailedSettingPanel.add(titleTextField, gbc_titleTextField);
+		titleTextField.setColumns(10);
+		
+		JLabel lblDescription = new JLabel("Description");
+		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblDescription = new GridBagConstraints();
+		gbc_lblDescription.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblDescription.insets = new Insets(0, 12, 5, 12);
+		gbc_lblDescription.gridx = 0;
+		gbc_lblDescription.gridy = 1;
+		DetailedSettingPanel.add(lblDescription, gbc_lblDescription);
+		
+		JScrollPane descScrollPane = new JScrollPane();
+		GridBagConstraints gbc_descScrollPane = new GridBagConstraints();
+		gbc_descScrollPane.insets = new Insets(0, 0, 5, 12);
+		gbc_descScrollPane.fill = GridBagConstraints.BOTH;
+		gbc_descScrollPane.gridx = 1;
+		gbc_descScrollPane.gridy = 1;
+		DetailedSettingPanel.add(descScrollPane, gbc_descScrollPane);
+		
+		JTextArea descTextArea = new JTextArea();
+		descTextArea.setName("");
+		descTextArea.setMaximumSize(new Dimension(50, 50));
+		descTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		descTextArea.setDropMode(DropMode.INSERT);
+		descScrollPane.setViewportView(descTextArea);
+		
+		JLabel lblDay = new JLabel("Day (DD/MM/YYYY)");
+		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblDay = new GridBagConstraints();
+		gbc_lblDay.anchor = GridBagConstraints.EAST;
+		gbc_lblDay.insets = new Insets(0, 12, 5, 12);
+		gbc_lblDay.gridx = 0;
+		gbc_lblDay.gridy = 2;
+		DetailedSettingPanel.add(lblDay, gbc_lblDay);
+		
+		textField = new JTextField();
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.insets = new Insets(0, 0, 5, 12);
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.gridx = 1;
+		gbc_textField.gridy = 2;
+		DetailedSettingPanel.add(textField, gbc_textField);
+		textField.setColumns(10);
+		
+		JLabel lblTime = new JLabel("Time");
+		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblTime = new GridBagConstraints();
+		gbc_lblTime.anchor = GridBagConstraints.EAST;
+		gbc_lblTime.insets = new Insets(0, 12, 5, 12);
+		gbc_lblTime.gridx = 0;
+		gbc_lblTime.gridy = 3;
+		DetailedSettingPanel.add(lblTime, gbc_lblTime);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.anchor = GridBagConstraints.WEST;
+		gbc_panel.insets = new Insets(0, 0, 5, 12);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 3;
+		DetailedSettingPanel.add(panel, gbc_panel);
+		
+		JLabel lblH = new JLabel("H");
+		panel.add(lblH);
+		
+		JSpinner spinner_1 = new JSpinner();
+		panel.add(spinner_1);
+		
+		JLabel lblM = new JLabel("M");
+		panel.add(lblM);
+		
+		JSpinner spinner_2 = new JSpinner();
+		panel.add(spinner_2);
+		
+		JLabel lblSendIntervalsmin = new JLabel("Send Intervals(Min)");
+		lblSendIntervalsmin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblSendIntervalsmin = new GridBagConstraints();
+		gbc_lblSendIntervalsmin.anchor = GridBagConstraints.EAST;
+		gbc_lblSendIntervalsmin.insets = new Insets(0, 12, 5, 12);
+		gbc_lblSendIntervalsmin.gridx = 0;
+		gbc_lblSendIntervalsmin.gridy = 4;
+		DetailedSettingPanel.add(lblSendIntervalsmin, gbc_lblSendIntervalsmin);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_spinner = new GridBagConstraints();
+		gbc_spinner.insets = new Insets(0, 0, 5, 12);
+		gbc_spinner.anchor = GridBagConstraints.WEST;
+		gbc_spinner.gridx = 1;
+		gbc_spinner.gridy = 4;
+		DetailedSettingPanel.add(spinner, gbc_spinner);
+		
+		JCheckBox checkBox = new JCheckBox("Activate Smart Medicine Cabinet");
+		checkBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_checkBox = new GridBagConstraints();
+		gbc_checkBox.insets = new Insets(0, 0, 5, 12);
+		gbc_checkBox.gridx = 1;
+		gbc_checkBox.gridy = 5;
+		DetailedSettingPanel.add(checkBox, gbc_checkBox);
+		
+		JButton btnCreate = new JButton("Create");
+		GridBagConstraints gbc_btnCreate = new GridBagConstraints();
+		gbc_btnCreate.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_btnCreate.insets = new Insets(0, 12, 12, 5);
+		gbc_btnCreate.gridx = 0;
+		gbc_btnCreate.gridy = 6;
+		DetailedSettingPanel.add(btnCreate, gbc_btnCreate);
+		
+		JButton btnReset = new JButton("Reset");
+		GridBagConstraints gbc_btnReset = new GridBagConstraints();
+		gbc_btnReset.insets = new Insets(0, 0, 12, 12);
+		gbc_btnReset.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_btnReset.gridx = 1;
+		gbc_btnReset.gridy = 6;
+		DetailedSettingPanel.add(btnReset, gbc_btnReset);
 		
 		
 	}
