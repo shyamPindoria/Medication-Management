@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,8 +9,12 @@ import java.awt.CardLayout;
 import javax.swing.border.EmptyBorder;
 
 public class MainFrame extends JFrame {
-
+	
 	private JPanel contentPane;
+	
+	private MenuPanel panelMenu;
+	private JPanel panelBody;
+	
 	private MedicationPanel panelMedication;
 	private HistoryPanel panelHistory;
 	private ContactsPanel panelContacts;
@@ -19,25 +24,10 @@ public class MainFrame extends JFrame {
 	
 	
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
 		setMinimumSize(new Dimension(740, 485));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 485);
@@ -45,15 +35,18 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
 		
-		MenuPanel panelMenu = new MenuPanel();
+		panelMenu = new MenuPanel();
 		contentPane.add(panelMenu, BorderLayout.WEST);
 		
-		JPanel panelBody = createBodyPanel();
+		panelBody = createBodyPanel();
 		contentPane.add(panelBody, BorderLayout.CENTER);
+		
+		this.setVisible(true);
 	}
 	
 	private JPanel createBodyPanel() {
-		JPanel panelBody = new JPanel();
+		
+		panelBody = new JPanel();
 		panelBody.setBorder(new EmptyBorder(0, 12, 0, 0));
 		panelBody.setLayout(new CardLayout(0, 0));
 		
