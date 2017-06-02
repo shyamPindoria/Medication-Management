@@ -3,9 +3,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -17,113 +17,125 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Image;
 
 public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameTxt;
-	private JTextField passwordTxt;
+	private JPasswordField passwordTxt;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Create the login frame
 	 */
 	public LoginFrame() {
-		setMinimumSize(new Dimension(740, 485));
+		setMinimumSize(new Dimension(740, 485)); //Set the size of the frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 485);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout());
 		
+		//Login label
 		JLabel lblLogInTo = new JLabel("Log In");
-		lblLogInTo.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		lblLogInTo.setFont(MedicationManagement.HEADER_FONT);
 		lblLogInTo.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblLogInTo, BorderLayout.NORTH);
 		
+		//Add login area
+		contentPane.add(createLoginArea(), BorderLayout.CENTER);
+		
+		//Add sign up area
+		contentPane.add(createSignUpArea(), BorderLayout.SOUTH);
+		
+	}
+
+	/**
+	 * Populate login area
+	 * @return login area panel
+	 */
+	private JPanel createLoginArea() {
+		
+		//Create a panel with a grid bag layout
+		JPanel loginArea = new JPanel();
+		GridBagLayout gbl_loginArea = new GridBagLayout();
+		loginArea.setLayout(gbl_loginArea);
+		
+		//User name label
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
+		gbc_lblUsername.anchor = GridBagConstraints.EAST;
+		gbc_lblUsername.gridx = 0;
+		gbc_lblUsername.gridy = 0;
+		loginArea.add(lblUsername, gbc_lblUsername);
+		
+		//User name text field
+		usernameTxt = new JTextField();
+		GridBagConstraints gbc_usernameTxt = new GridBagConstraints();
+		gbc_usernameTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_usernameTxt.gridx = 1;
+		gbc_usernameTxt.gridy = 0;
+		loginArea.add(usernameTxt, gbc_usernameTxt);
+		usernameTxt.setColumns(10);
+		
+		//Password label
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+		gbc_lblPassword.anchor = GridBagConstraints.EAST;
+		gbc_lblPassword.gridx = 0;
+		gbc_lblPassword.gridy = 1;
+		loginArea.add(lblPassword, gbc_lblPassword);
+		
+		//Password text field
+		passwordTxt = new JPasswordField();
+		GridBagConstraints gbc_passwordTxt = new GridBagConstraints();
+		gbc_passwordTxt.fill = GridBagConstraints.HORIZONTAL;
+		gbc_passwordTxt.gridx = 1;
+		gbc_passwordTxt.gridy = 1;
+		loginArea.add(passwordTxt, gbc_passwordTxt);
+		passwordTxt.setColumns(10);
+		
+		//Create login button
+		JButton btnLogin = new JButton("Login");
+		btnLogin.setPreferredSize(new Dimension(200, 30)); //Button size
+		btnLogin.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
+		gbc_btnLogin.gridwidth = 2;
+		gbc_btnLogin.gridx = 0;
+		gbc_btnLogin.gridy = 2;
+		Image goIcon = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnLogin.setIcon(new ImageIcon(goIcon)); //Add an image to the button
+		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT); //Set the image to the right of the text
+		loginArea.add(btnLogin, gbc_btnLogin);
+		
+		return loginArea;
+	}
+
+	/**
+	 * Create sign up area
+	 * @return sign up area panel
+	 */
+	private JPanel createSignUpArea() {
+		
+		//Create a panel with box layout
 		JPanel signUpArea = new JPanel();
-		contentPane.add(signUpArea, BorderLayout.SOUTH);
 		signUpArea.setLayout(new BoxLayout(signUpArea, BoxLayout.Y_AXIS));
 		
+		//No account label
 		JLabel lblDontHaveAn = new JLabel("Don't have an account?");
+		lblDontHaveAn.setFont(MedicationManagement.BODY_FONT);
 		lblDontHaveAn.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblDontHaveAn.setHorizontalAlignment(SwingConstants.CENTER);
 		signUpArea.add(lblDontHaveAn);
 		
+		//Sign up button
 		JButton btnSignUp = new JButton("Sign Up");
+		btnSignUp.setFont(MedicationManagement.BODY_FONT);
 		btnSignUp.setAlignmentX(Component.CENTER_ALIGNMENT);
 		signUpArea.add(btnSignUp);
 		
-		JPanel loginArea = new JPanel();
-		contentPane.add(loginArea, BorderLayout.CENTER);
-		GridBagLayout gbl_loginArea = new GridBagLayout();
-		gbl_loginArea.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_loginArea.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_loginArea.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0 };
-		gbl_loginArea.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0 };
-		loginArea.setLayout(gbl_loginArea);
-		
-		JLabel lblUsername = new JLabel("Username:");
-		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
-		gbc_lblUsername.anchor = GridBagConstraints.EAST;
-		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUsername.gridx = 1;
-		gbc_lblUsername.gridy = 1;
-		loginArea.add(lblUsername, gbc_lblUsername);
-		
-		usernameTxt = new JTextField();
-		GridBagConstraints gbc_usernameTxt = new GridBagConstraints();
-		gbc_usernameTxt.insets = new Insets(0, 0, 5, 0);
-		gbc_usernameTxt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_usernameTxt.gridx = 2;
-		gbc_usernameTxt.gridy = 1;
-		loginArea.add(usernameTxt, gbc_usernameTxt);
-		usernameTxt.setColumns(10);
-		
-		JLabel lblPassword = new JLabel("Password:");
-		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
-		gbc_lblPassword.anchor = GridBagConstraints.EAST;
-		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPassword.gridx = 1;
-		gbc_lblPassword.gridy = 2;
-		loginArea.add(lblPassword, gbc_lblPassword);
-		
-		passwordTxt = new JTextField();
-		GridBagConstraints gbc_passwordTxt = new GridBagConstraints();
-		gbc_passwordTxt.insets = new Insets(0, 0, 5, 0);
-		gbc_passwordTxt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_passwordTxt.gridx = 2;
-		gbc_passwordTxt.gridy = 2;
-		loginArea.add(passwordTxt, gbc_passwordTxt);
-		passwordTxt.setColumns(10);
-		
-		JButton btnLogin = new JButton("Login");
-		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
-		gbc_btnLogin.gridwidth = 2;
-		gbc_btnLogin.gridx = 1;
-		gbc_btnLogin.gridy = 3;
-		Image goIcon = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnLogin.setIcon(new ImageIcon(goIcon));
-		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT);
-		loginArea.add(btnLogin, gbc_btnLogin);
+		return signUpArea;
 	}
-
+	
 }
