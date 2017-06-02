@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +15,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class MenuPanel extends JPanel {
+	
+	JButton btnCurrent;
+	JButton btnHistory;
+	JButton btnContacts;
+	JButton btnUpload;
+	JButton btnHelp;
+	JButton btnSettings;
+	JButton btnLogOut;
 
 	/**
 	 * Create the panel and add the menu buttons to it
@@ -26,67 +36,67 @@ public class MenuPanel extends JPanel {
 		gbl_panelMenu.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panelMenu);
 		
-		
+		this.btnCurrent = createCurrentBtn();
 		GridBagConstraints gbc_btnCurrent = new GridBagConstraints();
 		gbc_btnCurrent.fill = GridBagConstraints.BOTH;
 		gbc_btnCurrent.weighty = 0.1;
 		gbc_btnCurrent.gridx = 0;
 		gbc_btnCurrent.gridy = 0;
-		this.add(createCurrentBtn(), gbc_btnCurrent);
+		this.add(btnCurrent, gbc_btnCurrent);
 		
-		
+		this.btnHistory = createHistoryBtn();
 		GridBagConstraints gbc_btnHistory = new GridBagConstraints();
 		gbc_btnHistory.fill = GridBagConstraints.BOTH;
 		gbc_btnHistory.weighty = 0.1;
 		gbc_btnHistory.insets = new Insets(5, 0, 0, 0);
 		gbc_btnHistory.gridx = 0;
 		gbc_btnHistory.gridy = 1;
-		this.add(createHistoryBtn(), gbc_btnHistory);
+		this.add(btnHistory, gbc_btnHistory);
 		
-		
+		this.btnContacts = createContactsBtn();
 		GridBagConstraints gbc_btnContacts = new GridBagConstraints();
 		gbc_btnContacts.fill = GridBagConstraints.BOTH;
 		gbc_btnContacts.weighty = 0.1;
 		gbc_btnContacts.insets = new Insets(5, 0, 0, 0);
 		gbc_btnContacts.gridx = 0;
 		gbc_btnContacts.gridy = 2;
-		this.add(createContactsBtn(), gbc_btnContacts);
+		this.add(btnContacts, gbc_btnContacts);
 		
-		
+		this.btnUpload = createUploadBtn();
 		GridBagConstraints gbc_btnUpload = new GridBagConstraints();
 		gbc_btnUpload.fill = GridBagConstraints.BOTH;
 		gbc_btnUpload.weighty = 0.1;
 		gbc_btnUpload.insets = new Insets(5, 0, 0, 0);
 		gbc_btnUpload.gridx = 0;
 		gbc_btnUpload.gridy = 3;
-		this.add(createUploadBtn(), gbc_btnUpload);
+		this.add(btnUpload, gbc_btnUpload);
 		
-		
+		this.btnHelp = createHelpBtn();
 		GridBagConstraints gbc_btnHelp = new GridBagConstraints();
 		gbc_btnHelp.fill = GridBagConstraints.BOTH;
 		gbc_btnHelp.weighty = 0.1;
 		gbc_btnHelp.insets = new Insets(5, 0, 0, 0);
 		gbc_btnHelp.gridx = 0;
 		gbc_btnHelp.gridy = 4;
-		this.add(createHelpBtn(), gbc_btnHelp);
+		this.add(btnHelp, gbc_btnHelp);
 		
-
+		this.btnSettings = createSettingsBtn();
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
 		gbc_btnSettings.fill = GridBagConstraints.BOTH;
 		gbc_btnSettings.weighty = 0.1;
 		gbc_btnSettings.insets = new Insets(5, 0, 0, 0);
 		gbc_btnSettings.gridx = 0;
 		gbc_btnSettings.gridy = 5;
-		this.add(createSettingsBtn(), gbc_btnSettings);
+		this.add(btnSettings, gbc_btnSettings);
 		
-		
+		this.btnLogOut = createLogOutBtn();
 		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
 		gbc_btnLogOut.weighty = 1.0;
 		gbc_btnLogOut.anchor = GridBagConstraints.SOUTH;
 		gbc_btnLogOut.insets = new Insets(5, 0, 0, 0);
 		gbc_btnLogOut.gridx = 0;
 		gbc_btnLogOut.gridy = 6;
-		add(createLogOutBtn(), gbc_btnLogOut);
+		add(btnLogOut, gbc_btnLogOut);
 	}
 
 	/**
@@ -104,7 +114,6 @@ public class MenuPanel extends JPanel {
 		btnCurrent.setOpaque(true); //To allow the background color to show
 		btnCurrent.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnCurrent.setBackground(new Color(0, 255, 220)); //Set the background color
-
 		return btnCurrent;
 	}
 
@@ -214,6 +223,17 @@ public class MenuPanel extends JPanel {
 		btnLogOut.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnLogOut.setBackground(new Color(0, 255, 220)); //Set the background color
 		return btnLogOut;
+	}
+
+	
+	public void addMenuButtonListener(ActionListener listener) {
+		this.btnCurrent.addActionListener(listener);
+		this.btnHistory.addActionListener(listener);
+		this.btnContacts.addActionListener(listener);
+		this.btnUpload.addActionListener(listener);
+		this.btnHelp.addActionListener(listener);
+		this.btnSettings.addActionListener(listener);
+		this.btnLogOut.addActionListener(listener);
 	}
 	
 }

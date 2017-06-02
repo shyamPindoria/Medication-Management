@@ -47,6 +47,7 @@ public class LoginFrame extends JFrame {
 		//Add sign up area
 		contentPane.add(createSignUpArea(), BorderLayout.SOUTH);
 		
+		this.setVisible(true);
 	}
 
 	/**
