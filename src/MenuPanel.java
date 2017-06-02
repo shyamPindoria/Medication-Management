@@ -45,77 +45,41 @@ public class MenuPanel extends JPanel {
 		gbc_btnHistory.gridy = 1;
 		this.add(createHistoryBtn(), gbc_btnHistory);
 		
-		JButton btnContacts = new JButton("Contacts");
-		btnContacts.setHorizontalAlignment(SwingConstants.LEFT);
-		btnContacts.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Image contactsIcon = new ImageIcon(this.getClass().getResource("contacts.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnContacts.setIcon(new ImageIcon(contactsIcon));
-		btnContacts.setPreferredSize(new Dimension(100, 25));
-		btnContacts.setOpaque(true);
-		btnContacts.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnContacts.setBackground(new Color(0, 255, 220));
+		
 		GridBagConstraints gbc_btnContacts = new GridBagConstraints();
 		gbc_btnContacts.fill = GridBagConstraints.BOTH;
 		gbc_btnContacts.weighty = 0.1;
 		gbc_btnContacts.insets = new Insets(5, 0, 0, 0);
 		gbc_btnContacts.gridx = 0;
 		gbc_btnContacts.gridy = 2;
-		this.add(btnContacts, gbc_btnContacts);
+		this.add(createContactsBtn(), gbc_btnContacts);
 		
-		JButton btnUpload = new JButton("Upload");
-		btnUpload.setHorizontalAlignment(SwingConstants.LEFT);
-		btnUpload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnUpload.setIcon(new ImageIcon(uploadIcon));
-		btnUpload.setPreferredSize(new Dimension(100, 25));
-		btnUpload.setOpaque(true);
-		btnUpload.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnUpload.setBackground(new Color(0, 255, 220));
+		
 		GridBagConstraints gbc_btnUpload = new GridBagConstraints();
 		gbc_btnUpload.fill = GridBagConstraints.BOTH;
 		gbc_btnUpload.weighty = 0.1;
 		gbc_btnUpload.insets = new Insets(5, 0, 0, 0);
 		gbc_btnUpload.gridx = 0;
 		gbc_btnUpload.gridy = 3;
-		this.add(btnUpload, gbc_btnUpload);
+		this.add(createUploadBtn(), gbc_btnUpload);
 		
-		JButton btnHelp = new JButton("Help");
-		btnHelp.setHorizontalAlignment(SwingConstants.LEFT);
-		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Image helpIcon = new ImageIcon(this.getClass().getResource("help.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		btnHelp.setIcon(new ImageIcon(helpIcon));
-		btnHelp.setPreferredSize(new Dimension(100, 25));
-		btnHelp.setOpaque(true);
-		btnHelp.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnHelp.setBackground(new Color(0, 255, 220));
+		
 		GridBagConstraints gbc_btnHelp = new GridBagConstraints();
 		gbc_btnHelp.fill = GridBagConstraints.BOTH;
 		gbc_btnHelp.weighty = 0.1;
 		gbc_btnHelp.insets = new Insets(5, 0, 0, 0);
 		gbc_btnHelp.gridx = 0;
 		gbc_btnHelp.gridy = 4;
-		this.add(btnHelp, gbc_btnHelp);
+		this.add(createHelpBtn(), gbc_btnHelp);
 		
-		JButton btnSettings = new JButton("Settings");
-		btnSettings.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSettings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Image settingsIcon = new ImageIcon(this.getClass().getResource("settings.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnSettings.setIcon(new ImageIcon(settingsIcon));
-		btnSettings.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnSettings.setPreferredSize(new Dimension(100, 25));
-		btnSettings.setBackground(new Color(0, 255, 220));
-		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnSettings.setOpaque(true);
+
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
 		gbc_btnSettings.fill = GridBagConstraints.BOTH;
 		gbc_btnSettings.weighty = 0.1;
 		gbc_btnSettings.insets = new Insets(5, 0, 0, 0);
 		gbc_btnSettings.gridx = 0;
 		gbc_btnSettings.gridy = 5;
-		this.add(btnSettings, gbc_btnSettings);
+		this.add(createSettingsBtn(), gbc_btnSettings);
 		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.setHorizontalAlignment(SwingConstants.LEFT);
@@ -168,4 +132,63 @@ public class MenuPanel extends JPanel {
 		return btnHistory;
 	}
 	
+	private JButton createContactsBtn() {
+		
+		JButton btnContacts = new JButton("Contacts");
+		btnContacts.setHorizontalAlignment(SwingConstants.LEFT);
+		btnContacts.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Image contactsIcon = new ImageIcon(this.getClass().getResource("contacts.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnContacts.setIcon(new ImageIcon(contactsIcon));
+		btnContacts.setPreferredSize(new Dimension(100, 25));
+		btnContacts.setOpaque(true);
+		btnContacts.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0));
+		btnContacts.setBackground(new Color(0, 255, 220));
+		
+		return btnContacts;
+	}
+	
+	private JButton createUploadBtn() {
+		
+		JButton btnUpload = new JButton("Upload");
+		btnUpload.setHorizontalAlignment(SwingConstants.LEFT);
+		btnUpload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnUpload.setIcon(new ImageIcon(uploadIcon));
+		btnUpload.setPreferredSize(new Dimension(100, 25));
+		btnUpload.setOpaque(true);
+		btnUpload.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0));
+		btnUpload.setBackground(new Color(0, 255, 220));
+		return btnUpload;
+		
+	}
+
+	private JButton createHelpBtn() {
+		JButton btnHelp = new JButton("Help");
+		btnHelp.setHorizontalAlignment(SwingConstants.LEFT);
+		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Image helpIcon = new ImageIcon(this.getClass().getResource("help.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		btnHelp.setIcon(new ImageIcon(helpIcon));
+		btnHelp.setPreferredSize(new Dimension(100, 25));
+		btnHelp.setOpaque(true);
+		btnHelp.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0));
+		btnHelp.setBackground(new Color(0, 255, 220));
+		return btnHelp;
+	}
+	
+	private JButton createSettingsBtn() {
+		JButton btnSettings = new JButton("Settings");
+		btnSettings.setHorizontalAlignment(SwingConstants.LEFT);
+		btnSettings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		Image settingsIcon = new ImageIcon(this.getClass().getResource("settings.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnSettings.setIcon(new ImageIcon(settingsIcon));
+		btnSettings.setHorizontalTextPosition(SwingConstants.RIGHT);
+		btnSettings.setPreferredSize(new Dimension(100, 25));
+		btnSettings.setBackground(new Color(0, 255, 220));
+		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0));
+		btnSettings.setOpaque(true);
+		return btnSettings;
+	}
 }

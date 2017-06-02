@@ -112,15 +112,21 @@ public class ContactsPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Create and populate a tool bar pane
+	 * @return Tool bar pane
+	 */
 	private JPanel createToolBarPane() {
-
+		//Panel for tool bar contents
 		JPanel panelToolBar = new JPanel();
 		
+		//Set the panel's layout to grid bag layout
 		GridBagLayout gbl_panelToolBar = new GridBagLayout();
 		gbl_panelToolBar.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
 		gbl_panelToolBar.rowWeights = new double[]{0.0};
 		panelToolBar.setLayout(gbl_panelToolBar);
 		
+		//Create an Add button and add it to the tool bar
 		JButton btnAdd = new JButton("Add");
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 12, 0, 5);
@@ -128,6 +134,7 @@ public class ContactsPanel extends JPanel {
 		gbc_btnAdd.gridy = 0;
 		panelToolBar.add(btnAdd, gbc_btnAdd);
 		
+		//Create a remove button and add it to the tool bar
 		JButton btnRemove = new JButton("Remove");
 		GridBagConstraints gbc_btnRemove = new GridBagConstraints();
 		gbc_btnRemove.weightx = 3.0;
@@ -137,6 +144,7 @@ public class ContactsPanel extends JPanel {
 		gbc_btnRemove.gridy = 0;
 		panelToolBar.add(btnRemove, gbc_btnRemove);
 		
+		//Search text field
 		textFieldSearch = new JTextField();
 		textFieldSearch.setColumns(10);
 		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
@@ -147,6 +155,7 @@ public class ContactsPanel extends JPanel {
 		gbc_textFieldSearch.gridy = 0;
 		panelToolBar.add(textFieldSearch, gbc_textFieldSearch);
 		
+		//Search button
 		JButton btnSearch = new JButton("Search");
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.insets = new Insets(0, 0, 0, 12);
@@ -158,10 +167,17 @@ public class ContactsPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Create and populate a contact list pane
+	 * @return contact list pane
+	 */
 	private JPanel createContactListPane() {
-		
+		//Main panel to hold all the labels and buttons
 		JPanel panelContactList = new JPanel();
 		
+		Image expandIcon = new ImageIcon(this.getClass().getResource("expand.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		
+		//Set a grid bag layout to the contact pane list
 		GridBagLayout gbl_panelContactList = new GridBagLayout();
 		gbl_panelContactList.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panelContactList.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -169,8 +185,10 @@ public class ContactsPanel extends JPanel {
 		gbl_panelContactList.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelContactList.setLayout(gbl_panelContactList);
 		
+		//Add labels for names and phone numbers to the pane
+		
 		JLabel lblName = new JLabel("Name");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblName.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.WEST;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
@@ -179,7 +197,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(lblName, gbc_lblName);
 		
 		JLabel lblPhone = new JLabel("Phone");
-		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblPhone.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblPhone = new GridBagConstraints();
 		gbc_lblPhone.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhone.gridx = 2;
@@ -198,7 +216,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(name1, gbc_name1);
 		
 		JLabel phone1 = new JLabel("0412345678");
-		phone1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phone1.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_phone1 = new GridBagConstraints();
 		gbc_phone1.weightx = 1.0;
 		gbc_phone1.insets = new Insets(0, 0, 5, 5);
@@ -206,8 +224,10 @@ public class ContactsPanel extends JPanel {
 		gbc_phone1.gridy = 1;
 		panelContactList.add(phone1, gbc_phone1);
 		
+		//Expand buttons
 		JButton btnExpand1 = new JButton("Expand");
-		btnExpand1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand1.setFont(MedicationManagement.BODY_FONT);
+		btnExpand1.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand1 = new GridBagConstraints();
 		gbc_btnExpand1.anchor = GridBagConstraints.EAST;
 		gbc_btnExpand1.insets = new Insets(0, 0, 5, 12);
@@ -216,7 +236,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(btnExpand1, gbc_btnExpand1);
 		
 		JLabel name2 = new JLabel("Dr. William");
-		name2.setFont(new Font("Dialog", Font.PLAIN, 18));
+		name2.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_name2 = new GridBagConstraints();
 		gbc_name2.weightx = 1.0;
 		gbc_name2.anchor = GridBagConstraints.WEST;
@@ -226,7 +246,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(name2, gbc_name2);
 		
 		JLabel phone2 = new JLabel("0498765432");
-		phone2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phone2.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_phone2 = new GridBagConstraints();
 		gbc_phone2.insets = new Insets(0, 0, 5, 5);
 		gbc_phone2.gridx = 2;
@@ -234,7 +254,8 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(phone2, gbc_phone2);
 		
 		JButton btnExpand2 = new JButton("Expand");
-		btnExpand2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand2.setFont(MedicationManagement.BODY_FONT);
+		btnExpand2.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand2 = new GridBagConstraints();
 		gbc_btnExpand2.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand2.gridx = 3;
@@ -242,7 +263,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(btnExpand2, gbc_btnExpand2);
 		
 		JLabel name3 = new JLabel("Dr. Jane");
-		name3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		name3.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_name3 = new GridBagConstraints();
 		gbc_name3.anchor = GridBagConstraints.WEST;
 		gbc_name3.insets = new Insets(0, 20, 5, 5);
@@ -251,7 +272,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(name3, gbc_name3);
 		
 		JLabel phone3 = new JLabel("0491827364");
-		phone3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phone3.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_phone3 = new GridBagConstraints();
 		gbc_phone3.insets = new Insets(0, 0, 5, 5);
 		gbc_phone3.gridx = 2;
@@ -259,7 +280,8 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(phone3, gbc_phone3);
 		
 		JButton btnExpand3 = new JButton("Expand");
-		btnExpand3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand3.setIcon(new ImageIcon(expandIcon));
+		btnExpand3.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnExpand3 = new GridBagConstraints();
 		gbc_btnExpand3.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand3.gridx = 3;
@@ -267,7 +289,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(btnExpand3, gbc_btnExpand3);
 		
 		JLabel name4 = new JLabel("Dr. Isaac");
-		name4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		name4.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_name4 = new GridBagConstraints();
 		gbc_name4.anchor = GridBagConstraints.WEST;
 		gbc_name4.insets = new Insets(0, 20, 5, 5);
@@ -276,7 +298,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(name4, gbc_name4);
 		
 		JLabel phone4 = new JLabel("0457483920");
-		phone4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phone4.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_phone4 = new GridBagConstraints();
 		gbc_phone4.insets = new Insets(0, 0, 5, 5);
 		gbc_phone4.gridx = 2;
@@ -284,7 +306,8 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(phone4, gbc_phone4);
 		
 		JButton btnExpand4 = new JButton("Expand");
-		btnExpand4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand4.setIcon(new ImageIcon(expandIcon));
+		btnExpand4.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnExpand4 = new GridBagConstraints();
 		gbc_btnExpand4.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand4.gridx = 3;
@@ -292,7 +315,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(btnExpand4, gbc_btnExpand4);
 		
 		JLabel name5 = new JLabel("Dr. Robert");
-		name5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		name5.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_name5 = new GridBagConstraints();
 		gbc_name5.anchor = GridBagConstraints.WEST;
 		gbc_name5.insets = new Insets(0, 20, 0, 5);
@@ -301,7 +324,7 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(name5, gbc_name5);
 		
 		JLabel phone5 = new JLabel("0401987654");
-		phone5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		phone5.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_phone5 = new GridBagConstraints();
 		gbc_phone5.insets = new Insets(0, 0, 0, 5);
 		gbc_phone5.gridx = 2;
@@ -309,7 +332,8 @@ public class ContactsPanel extends JPanel {
 		panelContactList.add(phone5, gbc_phone5);
 		
 		JButton btnExpand5 = new JButton("Expand");
-		btnExpand5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand5.setFont(MedicationManagement.BODY_FONT);
+		btnExpand5.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand5 = new GridBagConstraints();
 		gbc_btnExpand5.insets = new Insets(0, 0, 0, 12);
 		gbc_btnExpand5.gridx = 3;
