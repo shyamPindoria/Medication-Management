@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 public class MenuPanel extends JPanel {
 
 	/**
-	 * Create the panel.
+	 * Create the panel and add the menu buttons to it
 	 */
 	public MenuPanel() {
 		this.setBackground(Color.DARK_GRAY);
@@ -81,114 +81,141 @@ public class MenuPanel extends JPanel {
 		gbc_btnSettings.gridy = 5;
 		this.add(createSettingsBtn(), gbc_btnSettings);
 		
-		JButton btnLogOut = new JButton("Log Out");
-		btnLogOut.setHorizontalAlignment(SwingConstants.LEFT);
-		btnLogOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		Image logOutIcon = new ImageIcon(this.getClass().getResource("lock.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnLogOut.setIcon(new ImageIcon(logOutIcon));
-		btnLogOut.setPreferredSize(new Dimension(100, 25));
-		btnLogOut.setOpaque(true);
-		btnLogOut.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnLogOut.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnLogOut.setBackground(new Color(0, 255, 220));
+		
 		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
 		gbc_btnLogOut.weighty = 1.0;
 		gbc_btnLogOut.anchor = GridBagConstraints.SOUTH;
 		gbc_btnLogOut.insets = new Insets(5, 0, 0, 0);
 		gbc_btnLogOut.gridx = 0;
 		gbc_btnLogOut.gridy = 6;
-		add(btnLogOut, gbc_btnLogOut);
+		add(createLogOutBtn(), gbc_btnLogOut);
 	}
 
+	/**
+	 * Create current medication button
+	 * @return current medication button
+	 */
 	private JButton createCurrentBtn() {
 
-		JButton btnCurrent = new JButton("Medication");
-		btnCurrent.setHorizontalAlignment(SwingConstants.LEFT);
-		btnCurrent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnCurrent = new JButton("Medication"); //Creates button with text
+		btnCurrent.setHorizontalAlignment(SwingConstants.LEFT);  //Sets the alignment to left
+		btnCurrent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image medicationIcon = new ImageIcon(this.getClass().getResource("medication.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnCurrent.setIcon(new ImageIcon(medicationIcon));
-		btnCurrent.setPreferredSize(new Dimension(100, 25));
-		btnCurrent.setOpaque(true);
-		btnCurrent.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnCurrent.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnCurrent.setBackground(new Color(0, 255, 220));
+		btnCurrent.setIcon(new ImageIcon(medicationIcon)); //Add the medication image to the button
+		btnCurrent.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnCurrent.setOpaque(true); //To allow the background color to show
+		btnCurrent.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnCurrent.setBackground(new Color(0, 255, 220)); //Set the background color
 
 		return btnCurrent;
 	}
 
+	/**
+	 * Create history button
+	 * @return history button
+	 */
 	private JButton createHistoryBtn(){
 		
-		JButton btnHistory = new JButton("History");
-		btnHistory.setHorizontalAlignment(SwingConstants.LEFT);
-		btnHistory.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnHistory = new JButton("History"); //Creates button with text
+		btnHistory.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnHistory.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image historyIcon = new ImageIcon(this.getClass().getResource("history.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnHistory.setIcon(new ImageIcon(historyIcon));
-		btnHistory.setPreferredSize(new Dimension(100, 25));
-		btnHistory.setOpaque(true);
-		btnHistory.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnHistory.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnHistory.setBackground(new Color(0, 255, 220));
+		btnHistory.setIcon(new ImageIcon(historyIcon)); //Add the history image to the button
+		btnHistory.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnHistory.setOpaque(true); //To allow the background color to show
+		btnHistory.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnHistory.setBackground(new Color(0, 255, 220)); //Set the background color
 		
 		return btnHistory;
 	}
 	
+	/**
+	 * Create contacts button
+	 * @return contacts button
+	 */
 	private JButton createContactsBtn() {
 		
-		JButton btnContacts = new JButton("Contacts");
-		btnContacts.setHorizontalAlignment(SwingConstants.LEFT);
-		btnContacts.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnContacts = new JButton("Contacts"); //Creates button with text
+		btnContacts.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnContacts.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image contactsIcon = new ImageIcon(this.getClass().getResource("contacts.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnContacts.setIcon(new ImageIcon(contactsIcon));
-		btnContacts.setPreferredSize(new Dimension(100, 25));
-		btnContacts.setOpaque(true);
-		btnContacts.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnContacts.setBackground(new Color(0, 255, 220));
+		btnContacts.setIcon(new ImageIcon(contactsIcon)); //Add the contact image to the button
+		btnContacts.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnContacts.setOpaque(true); //To allow the background color to show
+		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnContacts.setBackground(new Color(0, 255, 220)); //Set the background color
 		
 		return btnContacts;
 	}
-	
+
+	/**
+	 * Create upload button
+	 * @return upload button
+	 */
 	private JButton createUploadBtn() {
 		
-		JButton btnUpload = new JButton("Upload");
-		btnUpload.setHorizontalAlignment(SwingConstants.LEFT);
-		btnUpload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnUpload = new JButton("Upload"); //Creates button with text
+		btnUpload.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnUpload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnUpload.setIcon(new ImageIcon(uploadIcon));
-		btnUpload.setPreferredSize(new Dimension(100, 25));
-		btnUpload.setOpaque(true);
-		btnUpload.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnUpload.setBackground(new Color(0, 255, 220));
+		btnUpload.setIcon(new ImageIcon(uploadIcon)); //Add the upload image to the button
+		btnUpload.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnUpload.setOpaque(true); //To allow the background color to show
+		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnUpload.setBackground(new Color(0, 255, 220)); //Set the background color
 		return btnUpload;
 		
 	}
 
+	/**
+	 * Create help button
+	 * @return help button
+	 */
 	private JButton createHelpBtn() {
-		JButton btnHelp = new JButton("Help");
-		btnHelp.setHorizontalAlignment(SwingConstants.LEFT);
-		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnHelp = new JButton("Help"); //Creates button with text
+		btnHelp.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image helpIcon = new ImageIcon(this.getClass().getResource("help.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-		btnHelp.setIcon(new ImageIcon(helpIcon));
-		btnHelp.setPreferredSize(new Dimension(100, 25));
-		btnHelp.setOpaque(true);
-		btnHelp.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnHelp.setBackground(new Color(0, 255, 220));
+		btnHelp.setIcon(new ImageIcon(helpIcon)); //Add the help image to the button
+		btnHelp.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnHelp.setOpaque(true); //To allow the background color to show
+		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnHelp.setBackground(new Color(0, 255, 220)); //Set the background color
 		return btnHelp;
 	}
 	
+	/**
+	 * Create settings button
+	 * @return settings button
+	 */
 	private JButton createSettingsBtn() {
-		JButton btnSettings = new JButton("Settings");
-		btnSettings.setHorizontalAlignment(SwingConstants.LEFT);
-		btnSettings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		JButton btnSettings = new JButton("Settings"); //Creates button with text
+		btnSettings.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnSettings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image settingsIcon = new ImageIcon(this.getClass().getResource("settings.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnSettings.setIcon(new ImageIcon(settingsIcon));
-		btnSettings.setHorizontalTextPosition(SwingConstants.RIGHT);
-		btnSettings.setPreferredSize(new Dimension(100, 25));
-		btnSettings.setBackground(new Color(0, 255, 220));
-		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0));
-		btnSettings.setOpaque(true);
+		btnSettings.setIcon(new ImageIcon(settingsIcon)); //Add the settings image to the button
+		btnSettings.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnSettings.setOpaque(true); //To allow the background color to show
+		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnSettings.setBackground(new Color(0, 255, 220)); //Set the background color
 		return btnSettings;
 	}
+
+	/**
+	 * Create log out button
+	 * @return log out button
+	 */
+	private JButton createLogOutBtn() {
+		JButton btnLogOut = new JButton("Log Out"); //Creates button with text
+		btnLogOut.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnLogOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
+		Image logOutIcon = new ImageIcon(this.getClass().getResource("lock.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnLogOut.setIcon(new ImageIcon(logOutIcon)); //Add the lock image to the button
+		btnLogOut.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnLogOut.setOpaque(true); //To allow the background color to show
+		btnLogOut.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnLogOut.setBackground(new Color(0, 255, 220)); //Set the background color
+		return btnLogOut;
+	}
+	
 }
