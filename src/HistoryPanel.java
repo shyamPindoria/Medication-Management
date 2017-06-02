@@ -3,6 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -49,8 +50,12 @@ public class HistoryPanel extends JPanel {
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
 		
+		JScrollPane scrollPaneBody = new JScrollPane();
 		JPanel panelBody = new JPanel();
-		add(panelBody, BorderLayout.CENTER);
+		
+		scrollPaneBody.setViewportView(panelBody);
+		add(scrollPaneBody, BorderLayout.CENTER);
+		
 		GridBagLayout gbl_panelBody = new GridBagLayout();
 		gbl_panelBody.columnWidths = new int[]{0, 0};
 		gbl_panelBody.rowHeights = new int[]{0, 53, 20, 0};
@@ -282,9 +287,7 @@ public class HistoryPanel extends JPanel {
 		gbc_button_2.gridx = 3;
 		gbc_button_2.gridy = 5;
 		panel.add(btnExpand5, gbc_button_2);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		add(scrollBar, BorderLayout.EAST);
+
 
 	}
 

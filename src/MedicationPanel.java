@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import java.awt.Panel;
 import java.awt.Button;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class MedicationPanel extends JPanel {
 	private JTextField txtSearch;
@@ -50,14 +51,19 @@ public class MedicationPanel extends JPanel {
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
 		
+		
+		
+		JScrollPane scrollPaneBody = new JScrollPane();
 		JPanel panelBody = new JPanel();
-		add(panelBody, BorderLayout.CENTER);
+		// add panel to scrollPanel
+	
 		GridBagLayout gbl_panelBody = new GridBagLayout();
 		gbl_panelBody.columnWidths = new int[]{0, 0};
 		gbl_panelBody.rowHeights = new int[]{0, 53, 20, 0};
 		gbl_panelBody.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_panelBody.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		panelBody.setLayout(gbl_panelBody);
+		
 		
 		JPanel panelToolBar = new JPanel();
 		GridBagConstraints gbc_panelToolBar = new GridBagConstraints();
@@ -283,8 +289,10 @@ public class MedicationPanel extends JPanel {
 		gbc_button_2.gridy = 5;
 		panel.add(btnExpand5, gbc_button_2);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		add(scrollBar, BorderLayout.EAST);
+		
+		scrollPaneBody.setViewportView(panelBody);
+		add(scrollPaneBody, BorderLayout.CENTER);
+
 
 	}
 
