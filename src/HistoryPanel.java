@@ -19,8 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class HistoryPanel extends JPanel {
-
-	private JTextField txtSearch;
+	private JTextField textField;
 	/**
 	 * Create the panel.
 	 */
@@ -46,6 +45,48 @@ public class HistoryPanel extends JPanel {
 		lblHistory.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		panelTitle.add(lblHistory, BorderLayout.CENTER);
 		
+		JPanel panel_1 = new JPanel();
+		panelTitle.add(panel_1, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		JLabel label = new JLabel("Sort By:");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.anchor = GridBagConstraints.EAST;
+		gbc_label.insets = new Insets(0, 12, 0, 5);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 0;
+		panel_1.add(label, gbc_label);
+		
+		JComboBox comboBox = new JComboBox();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
+		gbc_comboBox.gridx = 1;
+		gbc_comboBox.gridy = 0;
+		panel_1.add(comboBox, gbc_comboBox);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.weightx = 1.0;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.insets = new Insets(0, 5, 0, 5);
+		gbc_textField.gridx = 2;
+		gbc_textField.gridy = 0;
+		panel_1.add(textField, gbc_textField);
+		
+		JButton button = new JButton("Search");
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 0, 0, 12);
+		gbc_button.gridx = 3;
+		gbc_button.gridy = 0;
+		panel_1.add(button, gbc_button);
+		
 		JLabel lblAdded = new JLabel("Items: 5");
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
@@ -58,65 +99,17 @@ public class HistoryPanel extends JPanel {
 		
 		GridBagLayout gbl_panelBody = new GridBagLayout();
 		gbl_panelBody.columnWidths = new int[]{0, 0};
-		gbl_panelBody.rowHeights = new int[]{0, 53, 20, 0};
+		gbl_panelBody.rowHeights = new int[]{53, 20, 0};
 		gbl_panelBody.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelBody.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelBody.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		panelBody.setLayout(gbl_panelBody);
-		
-		JPanel panelToolBar = new JPanel();
-		GridBagConstraints gbc_panelToolBar = new GridBagConstraints();
-		gbc_panelToolBar.anchor = GridBagConstraints.NORTH;
-		gbc_panelToolBar.insets = new Insets(0, 0, 5, 0);
-		gbc_panelToolBar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panelToolBar.gridx = 0;
-		gbc_panelToolBar.gridy = 0;
-		panelBody.add(panelToolBar, gbc_panelToolBar);
-		GridBagLayout gbl_panelToolBar = new GridBagLayout();
-		gbl_panelToolBar.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panelToolBar.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panelToolBar.rowWeights = new double[]{0.0};
-		panelToolBar.setLayout(gbl_panelToolBar);
-		
-		JLabel lblSortBy = new JLabel("Sort By:");
-		GridBagConstraints gbc_lblSortBy = new GridBagConstraints();
-		gbc_lblSortBy.anchor = GridBagConstraints.EAST;
-		gbc_lblSortBy.insets = new Insets(0, 12, 0, 5);
-		gbc_lblSortBy.gridx = 0;
-		gbc_lblSortBy.gridy = 0;
-		panelToolBar.add(lblSortBy, gbc_lblSortBy);
-		
-		JComboBox comboBoxSort = new JComboBox();
-		comboBoxSort.setModel(new DefaultComboBoxModel(new String[] {"Illness", "Medication"}));
-		GridBagConstraints gbc_comboBoxSort = new GridBagConstraints();
-		gbc_comboBoxSort.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBoxSort.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxSort.gridx = 1;
-		gbc_comboBoxSort.gridy = 0;
-		panelToolBar.add(comboBoxSort, gbc_comboBoxSort);
-		
-		txtSearch = new JTextField();
-		GridBagConstraints gbc_txtSearch = new GridBagConstraints();
-		gbc_txtSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtSearch.weightx = 1.0;
-		gbc_txtSearch.insets = new Insets(0, 5, 0, 5);
-		gbc_txtSearch.gridx = 2;
-		gbc_txtSearch.gridy = 0;
-		panelToolBar.add(txtSearch, gbc_txtSearch);
-		txtSearch.setColumns(10);
-		
-		JButton btnSearch = new JButton("Search");
-		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
-		gbc_btnSearch.insets = new Insets(0, 0, 0, 12);
-		gbc_btnSearch.gridx = 3;
-		gbc_btnSearch.gridy = 0;
-		panelToolBar.add(btnSearch, gbc_btnSearch);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
+		gbc_panel.gridy = 0;
 		panelBody.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
@@ -226,11 +219,11 @@ public class HistoryPanel extends JPanel {
 		JButton btnExpand3 = new JButton("Expand");
 		btnExpand3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 5, 12);
-		gbc_button.gridx = 3;
-		gbc_button.gridy = 3;
-		panel.add(btnExpand3, gbc_button);
+		GridBagConstraints gbc_button00 = new GridBagConstraints();
+		gbc_button00.insets = new Insets(0, 0, 5, 12);
+		gbc_button00.gridx = 3;
+		gbc_button00.gridy = 3;
+		panel.add(btnExpand3, gbc_button00);
 		
 		///ROW 4////
 		JLabel lblHydrocodone = new JLabel("Body Pain");

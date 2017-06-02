@@ -20,7 +20,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class MedicationPanel extends JPanel {
-	private JTextField txtSearch;
+	private JTextField textField;
 
 	/**
 	 * Create the panel.
@@ -47,6 +47,48 @@ public class MedicationPanel extends JPanel {
 		lblCurrentMedication.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		panelTitle.add(lblCurrentMedication, BorderLayout.CENTER);
 		
+		JPanel panel_1 = new JPanel();
+		panelTitle.add(panel_1, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel_1 = new GridBagLayout();
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_1.setLayout(gbl_panel_1);
+		
+		JButton button = new JButton("Add");
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 0, 0, 5);
+		gbc_button.gridx = 0;
+		gbc_button.gridy = 0;
+		panel_1.add(button, gbc_button);
+		
+		JButton button_1 = new JButton("Remove");
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.weightx = 3.0;
+		gbc_button_1.anchor = GridBagConstraints.WEST;
+		gbc_button_1.insets = new Insets(0, 0, 0, 5);
+		gbc_button_1.gridx = 1;
+		gbc_button_1.gridy = 0;
+		panel_1.add(button_1, gbc_button_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.weightx = 1.0;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.insets = new Insets(0, 5, 0, 5);
+		gbc_textField.gridx = 2;
+		gbc_textField.gridy = 0;
+		panel_1.add(textField, gbc_textField);
+		
+		JButton button_2 = new JButton("Search");
+		GridBagConstraints gbc_button_2 = new GridBagConstraints();
+		gbc_button_2.insets = new Insets(0, 0, 0, 12);
+		gbc_button_2.gridx = 3;
+		gbc_button_2.gridy = 0;
+		panel_1.add(button_2, gbc_button_2);
+		
 		JLabel lblAdded = new JLabel("Added: 5");
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
@@ -56,68 +98,23 @@ public class MedicationPanel extends JPanel {
 		JScrollPane scrollPaneBody = new JScrollPane();
 		JPanel panelBody = new JPanel();
 		// add panel to scrollPanel
+		
+		scrollPaneBody.setViewportView(panelBody);
+		add(scrollPaneBody, BorderLayout.CENTER);
 	
 		GridBagLayout gbl_panelBody = new GridBagLayout();
 		gbl_panelBody.columnWidths = new int[]{0, 0};
-		gbl_panelBody.rowHeights = new int[]{0, 53, 20, 0};
+		gbl_panelBody.rowHeights = new int[]{53, 20, 0};
 		gbl_panelBody.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelBody.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelBody.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		panelBody.setLayout(gbl_panelBody);
-		
-		
-		JPanel panelToolBar = new JPanel();
-		GridBagConstraints gbc_panelToolBar = new GridBagConstraints();
-		gbc_panelToolBar.anchor = GridBagConstraints.NORTH;
-		gbc_panelToolBar.insets = new Insets(0, 0, 5, 0);
-		gbc_panelToolBar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panelToolBar.gridx = 0;
-		gbc_panelToolBar.gridy = 0;
-		panelBody.add(panelToolBar, gbc_panelToolBar);
-		GridBagLayout gbl_panelToolBar = new GridBagLayout();
-		gbl_panelToolBar.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panelToolBar.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panelToolBar.rowWeights = new double[]{0.0};
-		panelToolBar.setLayout(gbl_panelToolBar);
-		
-		JButton btnAdd = new JButton("Add");
-		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
-		gbc_btnAdd.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAdd.gridx = 0;
-		gbc_btnAdd.gridy = 0;
-		panelToolBar.add(btnAdd, gbc_btnAdd);
-		
-		JButton btnRemove = new JButton("Remove");
-		GridBagConstraints gbc_btnRemove = new GridBagConstraints();
-		gbc_btnRemove.anchor = GridBagConstraints.WEST;
-		gbc_btnRemove.weightx = 3.0;
-		gbc_btnRemove.insets = new Insets(0, 0, 5, 5);
-		gbc_btnRemove.gridx = 1;
-		gbc_btnRemove.gridy = 0;
-		panelToolBar.add(btnRemove, gbc_btnRemove);
-		
-		txtSearch = new JTextField();
-		GridBagConstraints gbc_txtSearch = new GridBagConstraints();
-		gbc_txtSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtSearch.weightx = 1.0;
-		gbc_txtSearch.insets = new Insets(0, 5, 5, 0);
-		gbc_txtSearch.gridx = 2;
-		gbc_txtSearch.gridy = 0;
-		panelToolBar.add(txtSearch, gbc_txtSearch);
-		txtSearch.setColumns(10);
-		
-		JButton btnSearch = new JButton("Search");
-		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
-		gbc_btnSearch.insets = new Insets(0, 0, 0, 12);
-		gbc_btnSearch.gridx = 3;
-		gbc_btnSearch.gridy = 0;
-		panelToolBar.add(btnSearch, gbc_btnSearch);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
+		gbc_panel.gridy = 0;
 		panelBody.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
@@ -227,11 +224,11 @@ public class MedicationPanel extends JPanel {
 		JButton btnExpand3 = new JButton("Expand");
 		btnExpand3.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 5, 12);
-		gbc_button.gridx = 3;
-		gbc_button.gridy = 3;
-		panel.add(btnExpand3, gbc_button);
+		GridBagConstraints gbc_button8 = new GridBagConstraints();
+		gbc_button8.insets = new Insets(0, 0, 5, 12);
+		gbc_button8.gridx = 3;
+		gbc_button8.gridy = 3;
+		panel.add(btnExpand3, gbc_button8);
 		
 		///ROW 4////
 		JLabel lblHydrocodone = new JLabel("Hydrocodone");
@@ -254,11 +251,11 @@ public class MedicationPanel extends JPanel {
 		JButton btnExpand4 = new JButton("Expand");
 		btnExpand4.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnExpand4.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.insets = new Insets(0, 0, 5, 12);
-		gbc_button_1.gridx = 3;
-		gbc_button_1.gridy = 4;
-		panel.add(btnExpand4, gbc_button_1);
+		GridBagConstraints gbc_button_9 = new GridBagConstraints();
+		gbc_button_9.insets = new Insets(0, 0, 5, 12);
+		gbc_button_9.gridx = 3;
+		gbc_button_9.gridy = 4;
+		panel.add(btnExpand4, gbc_button_9);
 		
 		
 		///ROW 5////
@@ -283,15 +280,14 @@ public class MedicationPanel extends JPanel {
 		JButton btnExpand5 = new JButton("Expand");
 		btnExpand5.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnExpand5.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.insets = new Insets(0, 0, 0, 12);
-		gbc_button_2.gridx = 3;
-		gbc_button_2.gridy = 5;
-		panel.add(btnExpand5, gbc_button_2);
+		GridBagConstraints gbc_button_10 = new GridBagConstraints();
+		gbc_button_10.insets = new Insets(0, 0, 0, 12);
+		gbc_button_10.gridx = 3;
+		gbc_button_10.gridy = 5;
+		panel.add(btnExpand5, gbc_button_10);
 		
 		
-		scrollPaneBody.setViewportView(panelBody);
-		add(scrollPaneBody, BorderLayout.CENTER);
+		
 
 
 	}

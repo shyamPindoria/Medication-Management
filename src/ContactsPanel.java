@@ -16,8 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
 public class ContactsPanel extends JPanel {
-	
-	private JTextField textFieldSearch;
+	private JTextField textField;
 	
 	public ContactsPanel() {
 		//Size of the panel
@@ -61,6 +60,9 @@ public class ContactsPanel extends JPanel {
 		lblContacts.setFont(MedicationManagement.HEADER_FONT);
 		panelTitle.add(lblContacts, BorderLayout.CENTER);
 		
+		panelTitle.add(createToolBarPane(), BorderLayout.SOUTH);
+		
+		
 		return panelTitle;
 		
 	}
@@ -89,23 +91,15 @@ public class ContactsPanel extends JPanel {
 	
 		GridBagLayout gbl_mainPanel = new GridBagLayout();
 		gbl_mainPanel.columnWeights = new double[]{1.0};
-		gbl_mainPanel.rowWeights = new double[]{0.0, 1.0};
+		gbl_mainPanel.rowWeights = new double[]{1.0};
 		mainPanel.setLayout(gbl_mainPanel);
-		
-		//Add the tool bar to the panel
-		JPanel panelToolBar = createToolBarPane();
-		GridBagConstraints gbc_panelToolBar = new GridBagConstraints();
-		gbc_panelToolBar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panelToolBar.gridx = 0;
-		gbc_panelToolBar.gridy = 0;
-		mainPanel.add(panelToolBar, gbc_panelToolBar);
 		
 		//Add the contact list panel
 		JPanel panelContactList = createContactListPane();
 		GridBagConstraints gbc_panelContactList = new GridBagConstraints();
 		gbc_panelContactList.fill = GridBagConstraints.BOTH;
 		gbc_panelContactList.gridx = 0;
-		gbc_panelContactList.gridy = 1;
+		gbc_panelContactList.gridy = 0;
 		mainPanel.add(panelContactList, gbc_panelContactList);
 		
 		
@@ -118,59 +112,53 @@ public class ContactsPanel extends JPanel {
 	 * @return Tool bar pane
 	 */
 	private JPanel createToolBarPane() {
-		//Panel for tool bar contents
-		JPanel panelToolBar = new JPanel();
-		
-		//Set the panel's layout to grid bag layout
-		GridBagLayout gbl_panelToolBar = new GridBagLayout();
-		gbl_panelToolBar.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0};
-		gbl_panelToolBar.rowWeights = new double[]{0.0};
-		panelToolBar.setLayout(gbl_panelToolBar);
-		
-		//Create an Add button and add it to the tool bar
-		JButton btnAdd = new JButton("Add");
-		btnAdd.setFont(MedicationManagement.BODY_FONT);
-		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
-		gbc_btnAdd.insets = new Insets(0, 12, 0, 5);
-		gbc_btnAdd.gridx = 0;
-		gbc_btnAdd.gridy = 0;
-		panelToolBar.add(btnAdd, gbc_btnAdd);
-		
-		//Create a remove button and add it to the tool bar
-		JButton btnRemove = new JButton("Remove");
-		btnRemove.setFont(MedicationManagement.BODY_FONT);
-		GridBagConstraints gbc_btnRemove = new GridBagConstraints();
-		gbc_btnRemove.weightx = 3.0;
-		gbc_btnRemove.anchor = GridBagConstraints.WEST;
-		gbc_btnRemove.insets = new Insets(0, 0, 0, 5);
-		gbc_btnRemove.gridx = 1;
-		gbc_btnRemove.gridy = 0;
-		panelToolBar.add(btnRemove, gbc_btnRemove);
-		
-		//Search text field
-		textFieldSearch = new JTextField();
-		textFieldSearch.setColumns(10);
-		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
-		gbc_textFieldSearch.weightx = 1.0;
-		gbc_textFieldSearch.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldSearch.insets = new Insets(0, 5, 0, 5);
-		gbc_textFieldSearch.gridx = 2;
-		gbc_textFieldSearch.gridy = 0;
-		panelToolBar.add(textFieldSearch, gbc_textFieldSearch);
-		
-		//Search button
-		JButton btnSearch = new JButton("Search");
-		btnSearch.setFont(MedicationManagement.BODY_FONT);
 		Image searchIcon = new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		btnSearch.setIcon(new ImageIcon(searchIcon));
-		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
-		gbc_btnSearch.insets = new Insets(0, 0, 0, 12);
-		gbc_btnSearch.gridx = 3;
-		gbc_btnSearch.gridy = 0;
-		panelToolBar.add(btnSearch, gbc_btnSearch);
+		JPanel panel = new JPanel();
 		
-		return panelToolBar;
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
+		JButton button = new JButton("Add");
+		button.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 12, 0, 5);
+		gbc_button.gridx = 0;
+		gbc_button.gridy = 0;
+		panel.add(button, gbc_button);
+		
+		JButton button_1 = new JButton("Remove");
+		button_1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.weightx = 3.0;
+		gbc_button_1.anchor = GridBagConstraints.WEST;
+		gbc_button_1.insets = new Insets(0, 0, 0, 5);
+		gbc_button_1.gridx = 1;
+		gbc_button_1.gridy = 0;
+		panel.add(button_1, gbc_button_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.weightx = 1.0;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.insets = new Insets(0, 5, 0, 5);
+		gbc_textField.gridx = 2;
+		gbc_textField.gridy = 0;
+		panel.add(textField, gbc_textField);
+		
+		JButton button_2 = new JButton("Search");
+		button_2.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints gbc_button_2 = new GridBagConstraints();
+		gbc_button_2.insets = new Insets(0, 0, 0, 12);
+		gbc_button_2.gridx = 3;
+		gbc_button_2.gridy = 0;
+		panel.add(button_2, gbc_button_2);
+		
+		return panel;
 	}
 	
 	/**
