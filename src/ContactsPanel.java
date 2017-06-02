@@ -30,6 +30,7 @@ public class ContactsPanel extends JPanel {
 		
 		//Display the count of the contacts at the bottom of the panel
 		JLabel lblContactsNo = new JLabel("Contacts: 5");
+		lblContactsNo.setFont(MedicationManagement.BODY_FONT);
 		lblContactsNo.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblContactsNo, BorderLayout.SOUTH);
 		
@@ -128,6 +129,7 @@ public class ContactsPanel extends JPanel {
 		
 		//Create an Add button and add it to the tool bar
 		JButton btnAdd = new JButton("Add");
+		btnAdd.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 12, 0, 5);
 		gbc_btnAdd.gridx = 0;
@@ -136,6 +138,7 @@ public class ContactsPanel extends JPanel {
 		
 		//Create a remove button and add it to the tool bar
 		JButton btnRemove = new JButton("Remove");
+		btnRemove.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnRemove = new GridBagConstraints();
 		gbc_btnRemove.weightx = 3.0;
 		gbc_btnRemove.anchor = GridBagConstraints.WEST;
@@ -157,6 +160,9 @@ public class ContactsPanel extends JPanel {
 		
 		//Search button
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setFont(MedicationManagement.BODY_FONT);
+		Image searchIcon = new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnSearch.setIcon(new ImageIcon(searchIcon));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.insets = new Insets(0, 0, 0, 12);
 		gbc_btnSearch.gridx = 3;

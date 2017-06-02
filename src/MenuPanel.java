@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -11,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.border.EmptyBorder;
 
 public class MenuPanel extends JPanel {

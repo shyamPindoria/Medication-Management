@@ -2,7 +2,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
@@ -18,16 +17,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 import javax.swing.JProgressBar;
 import java.awt.Component;
-import java.awt.Label;
-import java.awt.ScrollPane;
 import javax.swing.JToggleButton;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
-import java.awt.Color;
 import javax.swing.JScrollPane;
 
 public class UploadPanel extends JPanel {
-	private JTextField textField;
+	
+	private JTextField textFieldEmail;
 	private JTextField textFieldNumber;
 
 	/**
@@ -35,19 +30,47 @@ public class UploadPanel extends JPanel {
 	 */
 	public UploadPanel() {
 		setSize(new Dimension(640, 485));
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
 		
 		JLabel lblUpload = new JLabel("Upload");
 		lblUpload.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUpload.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblUpload.setFont(MedicationManagement.HEADER_FONT);
 		add(lblUpload, BorderLayout.NORTH);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		add(tabbedPane, BorderLayout.CENTER);
+		add(createTabbedPane(), BorderLayout.CENTER);
 		
+		add(createUploadPane(), BorderLayout.SOUTH);
+		
+	}
+	
+	/**
+	 * Create a tabbed pane and add the panels to it
+	 * @return tabbed pane
+	 */
+	private JTabbedPane createTabbedPane() {
+		
+		JTabbedPane tabbedPane = new JTabbedPane();
+		
+		tabbedPane.addTab("Email", null, createEmailPane(), null); //Add Email tab
+		 
+		tabbedPane.addTab("Phone", null, createPhonePane(), null); //Add Phone tab
+		
+		tabbedPane.addTab("Bluetooth", null, createBluetoothPane(), null); //Add Blue tooth tab
+		
+		tabbedPane.addTab("USB", null, createUSBPane(), null); //Add USB tab
+		
+		return tabbedPane;
+		
+	}
+
+	/**
+	 * Create email tab
+	 * @return Email tab
+	 */
+	private JPanel createEmailPane() {
+		
+		//Create email pane and set a grid bag layout to it
 		JPanel panelEmail = new JPanel();
-		panelEmail.setName("");
-		tabbedPane.addTab("Email", null, panelEmail, null);
 		GridBagLayout gbl_panelEmail = new GridBagLayout();
 		gbl_panelEmail.columnWidths = new int[]{0, 0, 0};
 		gbl_panelEmail.rowHeights = new int[]{0, 0, 0};
@@ -55,7 +78,9 @@ public class UploadPanel extends JPanel {
 		gbl_panelEmail.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		panelEmail.setLayout(gbl_panelEmail);
 		
+		//Create email label and add it to the panel
 		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblEmail.weightx = 1.0;
@@ -64,17 +89,20 @@ public class UploadPanel extends JPanel {
 		gbc_lblEmail.gridy = 0;
 		panelEmail.add(lblEmail, gbc_lblEmail);
 		
-		textField = new JTextField();
-		textField.setColumns(20);
+		//Create a text field for entering the email and add it to the panel
+		textFieldEmail = new JTextField();
+		textFieldEmail.setColumns(20); //Width of the text box
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_textField.weightx = 1.0;
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 0;
-		panelEmail.add(textField, gbc_textField);
+		panelEmail.add(textFieldEmail, gbc_textField);
 		
+		//Create a label for notifying the user that Internet is required
 		JLabel lblNoteInternetConnection = new JLabel("Note: An active internet connection is required");
+		lblNoteInternetConnection.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblNoteInternetConnection = new GridBagConstraints();
 		gbc_lblNoteInternetConnection.anchor = GridBagConstraints.NORTH;
 		gbc_lblNoteInternetConnection.gridwidth = 2;
@@ -83,9 +111,16 @@ public class UploadPanel extends JPanel {
 		gbc_lblNoteInternetConnection.gridy = 1;
 		panelEmail.add(lblNoteInternetConnection, gbc_lblNoteInternetConnection);
 		
-		
+		return panelEmail;
+	}
+
+	/**
+	 * Create phone tab
+	 * @return Phone panel
+	 */
+	private JPanel createPhonePane() {
+		//Create a panel with grid bag layout
 		JPanel panelPhone = new JPanel();
-		tabbedPane.addTab("Phone", null, panelPhone, null);
 		GridBagLayout gbl_panelPhone = new GridBagLayout();
 		gbl_panelPhone.columnWidths = new int[]{0, 0, 0};
 		gbl_panelPhone.rowHeights = new int[]{0, 0, 0, 0};
@@ -93,7 +128,9 @@ public class UploadPanel extends JPanel {
 		gbl_panelPhone.rowWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelPhone.setLayout(gbl_panelPhone);
 		
+		//Add number label
 		JLabel lblPhoneNumber = new JLabel("Phone Number:");
+		lblPhoneNumber.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblPhoneNumber = new GridBagConstraints();
 		gbc_lblPhoneNumber.weightx = 1.0;
 		gbc_lblPhoneNumber.insets = new Insets(0, 0, 10, 5);
@@ -102,6 +139,7 @@ public class UploadPanel extends JPanel {
 		gbc_lblPhoneNumber.gridy = 0;
 		panelPhone.add(lblPhoneNumber, gbc_lblPhoneNumber);
 		
+		//Text field for getting number input
 		textFieldNumber = new JTextField();
 		GridBagConstraints gbc_textFieldNumber = new GridBagConstraints();
 		gbc_textFieldNumber.weightx = 1.0;
@@ -112,8 +150,9 @@ public class UploadPanel extends JPanel {
 		panelPhone.add(textFieldNumber, gbc_textFieldNumber);
 		textFieldNumber.setColumns(15);
 		
+		//Add OR label
 		JLabel lblOr = new JLabel("OR");
-		lblOr.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblOr.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblOr = new GridBagConstraints();
 		gbc_lblOr.gridwidth = 2;
 		gbc_lblOr.weightx = 1.0;
@@ -122,7 +161,9 @@ public class UploadPanel extends JPanel {
 		gbc_lblOr.gridy = 1;
 		panelPhone.add(lblOr, gbc_lblOr);
 		
+		//Add choose from contacts label
 		JLabel lblChooseFromContacts = new JLabel("Choose from Contacts:");
+		lblChooseFromContacts.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblChooseFromContacts = new GridBagConstraints();
 		gbc_lblChooseFromContacts.weightx = 1.0;
 		gbc_lblChooseFromContacts.anchor = GridBagConstraints.NORTHEAST;
@@ -131,6 +172,7 @@ public class UploadPanel extends JPanel {
 		gbc_lblChooseFromContacts.gridy = 2;
 		panelPhone.add(lblChooseFromContacts, gbc_lblChooseFromContacts);
 		
+		//Add a combo box to allow the user to select a contact
 		JComboBox<String> comboBoxContacts = new JComboBox<String>();
 		comboBoxContacts.setPreferredSize(new Dimension(200, 27));
 		comboBoxContacts.setModel(new DefaultComboBoxModel<String>(new String[] {"Dr. Smith", "Dr. William", "Dr. Jane", "Dr. Isaac", "Dr. Robert"}));
@@ -141,8 +183,17 @@ public class UploadPanel extends JPanel {
 		gbc_comboBoxContacts.gridy = 2;
 		panelPhone.add(comboBoxContacts, gbc_comboBoxContacts);
 		
+		return panelPhone;
+		
+	}
+
+	/**
+	 * Create blue tooth tab
+	 * @return blue tooth pane
+	 */
+	private JPanel createBluetoothPane() {
+		//Create blue tooth pane with a grid bag layout
 		JPanel panelBluetooth = new JPanel();
-		tabbedPane.addTab("Bluetooth", null, panelBluetooth, null);
 		GridBagLayout gbl_panelBluetooth = new GridBagLayout();
 		gbl_panelBluetooth.columnWidths = new int[]{0, 0};
 		gbl_panelBluetooth.rowHeights = new int[]{0, 0, 0, 0};
@@ -150,13 +201,16 @@ public class UploadPanel extends JPanel {
 		gbl_panelBluetooth.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelBluetooth.setLayout(gbl_panelBluetooth);
 		
+		//Add connect label
 		JLabel lblConnect = new JLabel("Connect to a Bluetooth Device from the list below");
+		lblConnect.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblConnect = new GridBagConstraints();
 		gbc_lblConnect.insets = new Insets(5, 0, 5, 0);
 		gbc_lblConnect.gridx = 0;
 		gbc_lblConnect.gridy = 0;
 		panelBluetooth.add(lblConnect, gbc_lblConnect);
 		
+		//Create a tool bar for the buttons
 		JToolBar toolBar = new JToolBar();
 		GridBagConstraints gbc_toolBar = new GridBagConstraints();
 		gbc_toolBar.anchor = GridBagConstraints.WEST;
@@ -165,15 +219,19 @@ public class UploadPanel extends JPanel {
 		gbc_toolBar.gridy = 1;
 		panelBluetooth.add(toolBar, gbc_toolBar);
 		
+		//Blue tooth on/off toggle button
 		JToggleButton tglbtnBluetooth = new JToggleButton("Turn on Bluetooth");
+		tglbtnBluetooth.setFont(MedicationManagement.BODY_FONT);
 		toolBar.add(tglbtnBluetooth);
 		
+		//Refresh button
 		JButton btnRefreshBluetooth = new JButton("Refresh");
-		btnRefreshBluetooth.setMaximumSize(new Dimension(91, 45));
+		btnRefreshBluetooth.setFont(MedicationManagement.BODY_FONT);
 		Image refreshIcon = new ImageIcon(this.getClass().getResource("refresh.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnRefreshBluetooth.setIcon(new ImageIcon(refreshIcon));
 		toolBar.add(btnRefreshBluetooth);
 		
+		//Add a scroll pane that will display available blue tooth devices
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
@@ -181,8 +239,16 @@ public class UploadPanel extends JPanel {
 		gbc_scrollPane.gridy = 2;
 		panelBluetooth.add(scrollPane, gbc_scrollPane);
 		
+		return panelBluetooth;
+	}
+
+	/**
+	 * Create USB tab
+	 * @return USB panel
+	 */
+	private JPanel createUSBPane() {
+		//USB panel with grid bag layout
 		JPanel panelUSB = new JPanel();
-		tabbedPane.addTab("USB", null, panelUSB, null);
 		GridBagLayout gbl_panelUSB = new GridBagLayout();
 		gbl_panelUSB.columnWidths = new int[]{0, 0};
 		gbl_panelUSB.rowHeights = new int[]{0, 0, 0, 0};
@@ -190,13 +256,16 @@ public class UploadPanel extends JPanel {
 		gbl_panelUSB.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panelUSB.setLayout(gbl_panelUSB);
 		
+		//Select device label
 		JLabel lblSelectAUsb = new JLabel("Select a USB device from the list below");
+		lblSelectAUsb.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblSelectAUsb = new GridBagConstraints();
 		gbc_lblSelectAUsb.insets = new Insets(5, 0, 5, 0);
 		gbc_lblSelectAUsb.gridx = 0;
 		gbc_lblSelectAUsb.gridy = 0;
 		panelUSB.add(lblSelectAUsb, gbc_lblSelectAUsb);
 		
+		//Tool bar to contain the buttons
 		JToolBar toolBarUSB = new JToolBar();
 		GridBagConstraints gbc_toolBarUSB = new GridBagConstraints();
 		gbc_toolBarUSB.anchor = GridBagConstraints.WEST;
@@ -205,12 +274,14 @@ public class UploadPanel extends JPanel {
 		gbc_toolBarUSB.gridy = 1;
 		panelUSB.add(toolBarUSB, gbc_toolBarUSB);
 		
+		//Refresh button
 		JButton btnRefreshUSB = new JButton("Refresh");
-		btnRefreshUSB.setPreferredSize(new Dimension(91, 30));
-		btnRefreshUSB.setMaximumSize(new Dimension(91, 45));
+		btnRefreshUSB.setFont(MedicationManagement.BODY_FONT);
+		Image refreshIcon = new ImageIcon(this.getClass().getResource("refresh.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnRefreshUSB.setIcon(new ImageIcon(refreshIcon));
 		toolBarUSB.add(btnRefreshUSB);
 		
+		//Add a scroll pane to display the available USB devices
 		JScrollPane scrollPaneUSB = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneUSB = new GridBagConstraints();
 		gbc_scrollPaneUSB.fill = GridBagConstraints.BOTH;
@@ -218,24 +289,33 @@ public class UploadPanel extends JPanel {
 		gbc_scrollPaneUSB.gridy = 2;
 		panelUSB.add(scrollPaneUSB, gbc_scrollPaneUSB);
 		
+		return panelUSB;
+		
+	}
+	
+	/**
+	 * Create upload panel, add a progress bar and a button to it
+	 * @return upload panel
+	 */
+	private JPanel createUploadPane() {
+		//JPanel to hold the progress bar and the buttons
 		JPanel panelUpload = new JPanel();
-		add(panelUpload, BorderLayout.SOUTH);
+		panelUpload.setLayout(new BoxLayout(panelUpload, BoxLayout.Y_AXIS)); //Set a box layout
+		
+		JButton btnUpload = new JButton("Upload"); //Create a button for upload action
+		btnUpload.setFont(MedicationManagement.BODY_FONT); //Set font
+		btnUpload.setAlignmentX(Component.CENTER_ALIGNMENT); // Set the alignment of the button
 		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		panelUpload.setLayout(new BoxLayout(panelUpload, BoxLayout.Y_AXIS));
+		btnUpload.setIcon(new ImageIcon(uploadIcon)); //Set the image of the button
+		btnUpload.setIconTextGap(10); //Set the gap between the image and the text
+		panelUpload.add(btnUpload); //Add the button to the panel
 		
-		JButton btnUpload = new JButton("Upload");
-		btnUpload.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnUpload.setPreferredSize(new Dimension(100, 29));
-		btnUpload.setIconTextGap(10);
-		btnUpload.setIcon(new ImageIcon(uploadIcon));
-		panelUpload.add(btnUpload);
+		JProgressBar progressBarUpload = new JProgressBar(); //Create a progress bar
+		progressBarUpload.setMaximumSize(new Dimension(500, 30)); //Set the maximum size for the progress bar
+		progressBarUpload.setStringPainted(true); //Show the percentage as well on the progress bar
+		panelUpload.add(progressBarUpload); //Add the progress bar to the panel
 		
-		JProgressBar progressBarUpload = new JProgressBar();
-		progressBarUpload.setPreferredSize(new Dimension(146, 30));
-		progressBarUpload.setMaximumSize(new Dimension(500, 30));
-		progressBarUpload.setStringPainted(true);
-		panelUpload.add(progressBarUpload);
-
+		return panelUpload;
 	}
 
 }
