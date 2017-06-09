@@ -33,6 +33,7 @@ public class HistoryPanel extends JPanel {
 		
 		//Added Label
 		JLabel lblAdded = new JLabel("Items: 5");
+		lblAdded.setFont(MedicationManagement.BODY_FONT);
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
 		
