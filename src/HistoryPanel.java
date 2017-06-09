@@ -2,7 +2,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -10,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -19,269 +17,325 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class HistoryPanel extends JPanel {
-	private JTextField textField;
+	
+	private JTextField textFieldSearch;
+	
 	/**
-	 * Create the panel.
+	 * Create and populate the history panel
 	 */
 	public HistoryPanel() {
+		//Set size and layout
 		setSize(new Dimension(640, 485));
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
+	
+		//Add title pane to north
+		add(createTitlePane(), BorderLayout.NORTH);
 		
+		//Added Label
+		JLabel lblAdded = new JLabel("Items: 5");
+		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
+		add(lblAdded, BorderLayout.SOUTH);
 		
+		//Add scroll pane to center
+		add(createScrollPane(), BorderLayout.CENTER);
+
+	}
+
+	/**
+	 * Create title pane
+	 * @return title panel
+	 */
+	private JPanel createTitlePane() {
+		//New panel with border layout
 		JPanel panelTitle = new JPanel();
-		panelTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		add(panelTitle, BorderLayout.NORTH);
-		panelTitle.setLayout(new BorderLayout(0, 0));
+		panelTitle.setLayout(new BorderLayout());
 		
+		//User ID label
 		JLabel lblUserId = new JLabel("User ID: 00001");
 		lblUserId.setBorder(new EmptyBorder(0, 0, 0, 12));
 		lblUserId.setHorizontalTextPosition(SwingConstants.LEADING);
 		panelTitle.add(lblUserId, BorderLayout.EAST);
 		
+		//History label
 		JLabel lblHistory = new JLabel("History");
 		lblHistory.setBorder(new EmptyBorder(0, 0, 0, 0));
 		lblHistory.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblHistory.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHistory.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblHistory.setFont(MedicationManagement.HEADER_FONT);
 		panelTitle.add(lblHistory, BorderLayout.CENTER);
 		
-		JPanel panel_1 = new JPanel();
-		panelTitle.add(panel_1, BorderLayout.SOUTH);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
+		//Add tool bar panel to the south region
+		panelTitle.add(createToolBarPane(), BorderLayout.SOUTH);
 		
-		JLabel label = new JLabel("Sort By:");
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.EAST;
-		gbc_label.insets = new Insets(0, 12, 0, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 0;
-		panel_1.add(label, gbc_label);
+		return panelTitle;
+	}
+	
+	/**
+	 * Create tool bar pane
+	 * @return tool bar panel
+	 */
+	private JPanel createToolBarPane() {
+		//New panel with grid bag layout
+		JPanel panelToolBar = new JPanel();
+		GridBagLayout gbl_panelToolBar = new GridBagLayout();
+		gbl_panelToolBar.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gbl_panelToolBar.rowHeights = new int[]{0, 0};
+		gbl_panelToolBar.columnWeights = new double[]{0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelToolBar.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panelToolBar.setLayout(gbl_panelToolBar);
 		
-		JComboBox comboBox = new JComboBox();
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 0;
-		panel_1.add(comboBox, gbc_comboBox);
+		//Sort by label
+		JLabel labelSort = new JLabel("Sort By:");
+		GridBagConstraints gbc_labelSort = new GridBagConstraints();
+		gbc_labelSort.anchor = GridBagConstraints.EAST;
+		gbc_labelSort.insets = new Insets(0, 12, 0, 5);
+		gbc_labelSort.gridx = 0;
+		gbc_labelSort.gridy = 0;
+		panelToolBar.add(labelSort, gbc_labelSort);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.weightx = 1.0;
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 5, 0, 5);
-		gbc_textField.gridx = 2;
-		gbc_textField.gridy = 0;
-		panel_1.add(textField, gbc_textField);
+		//Sort by combo box
+		JComboBox<String[]> comboBoxSort = new JComboBox<String[]>();
+		comboBoxSort.setModel(new DefaultComboBoxModel(new String[] {"Illness", "Medication"}));
+		GridBagConstraints gbc_comboBoxSort = new GridBagConstraints();
+		gbc_comboBoxSort.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxSort.insets = new Insets(0, 0, 0, 5);
+		gbc_comboBoxSort.gridx = 1;
+		gbc_comboBoxSort.gridy = 0;
+		panelToolBar.add(comboBoxSort, gbc_comboBoxSort);
 		
-		JButton button = new JButton("Search");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 0, 12);
-		gbc_button.gridx = 3;
-		gbc_button.gridy = 0;
-		panel_1.add(button, gbc_button);
+		//Search text field
+		textFieldSearch = new JTextField();
+		textFieldSearch.setColumns(10);
+		GridBagConstraints gbc_textFieldSearch = new GridBagConstraints();
+		gbc_textFieldSearch.weightx = 1.0;
+		gbc_textFieldSearch.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldSearch.insets = new Insets(0, 5, 0, 5);
+		gbc_textFieldSearch.gridx = 2;
+		gbc_textFieldSearch.gridy = 0;
+		panelToolBar.add(textFieldSearch, gbc_textFieldSearch);
 		
-		JLabel lblAdded = new JLabel("Items: 5");
-		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
-		add(lblAdded, BorderLayout.SOUTH);
+		//Search button
+		JButton buttonSearch = new JButton("Search");
+		Image searchIcon = new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		buttonSearch.setIcon(new ImageIcon(searchIcon)); //Set search Icon
+		GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
+		gbc_buttonSearch.insets = new Insets(0, 0, 0, 12);
+		gbc_buttonSearch.gridx = 3;
+		gbc_buttonSearch.gridy = 0;
+		panelToolBar.add(buttonSearch, gbc_buttonSearch);
 		
-		JScrollPane scrollPaneBody = new JScrollPane();
+		return panelToolBar;
+	}
+	
+	/**
+	 * Create the scroll pane
+	 * @return scroll panel
+	 */
+	private JScrollPane createScrollPane() {
+
+		JScrollPane scrollPane = new JScrollPane();
+		
+		//Set the view post to body panel
+		scrollPane.setViewportView(createBodyPane());
+		
+		return scrollPane;
+	}
+	
+	/**
+	 * Create the body pane
+	 * @return body panel
+	 */
+	private JPanel createBodyPane() {
+		
+		//Panel with grid bag layout
 		JPanel panelBody = new JPanel();
-		
-		scrollPaneBody.setViewportView(panelBody);
-		add(scrollPaneBody, BorderLayout.CENTER);
-		
-		GridBagLayout gbl_panelBody = new GridBagLayout();
-		gbl_panelBody.columnWidths = new int[]{0, 0};
-		gbl_panelBody.rowHeights = new int[]{53, 20, 0};
-		gbl_panelBody.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panelBody.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		panelBody.setLayout(gbl_panelBody);
-		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		panelBody.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		///ROW 0////
-		JLabel lblNewLabel_1 = new JLabel("Illness");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 0;
-		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+		panelBody.setLayout(gbl_panel);
+
+		//ROW 0
+		//Illness label
+		JLabel lblIllness = new JLabel("Illness");
+		lblIllness.setFont(MedicationManagement.HEADER_FONT);
+		GridBagConstraints gbc_lblIllness = new GridBagConstraints();
+		gbc_lblIllness.anchor = GridBagConstraints.WEST;
+		gbc_lblIllness.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIllness.gridx = 1;
+		gbc_lblIllness.gridy = 0;
+		panelBody.add(lblIllness, gbc_lblIllness);
+
+		//Dose label
 		JLabel lblDose = new JLabel("Medication");
-		lblDose.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDose.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblDose = new GridBagConstraints();
 		gbc_lblDose.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDose.gridx = 2;
 		gbc_lblDose.gridy = 0;
-		panel.add(lblDose, gbc_lblDose);
+		panelBody.add(lblDose, gbc_lblDose);
+
+		//ROW 1
+		//Item label
+		JLabel lblItem1 = new JLabel("Headache");
+		lblItem1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblItem1.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblItem1 = new GridBagConstraints();
+		gbc_lblItem1.weightx = 1.0;
+		gbc_lblItem1.anchor = GridBagConstraints.WEST;
+		gbc_lblItem1.insets = new Insets(0, 20, 5, 5);
+		gbc_lblItem1.gridx = 1;
+		gbc_lblItem1.gridy = 1;
+		panelBody.add(lblItem1, gbc_lblItem1);
+
+		//Dose label
+		JLabel lblDose1 = new JLabel("Panadol");
+		lblDose1.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblDose1 = new GridBagConstraints();
+		gbc_lblDose1.weightx = 1.0;
+		gbc_lblDose1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDose1.gridx = 2;
+		gbc_lblDose1.gridy = 1;
+		panelBody.add(lblDose1, gbc_lblDose1);
 		
-		///ROW 1////
-		JLabel lblPanadol = new JLabel("Headache");
-		lblPanadol.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblPanadol.setFont(new Font("Dialog", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblPanadol = new GridBagConstraints();
-		gbc_lblPanadol.weightx = 1.0;
-		gbc_lblPanadol.anchor = GridBagConstraints.WEST;
-		gbc_lblPanadol.insets = new Insets(0, 20, 5, 5);
-		gbc_lblPanadol.gridx = 1;
-		gbc_lblPanadol.gridy = 1;
-		panel.add(lblPanadol, gbc_lblPanadol);
-		
+		//Expand button
 		JButton btnExpand1 = new JButton("Expand");
-		btnExpand1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand1.setFont(MedicationManagement.BODY_FONT);
 		Image expandIcon = new ImageIcon(this.getClass().getResource("expand.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-		
-		JLabel lblDoseEvery = new JLabel("Panadol");
-		lblDoseEvery.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDoseEvery = new GridBagConstraints();
-		gbc_lblDoseEvery.weightx = 1.0;
-		gbc_lblDoseEvery.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDoseEvery.gridx = 2;
-		gbc_lblDoseEvery.gridy = 1;
-		panel.add(lblDoseEvery, gbc_lblDoseEvery);
 		btnExpand1.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_btnExpand1 = new GridBagConstraints();
-		gbc_btnExpand1.anchor = GridBagConstraints.EAST;
-		gbc_btnExpand1.insets = new Insets(0, 0, 5, 12);
-		gbc_btnExpand1.gridx = 3;
-		gbc_btnExpand1.gridy = 1;
-		panel.add(btnExpand1, gbc_btnExpand1);
-		
-		
-		///ROW 2////
-		JLabel lblNewLabel = new JLabel("Cold & Flu");
-		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.weightx = 1.0;
-		gbc_lblNewLabel.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 2;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
-		
-		JLabel lblAfterDinner = new JLabel("Sambucol");
-		lblAfterDinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblAfterDinner = new GridBagConstraints();
-		gbc_lblAfterDinner.insets = new Insets(0, 0, 5, 5);
-		gbc_lblAfterDinner.gridx = 2;
-		gbc_lblAfterDinner.gridy = 2;
-		panel.add(lblAfterDinner, gbc_lblAfterDinner);
-		
+		GridBagConstraints gbc_btnExpand_1 = new GridBagConstraints();
+		gbc_btnExpand_1.anchor = GridBagConstraints.EAST;
+		gbc_btnExpand_1.insets = new Insets(0, 0, 5, 12);
+		gbc_btnExpand_1.gridx = 3;
+		gbc_btnExpand_1.gridy = 1;
+		panelBody.add(btnExpand1, gbc_btnExpand_1);
+
+
+		//ROW 2
+		//Item label
+		JLabel lblItem2 = new JLabel("Cold & Flu");
+		lblItem2.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblItem2 = new GridBagConstraints();
+		gbc_lblItem2.anchor = GridBagConstraints.WEST;
+		gbc_lblItem2.weightx = 1.0;
+		gbc_lblItem2.insets = new Insets(0, 20, 5, 5);
+		gbc_lblItem2.gridx = 1;
+		gbc_lblItem2.gridy = 2;
+		panelBody.add(lblItem2, gbc_lblItem2);
+
+		//Dose label
+		JLabel lblDose2 = new JLabel("Sambucol");
+		lblDose2.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblDose2 = new GridBagConstraints();
+		gbc_lblDose2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDose2.gridx = 2;
+		gbc_lblDose2.gridy = 2;
+		panelBody.add(lblDose2, gbc_lblDose2);
+
+		//Expand button
 		JButton btnExpand2 = new JButton("Expand");
-		btnExpand2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand2.setFont(MedicationManagement.BODY_FONT);
 		btnExpand2.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_btnExpand2 = new GridBagConstraints();
-		gbc_btnExpand2.insets = new Insets(0, 0, 5, 12);
-		gbc_btnExpand2.gridx = 3;
-		gbc_btnExpand2.gridy = 2;
-		panel.add(btnExpand2, gbc_btnExpand2);
-		
-		
-		///ROW 3////
-		JLabel lblNewLabel_2 = new JLabel("Diabetes");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 20, 5, 5);
-		gbc_lblNewLabel_2.gridx = 1;
-		gbc_lblNewLabel_2.gridy = 3;
-		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Glucophage");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 2;
-		gbc_lblNewLabel_3.gridy = 3;
-		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
+		GridBagConstraints gbc_btnExpand_2 = new GridBagConstraints();
+		gbc_btnExpand_2.insets = new Insets(0, 0, 5, 12);
+		gbc_btnExpand_2.gridx = 3;
+		gbc_btnExpand_2.gridy = 2;
+		panelBody.add(btnExpand2, gbc_btnExpand_2);
+
+
+		//ROW 3
+		//Item label
+		JLabel lblItem3 = new JLabel("Diabetes");
+		lblItem3.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblItem3 = new GridBagConstraints();
+		gbc_lblItem3.anchor = GridBagConstraints.WEST;
+		gbc_lblItem3.insets = new Insets(0, 20, 5, 5);
+		gbc_lblItem3.gridx = 1;
+		gbc_lblItem3.gridy = 3;
+		panelBody.add(lblItem3, gbc_lblItem3);
+
+		//Dose label
+		JLabel lblDose3 = new JLabel("Glucophage");
+		lblDose3.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblDose3 = new GridBagConstraints();
+		gbc_lblDose3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDose3.gridx = 2;
+		gbc_lblDose3.gridy = 3;
+		panelBody.add(lblDose3, gbc_lblDose3);
+
+		//Expand button
 		JButton btnExpand3 = new JButton("Expand");
-		btnExpand3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand3.setFont(MedicationManagement.BODY_FONT);
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button00 = new GridBagConstraints();
-		gbc_button00.insets = new Insets(0, 0, 5, 12);
-		gbc_button00.gridx = 3;
-		gbc_button00.gridy = 3;
-		panel.add(btnExpand3, gbc_button00);
-		
-		///ROW 4////
-		JLabel lblHydrocodone = new JLabel("Body Pain");
-		lblHydrocodone.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblHydrocodone = new GridBagConstraints();
-		gbc_lblHydrocodone.anchor = GridBagConstraints.WEST;
-		gbc_lblHydrocodone.insets = new Insets(0, 20, 5, 5);
-		gbc_lblHydrocodone.gridx = 1;
-		gbc_lblHydrocodone.gridy = 4;
-		panel.add(lblHydrocodone, gbc_lblHydrocodone);
-		
-		JLabel lblNewLabel_4 = new JLabel("Hydrocodone");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 2;
-		gbc_lblNewLabel_4.gridy = 4;
-		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		
+		GridBagConstraints gbc_buttonExpand_3 = new GridBagConstraints();
+		gbc_buttonExpand_3.insets = new Insets(0, 0, 5, 12);
+		gbc_buttonExpand_3.gridx = 3;
+		gbc_buttonExpand_3.gridy = 3;
+		panelBody.add(btnExpand3, gbc_buttonExpand_3);
+
+		//ROW 4
+		//Item label
+		JLabel lblItem4 = new JLabel("Body Pain");
+		lblItem4.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblItem4 = new GridBagConstraints();
+		gbc_lblItem4.anchor = GridBagConstraints.WEST;
+		gbc_lblItem4.insets = new Insets(0, 20, 5, 5);
+		gbc_lblItem4.gridx = 1;
+		gbc_lblItem4.gridy = 4;
+		panelBody.add(lblItem4, gbc_lblItem4);
+
+		//Dose label
+		JLabel lblDose4 = new JLabel("Hydrocodone");
+		lblDose4.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblDose4 = new GridBagConstraints();
+		gbc_lblDose4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDose4.gridx = 2;
+		gbc_lblDose4.gridy = 4;
+		panelBody.add(lblDose4, gbc_lblDose4);
+
+		//Expand button
 		JButton btnExpand4 = new JButton("Expand");
-		btnExpand4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand4.setFont(MedicationManagement.BODY_FONT);
 		btnExpand4.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.insets = new Insets(0, 0, 5, 12);
-		gbc_button_1.gridx = 3;
-		gbc_button_1.gridy = 4;
-		panel.add(btnExpand4, gbc_button_1);
-		
-		
-		///ROW 5////
-		
-		JLabel lblSimvastatin = new JLabel("High Cholesterol");
-		lblSimvastatin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblSimvastatin = new GridBagConstraints();
-		gbc_lblSimvastatin.anchor = GridBagConstraints.WEST;
-		gbc_lblSimvastatin.insets = new Insets(0, 20, 0, 5);
-		gbc_lblSimvastatin.gridx = 1;
-		gbc_lblSimvastatin.gridy = 5;
-		panel.add(lblSimvastatin, gbc_lblSimvastatin);
-		
-		JLabel lblEveryEvening = new JLabel("Simvastatin");
-		lblEveryEvening.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblEveryEvening = new GridBagConstraints();
-		gbc_lblEveryEvening.insets = new Insets(0, 0, 0, 5);
-		gbc_lblEveryEvening.gridx = 2;
-		gbc_lblEveryEvening.gridy = 5;
-		panel.add(lblEveryEvening, gbc_lblEveryEvening);
-		
+		GridBagConstraints gbc_buttonExpand_4 = new GridBagConstraints();
+		gbc_buttonExpand_4.insets = new Insets(0, 0, 5, 12);
+		gbc_buttonExpand_4.gridx = 3;
+		gbc_buttonExpand_4.gridy = 4;
+		panelBody.add(btnExpand4, gbc_buttonExpand_4);
+
+
+		//ROW 5
+		//Item label
+		JLabel lblItem5 = new JLabel("High Cholesterol");
+		lblItem5.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblItem5 = new GridBagConstraints();
+		gbc_lblItem5.anchor = GridBagConstraints.WEST;
+		gbc_lblItem5.insets = new Insets(0, 20, 0, 5);
+		gbc_lblItem5.gridx = 1;
+		gbc_lblItem5.gridy = 5;
+		panelBody.add(lblItem5, gbc_lblItem5);
+
+		//Dose label
+		JLabel lblDose5 = new JLabel("Simvastatin");
+		lblDose5.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_lblDose5 = new GridBagConstraints();
+		gbc_lblDose5.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDose5.gridx = 2;
+		gbc_lblDose5.gridy = 5;
+		panelBody.add(lblDose5, gbc_lblDose5);
+
+		//Expand button
 		JButton btnExpand5 = new JButton("Expand");
-		btnExpand5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnExpand5.setFont(MedicationManagement.BODY_FONT);
 		btnExpand5.setIcon(new ImageIcon(expandIcon));
-		GridBagConstraints gbc_button_2 = new GridBagConstraints();
-		gbc_button_2.insets = new Insets(0, 0, 0, 12);
-		gbc_button_2.gridx = 3;
-		gbc_button_2.gridy = 5;
-		panel.add(btnExpand5, gbc_button_2);
+		GridBagConstraints gbc_buttonExpand_5 = new GridBagConstraints();
+		gbc_buttonExpand_5.insets = new Insets(0, 0, 0, 12);
+		gbc_buttonExpand_5.gridx = 3;
+		gbc_buttonExpand_5.gridy = 5;
+		panelBody.add(btnExpand5, gbc_buttonExpand_5);
 
-
+		return panelBody;
 	}
 
 }
