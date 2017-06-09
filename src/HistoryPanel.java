@@ -86,6 +86,7 @@ public class HistoryPanel extends JPanel {
 		
 		//Sort by label
 		JLabel labelSort = new JLabel("Sort By:");
+		labelSort.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_labelSort = new GridBagConstraints();
 		gbc_labelSort.anchor = GridBagConstraints.EAST;
 		gbc_labelSort.insets = new Insets(0, 12, 0, 5);
@@ -116,6 +117,7 @@ public class HistoryPanel extends JPanel {
 		
 		//Search button
 		JButton buttonSearch = new JButton("Search");
+		buttonSearch.setFont(MedicationManagement.BODY_FONT);
 		Image searchIcon = new ImageIcon(this.getClass().getResource("search.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		buttonSearch.setIcon(new ImageIcon(searchIcon)); //Set search Icon
 		GridBagConstraints gbc_buttonSearch = new GridBagConstraints();
