@@ -31,6 +31,7 @@ public class MedicationPanel extends JPanel {
 		
 		//Added label
 		JLabel lblAdded = new JLabel("Added: 5");
+		lblAdded.setFont(MedicationManagement.BODY_FONT);
 		lblAdded.setBorder(new EmptyBorder(0, 12, 12, 0));
 		add(lblAdded, BorderLayout.SOUTH);
 		
@@ -155,7 +156,7 @@ public class MedicationPanel extends JPanel {
 
 		//ROW 0
 		JLabel lblName = new JLabel("Name");
-		lblName.setFont(MedicationManagement.BODY_FONT);
+		lblName.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.WEST;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
@@ -164,7 +165,7 @@ public class MedicationPanel extends JPanel {
 		panelBody.add(lblName, gbc_lblName);
 
 		JLabel lblDose = new JLabel("Dose");
-		lblDose.setFont(MedicationManagement.BODY_FONT);
+		lblDose.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblDose = new GridBagConstraints();
 		gbc_lblDose.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDose.gridx = 2;
