@@ -22,6 +22,7 @@ public class MenuPanel extends JPanel {
 	JButton btnUpload;
 	JButton btnHelp;
 	JButton btnSettings;
+	JButton btnNotification;
 	JButton btnLogOut;
 
 	/**
@@ -80,14 +81,24 @@ public class MenuPanel extends JPanel {
 		gbc_btnHelp.gridy = 4;
 		this.add(btnHelp, gbc_btnHelp);
 		
+		this.btnNotification = createNotificationBtn();
+		GridBagConstraints gbc_btnNotification = new GridBagConstraints();
+		gbc_btnNotification.fill = GridBagConstraints.BOTH;
+		gbc_btnNotification.weighty = 0.1;
+		gbc_btnNotification.insets = new Insets(5, 0, 0, 0);
+		gbc_btnNotification.gridx = 0;
+		gbc_btnNotification.gridy = 5;
+		this.add(btnNotification, gbc_btnNotification);
+		
 		this.btnSettings = createSettingsBtn();
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
 		gbc_btnSettings.fill = GridBagConstraints.BOTH;
 		gbc_btnSettings.weighty = 0.1;
 		gbc_btnSettings.insets = new Insets(5, 0, 0, 0);
 		gbc_btnSettings.gridx = 0;
-		gbc_btnSettings.gridy = 5;
+		gbc_btnSettings.gridy = 6;
 		this.add(btnSettings, gbc_btnSettings);
+		
 		
 		this.btnLogOut = createLogOutBtn();
 		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
@@ -95,7 +106,7 @@ public class MenuPanel extends JPanel {
 		gbc_btnLogOut.anchor = GridBagConstraints.SOUTH;
 		gbc_btnLogOut.insets = new Insets(5, 0, 0, 0);
 		gbc_btnLogOut.gridx = 0;
-		gbc_btnLogOut.gridy = 6;
+		gbc_btnLogOut.gridy = 7;
 		add(btnLogOut, gbc_btnLogOut);
 	}
 
@@ -209,6 +220,22 @@ public class MenuPanel extends JPanel {
 	}
 
 	/**
+	 * Create settings button
+	 * @return settings button
+	 */
+	private JButton createNotificationBtn() {
+		JButton btnNotification = new JButton("Notification"); //Creates button with text
+		btnNotification.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnNotification.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
+		Image notificationIcon = new ImageIcon(this.getClass().getResource("notification.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnNotification.setIcon(new ImageIcon(notificationIcon)); //Add the settings image to the button
+		btnNotification.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
+		btnNotification.setOpaque(true); //To allow the background color to show
+		btnNotification.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
+		btnNotification.setBackground(new Color(0, 255, 220)); //Set the background color
+		return btnNotification;
+	}
+	/**
 	 * Create log out button
 	 * @return log out button
 	 */
@@ -234,6 +261,7 @@ public class MenuPanel extends JPanel {
 		this.btnHelp.addActionListener(listener);
 		this.btnSettings.addActionListener(listener);
 		this.btnLogOut.addActionListener(listener);
+		this.btnNotification.addActionListener(listener);
 	}
 	
 }

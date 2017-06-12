@@ -24,6 +24,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private UploadPanel panelUpload;
 	private HelpPanel panelHelp;
 	private SettingsPanel panelSettings;
+	private NotificationPanel panelNotification;
 	
 	
 	/**
@@ -74,6 +75,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.panelSettings = new SettingsPanel();
 		panelBody.add(this.panelSettings, "Settings");
 		
+		this.panelNotification = new NotificationPanel();
+		panelBody.add(this.panelNotification, "Notification");
+		
 		return panelBody;
 	}
 
@@ -94,6 +98,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		else if(e.getSource().equals(panelMenu.btnHelp)) {
 			cardLayout.show(panelBody, "Help");
+		}
+		else if(e.getSource().equals(panelMenu.btnNotification)){
+			cardLayout.show(panelBody, "Notification");
 		}
 		else if(e.getSource().equals(panelMenu.btnSettings)) {
 			cardLayout.show(panelBody, "Settings");
