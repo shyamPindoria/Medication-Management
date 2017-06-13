@@ -29,6 +29,7 @@ public class MenuPanel extends JPanel {
 	 * Create the panel and add the menu buttons to it
 	 */
 	public MenuPanel() {
+		
 		this.setBackground(Color.DARK_GRAY);
 		GridBagLayout gbl_panelMenu = new GridBagLayout();
 		gbl_panelMenu.columnWidths = new int[]{51, 0};
