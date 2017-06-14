@@ -2,7 +2,12 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import java.awt.GridBagLayout;
@@ -10,6 +15,10 @@ import java.awt.Image;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -20,10 +29,14 @@ import java.awt.Component;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
 
-public class UploadPanel extends JPanel {
+public class UploadPanel extends JPanel implements ActionListener, ChangeListener {
 	
 	private JTextField textFieldEmail;
 	private JTextField textFieldNumber;
+	private JProgressBar progressBarUpload;
+	private JScrollPane scrollPaneBluetooth;
+	private JScrollPane scrollPaneUSB;
+	private JToggleButton tglbtnBluetooth;
 
 	/**
 	 * Create the panel.
@@ -59,6 +72,8 @@ public class UploadPanel extends JPanel {
 		
 		tabbedPane.addTab("USB", null, createUSBPane(), null); //Add USB tab
 		
+		tabbedPane.addChangeListener(this); //Listening for tab chnages
+		
 		return tabbedPane;
 		
 	}
@@ -84,7 +99,7 @@ public class UploadPanel extends JPanel {
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblEmail.weightx = 1.0;
-		gbc_lblEmail.insets = new Insets(0, 0, 10, 5);
+		gbc_lblEmail.insets = new Insets(0, 0, 7, 5);
 		gbc_lblEmail.gridx = 0;
 		gbc_lblEmail.gridy = 0;
 		panelEmail.add(lblEmail, gbc_lblEmail);
@@ -133,7 +148,7 @@ public class UploadPanel extends JPanel {
 		lblPhoneNumber.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblPhoneNumber = new GridBagConstraints();
 		gbc_lblPhoneNumber.weightx = 1.0;
-		gbc_lblPhoneNumber.insets = new Insets(0, 0, 10, 5);
+		gbc_lblPhoneNumber.insets = new Insets(0, 0, 7, 5);
 		gbc_lblPhoneNumber.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblPhoneNumber.gridx = 0;
 		gbc_lblPhoneNumber.gridy = 0;
@@ -167,7 +182,7 @@ public class UploadPanel extends JPanel {
 		GridBagConstraints gbc_lblChooseFromContacts = new GridBagConstraints();
 		gbc_lblChooseFromContacts.weightx = 1.0;
 		gbc_lblChooseFromContacts.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblChooseFromContacts.insets = new Insets(5, 0, 0, 5);
+		gbc_lblChooseFromContacts.insets = new Insets(2, 0, 0, 5);
 		gbc_lblChooseFromContacts.gridx = 0;
 		gbc_lblChooseFromContacts.gridy = 2;
 		panelPhone.add(lblChooseFromContacts, gbc_lblChooseFromContacts);
@@ -220,8 +235,10 @@ public class UploadPanel extends JPanel {
 		panelBluetooth.add(toolBar, gbc_toolBar);
 		
 		//Blue tooth on/off toggle button
-		JToggleButton tglbtnBluetooth = new JToggleButton("Turn on Bluetooth");
+		tglbtnBluetooth = new JToggleButton("Turn on Bluetooth");
 		tglbtnBluetooth.setFont(MedicationManagement.BODY_FONT);
+		tglbtnBluetooth.addActionListener(this);
+		tglbtnBluetooth.setActionCommand("Toggle Bluetooth");
 		toolBar.add(tglbtnBluetooth);
 		
 		//Refresh button
@@ -229,15 +246,17 @@ public class UploadPanel extends JPanel {
 		btnRefreshBluetooth.setFont(MedicationManagement.BODY_FONT);
 		Image refreshIcon = new ImageIcon(this.getClass().getResource("refresh.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnRefreshBluetooth.setIcon(new ImageIcon(refreshIcon));
+		btnRefreshBluetooth.addActionListener(this);
+		btnRefreshBluetooth.setActionCommand("Refresh Bluetooth");
 		toolBar.add(btnRefreshBluetooth);
 		
 		//Add a scroll pane that will display available blue tooth devices
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPaneBluetooth = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
-		panelBluetooth.add(scrollPane, gbc_scrollPane);
+		panelBluetooth.add(scrollPaneBluetooth, gbc_scrollPane);
 		
 		return panelBluetooth;
 	}
@@ -279,10 +298,12 @@ public class UploadPanel extends JPanel {
 		btnRefreshUSB.setFont(MedicationManagement.BODY_FONT);
 		Image refreshIcon = new ImageIcon(this.getClass().getResource("refresh.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnRefreshUSB.setIcon(new ImageIcon(refreshIcon));
+		btnRefreshUSB.addActionListener(this);
+		btnRefreshUSB.setActionCommand("Refresh USB");
 		toolBarUSB.add(btnRefreshUSB);
 		
 		//Add a scroll pane to display the available USB devices
-		JScrollPane scrollPaneUSB = new JScrollPane();
+		scrollPaneUSB = new JScrollPane();
 		GridBagConstraints gbc_scrollPaneUSB = new GridBagConstraints();
 		gbc_scrollPaneUSB.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneUSB.gridx = 0;
@@ -308,14 +329,60 @@ public class UploadPanel extends JPanel {
 		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnUpload.setIcon(new ImageIcon(uploadIcon)); //Set the image of the button
 		btnUpload.setIconTextGap(10); //Set the gap between the image and the text
+		btnUpload.addActionListener(this); //Ad action listener to the button
+		btnUpload.setActionCommand("Upload"); //Action Command
 		panelUpload.add(btnUpload); //Add the button to the panel
 		
-		JProgressBar progressBarUpload = new JProgressBar(); //Create a progress bar
+		progressBarUpload = new JProgressBar(); //Create a progress bar
 		progressBarUpload.setMaximumSize(new Dimension(500, 30)); //Set the maximum size for the progress bar
 		progressBarUpload.setStringPainted(true); //Show the percentage as well on the progress bar
 		panelUpload.add(progressBarUpload); //Add the progress bar to the panel
 		
 		return panelUpload;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getActionCommand().equals("Upload")) {
+			 Thread t = new Thread(){
+			        public void run(){
+			            for(int i = 0 ; i <= 100 ; i++){
+			                final int percent = i;
+			                SwingUtilities.invokeLater(new Runnable() {
+			                    public void run() {
+			                        progressBarUpload.setValue(percent);
+			                        if (percent == 100) {
+			                        	JOptionPane.showMessageDialog(UploadPanel.this, "Your history has been successfully\nshared with the recipient.", "Upload Successful", JOptionPane.INFORMATION_MESSAGE);
+			                        }
+			                    }
+			                  });
+
+			                try {
+			                    Thread.sleep(10);
+			                } catch (InterruptedException ex) {ex.printStackTrace();}
+			            }
+			        }
+			    };
+			    t.start();
+		} else if (e.getActionCommand().equals("Refresh Bluetooth")) {
+			JOptionPane.showMessageDialog(this, "Please make sure that Bluetooth is enabled on the recipient's device.", "No Bluetooth device found", JOptionPane.ERROR_MESSAGE);
+		} else if (e.getActionCommand().equals("Refresh USB")) {
+			JOptionPane.showMessageDialog(this, "Please make sure a USB device is connected.", "No USB device found", JOptionPane.ERROR_MESSAGE);
+		} else if (e.getSource().equals(this.tglbtnBluetooth)) {
+			if (this.tglbtnBluetooth.getText().equals("Turn on Bluetooth")) {
+				this.tglbtnBluetooth.setText("Turn off Bluetooth");
+			} else {
+				this.tglbtnBluetooth.setText("Turn on Bluetooth");
+			}
+		}
+		
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		//Reset progress bar
+		this.progressBarUpload.setValue(0);
 	}
 
 }
