@@ -125,7 +125,7 @@ public class MenuPanel extends JPanel {
 		btnCurrent.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnCurrent.setOpaque(true); //To allow the background color to show
 		btnCurrent.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnCurrent.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnCurrent.setBackground(MedicationManagement.MENU_BUTTON_SELECTED); //Set the background color
 		return btnCurrent;
 	}
 
@@ -143,7 +143,7 @@ public class MenuPanel extends JPanel {
 		btnHistory.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnHistory.setOpaque(true); //To allow the background color to show
 		btnHistory.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnHistory.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnHistory.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		
 		return btnHistory;
 	}
@@ -162,7 +162,7 @@ public class MenuPanel extends JPanel {
 		btnContacts.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnContacts.setOpaque(true); //To allow the background color to show
 		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnContacts.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnContacts.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		
 		return btnContacts;
 	}
@@ -181,7 +181,7 @@ public class MenuPanel extends JPanel {
 		btnUpload.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnUpload.setOpaque(true); //To allow the background color to show
 		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnUpload.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnUpload.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		return btnUpload;
 		
 	}
@@ -199,7 +199,7 @@ public class MenuPanel extends JPanel {
 		btnHelp.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnHelp.setOpaque(true); //To allow the background color to show
 		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnHelp.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnHelp.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		return btnHelp;
 	}
 	
@@ -216,7 +216,7 @@ public class MenuPanel extends JPanel {
 		btnSettings.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnSettings.setOpaque(true); //To allow the background color to show
 		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnSettings.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnSettings.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		return btnSettings;
 	}
 
@@ -233,9 +233,10 @@ public class MenuPanel extends JPanel {
 		btnNotification.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnNotification.setOpaque(true); //To allow the background color to show
 		btnNotification.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnNotification.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnNotification.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		return btnNotification;
 	}
+	
 	/**
 	 * Create log out button
 	 * @return log out button
@@ -249,11 +250,34 @@ public class MenuPanel extends JPanel {
 		btnLogOut.setPreferredSize(new Dimension(100, 25)); //Set the size of the button
 		btnLogOut.setOpaque(true); //To allow the background color to show
 		btnLogOut.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
-		btnLogOut.setBackground(new Color(0, 255, 220)); //Set the background color
+		btnLogOut.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
 		return btnLogOut;
 	}
 
+	/**
+	 * Change the background color of the buttons
+	 * Make the selected button a different color 
+	 * @param button selected button
+	 */
+	public void changeSelected(JButton button) {
+		//Reset the colors of all the buttons
+		this.btnCurrent.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnHistory.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnContacts.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnUpload.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnHelp.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnSettings.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnLogOut.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		this.btnNotification.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		
+		//Change the color of the selected button
+		button.setBackground(MedicationManagement.MENU_BUTTON_SELECTED);
+	}
 	
+	/**
+	 * Adds action listeners to the menu buttons
+	 * @param listener action listener to add
+	 */
 	public void addMenuButtonListener(ActionListener listener) {
 		this.btnCurrent.addActionListener(listener);
 		this.btnHistory.addActionListener(listener);

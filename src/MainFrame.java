@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -58,7 +59,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		panelBody.setLayout(cardLayout);
 		
 		this.panelMedication = new MedicationPanel();
-		panelBody.add(this.panelMedication, "Current");
+		panelBody.add(this.panelMedication, "Medication");
 		
 		this.panelHistory = new HistoryPanel();
 		panelBody.add(this.panelHistory, "History");
@@ -83,33 +84,16 @@ public class MainFrame extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(e.getSource().equals(panelMenu.btnCurrent)) {
-			cardLayout.show(panelBody, "Current");
+		//Check if button pressed was log out button
+		if(e.getSource().equals(panelMenu.btnLogOut)) {
+			Point mainFrameLoc = this.getLocation(); //Get location of current frame
+			this.dispose(); //Close current frame
+			new LoginFrame().setLocation(mainFrameLoc); //Open login frame
+		} else {
+			cardLayout.show(panelBody, ((JButton) e.getSource()).getText()); //Change the panel according to the button pressed
 		}
-		else if(e.getSource().equals(panelMenu.btnHistory)) {
-			cardLayout.show(panelBody, "History");
-		}
-		else if(e.getSource().equals(panelMenu.btnContacts)) {
-			cardLayout.show(panelBody, "Contacts");
-		}
-		else if(e.getSource().equals(panelMenu.btnUpload)) {
-			cardLayout.show(panelBody, "Upload");
-		}
-		else if(e.getSource().equals(panelMenu.btnHelp)) {
-			cardLayout.show(panelBody, "Help");
-		}
-		else if(e.getSource().equals(panelMenu.btnNotification)){
-			cardLayout.show(panelBody, "Notification");
-		}
-		else if(e.getSource().equals(panelMenu.btnSettings)) {
-			cardLayout.show(panelBody, "Settings");
-		}
-		else if(e.getSource().equals(panelMenu.btnLogOut)) {
-			Point mainFrameLoc = this.getLocation();
-			this.dispose();
-			new LoginFrame().setLocation(mainFrameLoc);
-		}
+		//Change the color of the selected button
+		this.panelMenu.changeSelected((JButton) e.getSource());
 		
 	}
 }
