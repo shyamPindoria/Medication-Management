@@ -103,7 +103,11 @@ public class NotificationPanel extends JPanel{
 			// panel to store detailed reminders settings 
 			JPanel DetailedSettingPanel = new JPanel();
 			
+			// Create title Border
 			DetailedSettingPanel.setBorder(BorderFactory.createTitledBorder("Configure New Notification"));
+			
+			
+			// Create GridBagConstraints to manage items in the GridBagLayout
 			GridBagConstraints gbc_DetailedSettingPanel = new GridBagConstraints();
 			gbc_DetailedSettingPanel.insets = new Insets(0, 5, 0, 0);
 			gbc_DetailedSettingPanel.fill = GridBagConstraints.BOTH;
@@ -111,10 +115,8 @@ public class NotificationPanel extends JPanel{
 			gbc_DetailedSettingPanel.gridy = 0;
 		
 			GridBagLayout gbl_DetailedSettingPanel = new GridBagLayout();
-			gbl_DetailedSettingPanel.columnWidths = new int[]{150, 0, 0};
-			gbl_DetailedSettingPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-			gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+			gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0};
+			gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 			DetailedSettingPanel.setLayout(gbl_DetailedSettingPanel);
 
 			JLabel lblTitle = new JLabel("Title");
@@ -170,13 +172,14 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblDay, gbc_lblDay);
 
 			textFieldDay = new JTextField();
+			textFieldDay.setColumns(10);
 			GridBagConstraints gbc_textFieldDay = new GridBagConstraints();
 			gbc_textFieldDay.insets = new Insets(0, 0, 5, 12);
-			gbc_textFieldDay.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textFieldDay.anchor= GridBagConstraints.LINE_START;
 			gbc_textFieldDay.gridx = 1;
 			gbc_textFieldDay.gridy = 2;
 			DetailedSettingPanel.add(textFieldDay, gbc_textFieldDay);
-			textFieldDay.setColumns(10);
+			
 
 			JLabel lblTime = new JLabel("Time");
 			lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -239,10 +242,8 @@ public class NotificationPanel extends JPanel{
 			
 			JPanel panel = new JPanel();
 			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.SOUTH;
-			gbc_panel.insets = new Insets(0, 0, 0, 5);
-			gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-			gbc_panel.gridx = 0;
+			gbc_panel.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_panel.gridx = 1;
 			gbc_panel.gridy = 6;
 			DetailedSettingPanel.add(panel, gbc_panel);
 			
