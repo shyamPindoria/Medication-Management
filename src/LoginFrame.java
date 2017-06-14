@@ -1,10 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -12,11 +8,11 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,16 +146,22 @@ public class LoginFrame extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//If sign up button was pressed
 		if (e.getActionCommand().equals("Sign Up")) {
+			//Display the username and password
 			JOptionPane.showMessageDialog(this, "Your username is: usr00001\nYour password is abc00001", "Sign Up Successful", JOptionPane.PLAIN_MESSAGE);
 		}
+		//If login button was pressed
 		else if (e.getActionCommand().equals("Login")) {
+			//Correct password
 			char[] password = {'a', 'b', 'c', '0', '0', '0', '0', '1'};
+			//Check if the username and password are correct
 			if (usernameTxt.getText().equals("usr00001") && Arrays.equals(passwordTxt.getPassword(), password)) {
 				Point mainFrameLoc = this.getLocation(); //Get location of current frame
 				this.dispose(); //Close current frame
-				new MainFrame().setLocation(mainFrameLoc); //Open login frame
+				new MainFrame().setLocation(mainFrameLoc); //Open main frame
 			} else {
+				//Display error message if username or password is incorrect
 				JOptionPane.showMessageDialog(this, "The username or password you entered is incorrect.", "Unable to login", JOptionPane.ERROR_MESSAGE);
 			}
 
