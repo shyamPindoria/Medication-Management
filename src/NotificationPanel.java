@@ -52,60 +52,58 @@ public class NotificationPanel extends JPanel{
 			lblNotification.setFont(new Font("Tahoma", Font.PLAIN, 20));
 			lblNotification.setHorizontalAlignment(SwingConstants.CENTER);
 			this.add(lblNotification, BorderLayout.NORTH);
-			this.add(createSplitPane(), BorderLayout.CENTER);
-
-		
+			this.add(createSplitPane(), BorderLayout.CENTER);	
 	}
 		
+		/**
+		 * Creates and returns splitpane with previous notifications on left pane and
+		 * detailed notification settings on right pane 
+		 * @return sp - split pane
+		 */
 		private JSplitPane createSplitPane(){
 			JSplitPane sp = new JSplitPane();
 			
 			sp.setLeftComponent(createPreviousNotification());
-			
 			sp.setRightComponent(createDetailedNotification());
 			return sp;
 		}
 		
+		
+		/**
+		 * Creates and returns panel to be used as Left components in the split pane
+		 * @return previousReminderPanel - JPanel
+		 */
 		private JPanel createPreviousNotification(){
-			//  panel to save previous reminders in a list
+			//  panel to store previous reminders in a list
 			JPanel previousReminderPanel = new JPanel();
+			previousReminderPanel.setLayout(new BorderLayout());
 			 
 			// set it to Min size of 200 width and 200 height 
 			previousReminderPanel.setMinimumSize(new Dimension(200, 200));
+			previousReminderPanel.setPreferredSize(new Dimension(200,200));
 			
-			
+			// create titled border
 			previousReminderPanel.setBorder(BorderFactory.createTitledBorder("Previous Nofications"));
-			previousReminderPanel.setAutoscrolls(true);
-			GridBagConstraints gbc_previousReminderPanel = new GridBagConstraints();
-			gbc_previousReminderPanel.anchor = GridBagConstraints.WEST;
-			gbc_previousReminderPanel.fill = GridBagConstraints.BOTH;
-			gbc_previousReminderPanel.insets = new Insets(0, 0, 0, 5);
-			gbc_previousReminderPanel.gridx = 0;
-			gbc_previousReminderPanel.gridy = 0;
 			
-			
-			GridBagLayout gbl_previousReminderPanel = new GridBagLayout();
-			gbl_previousReminderPanel.columnWidths = new int[]{159, 0};
-			gbl_previousReminderPanel.rowHeights = new int[]{25, 0};
-			gbl_previousReminderPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-			gbl_previousReminderPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-			previousReminderPanel.setLayout(gbl_previousReminderPanel);
-
+			// Jlist to store reminders in a list
 			JList list = new JList();
-			GridBagConstraints gbc_list = new GridBagConstraints();
-			gbc_list.fill = GridBagConstraints.BOTH;
-			gbc_list.gridx = 0;
-			gbc_list.gridy = 0;
-			previousReminderPanel.add(list, gbc_list);
-
+			
+			// add this list to the panel
+			previousReminderPanel.add(list, BorderLayout.CENTER);
 			return previousReminderPanel;
 		}
-
+		
+		
+		/**
+		 * Creates and returns panel to be used as right components in the split pane
+		 * @return DetailedSettingPanel - JPanel
+		 */
 		private JPanel createDetailedNotification(){
 			
+			// panel to store detailed reminders settings 
 			JPanel DetailedSettingPanel = new JPanel();
-			DetailedSettingPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-			DetailedSettingPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Configure New Notification", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			
+			DetailedSettingPanel.setBorder(BorderFactory.createTitledBorder("Configure New Notification"));
 			GridBagConstraints gbc_DetailedSettingPanel = new GridBagConstraints();
 			gbc_DetailedSettingPanel.insets = new Insets(0, 5, 0, 0);
 			gbc_DetailedSettingPanel.fill = GridBagConstraints.BOTH;
