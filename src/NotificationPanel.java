@@ -103,7 +103,11 @@ public class NotificationPanel extends JPanel{
 			// panel to store detailed reminders settings 
 			JPanel DetailedSettingPanel = new JPanel();
 			
+			// Create title Border
 			DetailedSettingPanel.setBorder(BorderFactory.createTitledBorder("Configure New Notification"));
+			
+			
+			// Create GridBagConstraints to manage items in the GridBagLayout
 			GridBagConstraints gbc_DetailedSettingPanel = new GridBagConstraints();
 			gbc_DetailedSettingPanel.insets = new Insets(0, 5, 0, 0);
 			gbc_DetailedSettingPanel.fill = GridBagConstraints.BOTH;
@@ -111,12 +115,12 @@ public class NotificationPanel extends JPanel{
 			gbc_DetailedSettingPanel.gridy = 0;
 		
 			GridBagLayout gbl_DetailedSettingPanel = new GridBagLayout();
-			gbl_DetailedSettingPanel.columnWidths = new int[]{150, 0, 0};
-			gbl_DetailedSettingPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-			gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+			gbl_DetailedSettingPanel.columnWeights = new double[]{0.0, 1.0};
+			gbl_DetailedSettingPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 			DetailedSettingPanel.setLayout(gbl_DetailedSettingPanel);
 
+			//////////////////////////////// ROW 1//////////////////////////////////////
+			// ADD title and text field in row 1 
 			JLabel lblTitle = new JLabel("Title");
 			lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblTitle = new GridBagConstraints();
@@ -136,6 +140,8 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(textFieldTitle, gbc_textFieldTitle);
 			textFieldTitle.setColumns(10);
 
+			////////////////////////////// ROW 2 ///////////////////////////////////////
+			// Add Desc and scroll pan with textArea embeded into it at row 2
 			JLabel lblDescription = new JLabel("Description");
 			lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblDescription = new GridBagConstraints();
@@ -160,6 +166,8 @@ public class NotificationPanel extends JPanel{
 			descTextArea.setDropMode(DropMode.INSERT);
 			scrollPaneDesc.setViewportView(descTextArea);
 
+			///////////////////////////////// ROW 3 /////////////////////////////////////////
+			// Add Day label and textfield at row 3
 			JLabel lblDay = new JLabel("Day (DD/MM/YYYY)");
 			lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblDay = new GridBagConstraints();
@@ -170,14 +178,17 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblDay, gbc_lblDay);
 
 			textFieldDay = new JTextField();
+			textFieldDay.setColumns(10);
 			GridBagConstraints gbc_textFieldDay = new GridBagConstraints();
 			gbc_textFieldDay.insets = new Insets(0, 0, 5, 12);
-			gbc_textFieldDay.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textFieldDay.anchor= GridBagConstraints.LINE_START;
 			gbc_textFieldDay.gridx = 1;
 			gbc_textFieldDay.gridy = 2;
 			DetailedSettingPanel.add(textFieldDay, gbc_textFieldDay);
-			textFieldDay.setColumns(10);
+			
 
+			/////////////////////////////// ROW 4 ///////////////////////////////////////////
+			// Add Time label and panel at row 4
 			JLabel lblTime = new JLabel("Time");
 			lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblTime = new GridBagConstraints();
@@ -187,6 +198,7 @@ public class NotificationPanel extends JPanel{
 			gbc_lblTime.gridy = 3;
 			DetailedSettingPanel.add(lblTime, gbc_lblTime);
 
+			// create panel having 2 spinners for hour and minutes
 			JPanel panelTime = new JPanel();
 			FlowLayout fl_panelTime = (FlowLayout) panelTime.getLayout();
 			fl_panelTime.setAlignment(FlowLayout.LEFT);
@@ -198,19 +210,21 @@ public class NotificationPanel extends JPanel{
 			gbc_panelTime.gridy = 3;
 			DetailedSettingPanel.add(panelTime, gbc_panelTime);
 
+			// H and spinner for it
 			JLabel lblH = new JLabel("H");
 			panelTime.add(lblH);
-
 			JSpinner spinnerHour = new JSpinner();
 			panelTime.add(spinnerHour);
 
+			// M and spinner for it
 			JLabel lblM = new JLabel("M");
 			panelTime.add(lblM);
-
 			JSpinner spinnerMin = new JSpinner();
 			panelTime.add(spinnerMin);
 
-			JLabel lblSendIntervalsmin = new JLabel("Send Intervals(Min)");
+			////////////////////////////////// ROW 5 //////////////////////////////
+			// Add Intervals label and spinner for it at row 5
+			JLabel lblSendIntervalsmin = new JLabel("Set Intervals(Min)");
 			lblSendIntervalsmin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_lblSendIntervalsmin = new GridBagConstraints();
 			gbc_lblSendIntervalsmin.anchor = GridBagConstraints.WEST;
@@ -228,6 +242,8 @@ public class NotificationPanel extends JPanel{
 			gbc_spinnerInterval.gridy = 4;
 			DetailedSettingPanel.add(spinnerInterval, gbc_spinnerInterval);
 
+			/////////////////////////////// ROW 6 ////////////////////////////////////
+			// Add checklist and texts for it at row 6 column 2
 			JCheckBox checkBoxSmartCabinet = new JCheckBox("Activate Smart Medicine Cabinet");
 			checkBoxSmartCabinet.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			GridBagConstraints gbc_checkBoxSmartCabinet = new GridBagConstraints();
@@ -236,22 +252,24 @@ public class NotificationPanel extends JPanel{
 			gbc_checkBoxSmartCabinet.gridx = 1;
 			gbc_checkBoxSmartCabinet.gridy = 5;
 			DetailedSettingPanel.add(checkBoxSmartCabinet, gbc_checkBoxSmartCabinet);
+		
 			
-			JPanel panel = new JPanel();
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.anchor = GridBagConstraints.SOUTH;
-			gbc_panel.insets = new Insets(0, 0, 0, 5);
-			gbc_panel.fill = GridBagConstraints.HORIZONTAL;
-			gbc_panel.gridx = 0;
-			gbc_panel.gridy = 6;
-			DetailedSettingPanel.add(panel, gbc_panel);
+			//////////////////////////////// ROW 7 ///////////////////////////////////
+			// Add panel having two buttons in it at row 7
+			JPanel btnPanel = new JPanel();
+			GridBagConstraints gbc_btnPanel = new GridBagConstraints();
+			gbc_btnPanel.anchor = GridBagConstraints.SOUTHEAST;
+			gbc_btnPanel.gridx = 1;
+			gbc_btnPanel.gridy = 6;
+			DetailedSettingPanel.add(btnPanel, gbc_btnPanel);
 			
-			JButton button = new JButton("Create");
-			button.setDefaultCapable(false);
-			panel.add(button);
+			// Create panel with create and Reset button
+			JButton btnCreate = new JButton("Create");
+			btnCreate.setDefaultCapable(false);
+			btnPanel.add(btnCreate);
 			
-			JButton button_1 = new JButton("Reset");
-			panel.add(button_1);
+			JButton btnReset = new JButton("Reset");
+			btnPanel.add(btnReset);
 			
 			return DetailedSettingPanel;
 		}
