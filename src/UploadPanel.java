@@ -344,14 +344,18 @@ public class UploadPanel extends JPanel implements ActionListener, ChangeListene
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		//If upload button was pressed
 		if (e.getActionCommand().equals("Upload")) {
+			//Run the animation in a new thread
 			 Thread t = new Thread(){
 			        public void run(){
+			        	//Loop from 0 to 100
 			            for(int i = 0 ; i <= 100 ; i++){
-			                final int percent = i;
+			                final int percent = i; //To allow i to be used in the invokeLater method
 			                SwingUtilities.invokeLater(new Runnable() {
 			                    public void run() {
 			                        progressBarUpload.setValue(percent);
+			                        //Show dialog box on 100%
 			                        if (percent == 100) {
 			                        	JOptionPane.showMessageDialog(UploadPanel.this, "Your history has been successfully\nshared with the recipient.", "Upload Successful", JOptionPane.INFORMATION_MESSAGE);
 			                        }
@@ -359,6 +363,7 @@ public class UploadPanel extends JPanel implements ActionListener, ChangeListene
 			                  });
 
 			                try {
+			                	//Pause thread to simulate animation of the progress bar
 			                    Thread.sleep(10);
 			                } catch (InterruptedException ex) {ex.printStackTrace();}
 			            }
@@ -366,10 +371,18 @@ public class UploadPanel extends JPanel implements ActionListener, ChangeListene
 			    };
 			    t.start();
 		} else if (e.getActionCommand().equals("Refresh Bluetooth")) {
-			JOptionPane.showMessageDialog(this, "Please make sure that Bluetooth is enabled on the recipient's device.", "No Bluetooth device found", JOptionPane.ERROR_MESSAGE);
+			if (this.tglbtnBluetooth.getText().equals("Turn on Bluetooth")) {
+				JOptionPane.showMessageDialog(this, "Please enable Bluetooth before scanning.", "Bluetooth is turned off", JOptionPane.ERROR_MESSAGE);
+			} else {
+				//Bluetooth refresh button clicked
+				JOptionPane.showMessageDialog(this, "Please make sure that Bluetooth is enabled on the recipient's device.", "No Bluetooth device found", JOptionPane.ERROR_MESSAGE);
+			}
 		} else if (e.getActionCommand().equals("Refresh USB")) {
+			//USB refresh button clicked
 			JOptionPane.showMessageDialog(this, "Please make sure a USB device is connected.", "No USB device found", JOptionPane.ERROR_MESSAGE);
 		} else if (e.getSource().equals(this.tglbtnBluetooth)) {
+			//Bluetooth toggle button clicked
+			//Change its text accordingly
 			if (this.tglbtnBluetooth.getText().equals("Turn on Bluetooth")) {
 				this.tglbtnBluetooth.setText("Turn off Bluetooth");
 			} else {
@@ -381,7 +394,7 @@ public class UploadPanel extends JPanel implements ActionListener, ChangeListene
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		//Reset progress bar
+		//Reset progress bar when the user switches tabs
 		this.progressBarUpload.setValue(0);
 	}
 
