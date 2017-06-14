@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -16,10 +17,14 @@ import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.awt.Dimension;
 import java.awt.Image;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField usernameTxt;
@@ -108,11 +113,13 @@ public class LoginFrame extends JFrame {
 		Image goIcon = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnLogin.setIcon(new ImageIcon(goIcon)); //Add an image to the button
 		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT); //Set the image to the right of the text
+		btnLogin.addActionListener(this);
+		btnLogin.setActionCommand("Login");
 		loginArea.add(btnLogin, gbc_btnLogin);
 		
 		return loginArea;
 	}
-
+	
 	/**
 	 * Create sign up area
 	 * @return sign up area panel
@@ -134,9 +141,30 @@ public class LoginFrame extends JFrame {
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.setFont(MedicationManagement.BODY_FONT);
 		btnSignUp.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnSignUp.addActionListener(this);
+		btnSignUp.setActionCommand("Sign Up");
 		signUpArea.add(btnSignUp);
 		
 		return signUpArea;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Sign Up")) {
+			JOptionPane.showMessageDialog(this, "Your username is: usr00001\nYour password is abc00001", "Sign Up Successful", JOptionPane.PLAIN_MESSAGE);
+		}
+		else if (e.getActionCommand().equals("Login")) {
+			char[] password = {'a', 'b', 'c', '0', '0', '0', '0', '1'};
+			if (usernameTxt.getText().equals("usr00001") && Arrays.equals(passwordTxt.getPassword(), password)) {
+				Point mainFrameLoc = this.getLocation(); //Get location of current frame
+				this.dispose(); //Close current frame
+				new MainFrame().setLocation(mainFrameLoc); //Open login frame
+			} else {
+				JOptionPane.showMessageDialog(this, "The username or password you entered is incorrect.", "Unable to login", JOptionPane.ERROR_MESSAGE);
+			}
+
+		}
+		
 	}
 	
 }
