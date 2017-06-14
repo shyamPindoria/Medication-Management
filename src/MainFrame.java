@@ -96,4 +96,5 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.panelMenu.changeSelected((JButton) e.getSource());
 		
 	}
+
 }

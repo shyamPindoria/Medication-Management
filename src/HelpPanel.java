@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
@@ -10,8 +12,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.CardLayout;
 
-public class HelpPanel extends JPanel {
+public class HelpPanel extends JPanel implements TreeSelectionListener {
 
+	private JPanel panelHelpBody;
+	private JTree tree;
+	private CardLayout cardLayout;
+	
 	public HelpPanel() {
 		//panel size
 		setSize(new Dimension(640, 485));
@@ -54,7 +60,7 @@ public class HelpPanel extends JPanel {
 	 */
 	private JTree createTree() {
 		
-		JTree tree = new JTree();
+		tree = new JTree();
 		//Populate the tree with nodes
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Medication Management") {
@@ -78,6 +84,9 @@ public class HelpPanel extends JPanel {
 			}
 		));
 		
+		//Add a tree selection listener to the tree
+		tree.addTreeSelectionListener(this);
+		
 		return tree;
 	}
 
@@ -87,13 +96,14 @@ public class HelpPanel extends JPanel {
 	 */
 	private JPanel createHelpBodyPanel() {
 		
-		JPanel panelHelpBody = new JPanel();
+		panelHelpBody = new JPanel();
+		cardLayout = new CardLayout();
 		//Add a card layout to the panel
-		panelHelpBody.setLayout(new CardLayout());
+		panelHelpBody.setLayout(cardLayout);
 		
 		//Welcome scroll pane
 		JScrollPane scrollPaneWelcome = new JScrollPane();
-		panelHelpBody.add(scrollPaneWelcome); //Add the scroll pane to the body panel
+		panelHelpBody.add(scrollPaneWelcome, "Welcome"); //Add the scroll pane to the body panel
 		JLabel lblWelcome = new JLabel("Welcome"); //Header label for the scroll panel
 		lblWelcome.setFont(MedicationManagement.BODY_FONT); //Font for the label
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER); //Align the label to the center
@@ -101,7 +111,7 @@ public class HelpPanel extends JPanel {
 		
 		//Current medic scroll pane
 		JScrollPane scrollPaneCurrent = new JScrollPane();
-		panelHelpBody.add(scrollPaneCurrent);
+		panelHelpBody.add(scrollPaneCurrent, "Current Medication");
 		JLabel lblCurrentMedication = new JLabel("Current Medication");
 		lblCurrentMedication.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurrentMedication.setFont(MedicationManagement.BODY_FONT);
@@ -109,7 +119,7 @@ public class HelpPanel extends JPanel {
 		
 		//History scroll pane
 		JScrollPane scrollPaneHistory = new JScrollPane();
-		panelHelpBody.add(scrollPaneHistory);		
+		panelHelpBody.add(scrollPaneHistory, "History");		
 		JLabel lblHistory = new JLabel("History");
 		lblHistory.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHistory.setFont(MedicationManagement.BODY_FONT);
@@ -117,7 +127,7 @@ public class HelpPanel extends JPanel {
 		
 		//Email scroll pane
 		JScrollPane scrollPaneEmail = new JScrollPane();
-		panelHelpBody.add(scrollPaneEmail);
+		panelHelpBody.add(scrollPaneEmail, "Email");
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(MedicationManagement.BODY_FONT);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,7 +135,7 @@ public class HelpPanel extends JPanel {
 		
 		//Phone scroll pane
 		JScrollPane scrollPanePhone = new JScrollPane();
-		panelHelpBody.add(scrollPanePhone);
+		panelHelpBody.add(scrollPanePhone, "Phone");
 		JLabel lblPhone = new JLabel("Phone");
 		lblPhone.setFont(MedicationManagement.BODY_FONT);
 		lblPhone.setHorizontalAlignment(SwingConstants.CENTER);
@@ -133,7 +143,7 @@ public class HelpPanel extends JPanel {
 		
 		//Blue tooth scroll pane
 		JScrollPane scrollPaneBluetooth = new JScrollPane();
-		panelHelpBody.add(scrollPaneBluetooth);
+		panelHelpBody.add(scrollPaneBluetooth, "Bluetooth");
 		JLabel lblBluetooth = new JLabel("Bluetooth");
 		lblBluetooth.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBluetooth.setFont(MedicationManagement.BODY_FONT);
@@ -141,7 +151,7 @@ public class HelpPanel extends JPanel {
 		
 		//USB scroll pane
 		JScrollPane scrollPaneUSB = new JScrollPane();
-		panelHelpBody.add(scrollPaneUSB);
+		panelHelpBody.add(scrollPaneUSB, "USB");
 		JLabel lblUsbConnection = new JLabel("USB Connection");
 		lblUsbConnection.setFont(MedicationManagement.BODY_FONT);
 		lblUsbConnection.setHorizontalAlignment(SwingConstants.CENTER);
@@ -149,13 +159,23 @@ public class HelpPanel extends JPanel {
 		
 		//About scroll pane
 		JScrollPane scrollPaneAbout = new JScrollPane();
-		panelHelpBody.add(scrollPaneAbout);
+		panelHelpBody.add(scrollPaneAbout, "About");
 		JLabel lblAbout = new JLabel("About");
 		lblAbout.setFont(MedicationManagement.BODY_FONT);
 		lblAbout.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPaneAbout.setColumnHeaderView(lblAbout);
 		
 		return panelHelpBody;
+		
+	}
+
+	
+	@Override
+	public void valueChanged(TreeSelectionEvent e) {
+		//Selected node in the tree
+		DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		//Display the corresponding panel
+		cardLayout.show(this.panelHelpBody, node.getUserObject().toString());
 		
 	}
 
