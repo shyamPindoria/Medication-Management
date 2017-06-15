@@ -49,7 +49,7 @@ public class NotificationPanel extends JPanel{
 			
 
 			JLabel lblNotification = new JLabel("Notification");
-			lblNotification.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			lblNotification.setFont(MedicationManagement.HEADER_FONT);
 			lblNotification.setHorizontalAlignment(SwingConstants.CENTER);
 			this.add(lblNotification, BorderLayout.NORTH);
 			this.add(createSplitPane(), BorderLayout.CENTER);	
@@ -87,6 +87,7 @@ public class NotificationPanel extends JPanel{
 			
 			// Jlist to store reminders in a list
 			JList list = new JList();
+			list.setFont(MedicationManagement.BODY_FONT);
 			
 			// add this list to the panel
 			previousReminderPanel.add(list, BorderLayout.CENTER);
@@ -122,7 +123,7 @@ public class NotificationPanel extends JPanel{
 			//////////////////////////////// ROW 1//////////////////////////////////////
 			// ADD title and text field in row 1 
 			JLabel lblTitle = new JLabel("Title");
-			lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblTitle.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_lblTitle = new GridBagConstraints();
 			gbc_lblTitle.insets = new Insets(0, 12, 5, 12);
 			gbc_lblTitle.anchor = GridBagConstraints.WEST;
@@ -131,7 +132,7 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblTitle, gbc_lblTitle);
 
 			textFieldTitle = new JTextField();
-			textFieldTitle.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			textFieldTitle.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_textFieldTitle = new GridBagConstraints();
 			gbc_textFieldTitle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFieldTitle.insets = new Insets(0, 0, 5, 12);
@@ -143,7 +144,7 @@ public class NotificationPanel extends JPanel{
 			////////////////////////////// ROW 2 ///////////////////////////////////////
 			// Add Desc and scroll pan with textArea embeded into it at row 2
 			JLabel lblDescription = new JLabel("Description");
-			lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblDescription.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_lblDescription = new GridBagConstraints();
 			gbc_lblDescription.anchor = GridBagConstraints.NORTHWEST;
 			gbc_lblDescription.insets = new Insets(0, 12, 5, 12);
@@ -151,6 +152,7 @@ public class NotificationPanel extends JPanel{
 			gbc_lblDescription.gridy = 1;
 			DetailedSettingPanel.add(lblDescription, gbc_lblDescription);
 
+			// Create a scroll pane to hold text area
 			JScrollPane scrollPaneDesc = new JScrollPane();
 			GridBagConstraints gbc_scrollPaneDesc = new GridBagConstraints();
 			gbc_scrollPaneDesc.insets = new Insets(0, 0, 5, 12);
@@ -159,17 +161,18 @@ public class NotificationPanel extends JPanel{
 			gbc_scrollPaneDesc.gridy = 1;
 			DetailedSettingPanel.add(scrollPaneDesc, gbc_scrollPaneDesc);
 
+			// TextArea to accept texts from user
 			JTextArea descTextArea = new JTextArea();
 			descTextArea.setName("");
 			descTextArea.setMaximumSize(new Dimension(50, 50));
-			descTextArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+			descTextArea.setFont(MedicationManagement.BODY_FONT);
 			descTextArea.setDropMode(DropMode.INSERT);
 			scrollPaneDesc.setViewportView(descTextArea);
 
 			///////////////////////////////// ROW 3 /////////////////////////////////////////
 			// Add Day label and textfield at row 3
 			JLabel lblDay = new JLabel("Day (DD/MM/YYYY)");
-			lblDay.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblDay.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_lblDay = new GridBagConstraints();
 			gbc_lblDay.anchor = GridBagConstraints.WEST;
 			gbc_lblDay.insets = new Insets(0, 12, 5, 12);
@@ -178,7 +181,7 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblDay, gbc_lblDay);
 
 			textFieldDay = new JTextField();
-			textFieldDay.setColumns(10);
+			textFieldDay.setColumns(10);	// textfiled of the size of upto 10 columns
 			GridBagConstraints gbc_textFieldDay = new GridBagConstraints();
 			gbc_textFieldDay.insets = new Insets(0, 0, 5, 12);
 			gbc_textFieldDay.anchor= GridBagConstraints.LINE_START;
@@ -190,7 +193,7 @@ public class NotificationPanel extends JPanel{
 			/////////////////////////////// ROW 4 ///////////////////////////////////////////
 			// Add Time label and panel at row 4
 			JLabel lblTime = new JLabel("Time");
-			lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblTime.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_lblTime = new GridBagConstraints();
 			gbc_lblTime.anchor = GridBagConstraints.WEST;
 			gbc_lblTime.insets = new Insets(0, 12, 5, 12);
@@ -212,20 +215,24 @@ public class NotificationPanel extends JPanel{
 
 			// H and spinner for it
 			JLabel lblH = new JLabel("H");
+			lblH.setFont(MedicationManagement.BODY_FONT);
 			panelTime.add(lblH);
 			JSpinner spinnerHour = new JSpinner();
+			spinnerHour.setPreferredSize(new Dimension(50, 22));
 			panelTime.add(spinnerHour);
 
 			// M and spinner for it
 			JLabel lblM = new JLabel("M");
+			lblM.setFont(MedicationManagement.BODY_FONT);
 			panelTime.add(lblM);
 			JSpinner spinnerMin = new JSpinner();
+			spinnerMin.setPreferredSize(new Dimension(50, 20));
 			panelTime.add(spinnerMin);
 
 			////////////////////////////////// ROW 5 //////////////////////////////
 			// Add Intervals label and spinner for it at row 5
 			JLabel lblSendIntervalsmin = new JLabel("Set Intervals(Min)");
-			lblSendIntervalsmin.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblSendIntervalsmin.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_lblSendIntervalsmin = new GridBagConstraints();
 			gbc_lblSendIntervalsmin.anchor = GridBagConstraints.WEST;
 			gbc_lblSendIntervalsmin.insets = new Insets(0, 12, 5, 12);
@@ -234,10 +241,11 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblSendIntervalsmin, gbc_lblSendIntervalsmin);
 
 			JSpinner spinnerInterval = new JSpinner();
-			spinnerInterval.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			spinnerInterval.setPreferredSize(new Dimension(50, 22));
+			spinnerInterval.setMinimumSize(new Dimension(50, 22));
 			GridBagConstraints gbc_spinnerInterval = new GridBagConstraints();
-			gbc_spinnerInterval.insets = new Insets(0, 0, 5, 12);
 			gbc_spinnerInterval.anchor = GridBagConstraints.WEST;
+			gbc_spinnerInterval.insets = new Insets(0, 0, 5, 12);
 			gbc_spinnerInterval.gridx = 1;
 			gbc_spinnerInterval.gridy = 4;
 			DetailedSettingPanel.add(spinnerInterval, gbc_spinnerInterval);
@@ -245,7 +253,7 @@ public class NotificationPanel extends JPanel{
 			/////////////////////////////// ROW 6 ////////////////////////////////////
 			// Add checklist and texts for it at row 6 column 2
 			JCheckBox checkBoxSmartCabinet = new JCheckBox("Activate Smart Medicine Cabinet");
-			checkBoxSmartCabinet.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			checkBoxSmartCabinet.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_checkBoxSmartCabinet = new GridBagConstraints();
 			gbc_checkBoxSmartCabinet.anchor = GridBagConstraints.WEST;
 			gbc_checkBoxSmartCabinet.insets = new Insets(0, 0, 5, 12);
@@ -265,10 +273,10 @@ public class NotificationPanel extends JPanel{
 			
 			// Create panel with create and Reset button
 			JButton btnCreate = new JButton("Create");
-			btnCreate.setDefaultCapable(false);
+			btnCreate.setFont(MedicationManagement.BODY_FONT);
 			btnPanel.add(btnCreate);
-			
 			JButton btnReset = new JButton("Reset");
+			btnReset.setFont(MedicationManagement.BODY_FONT);
 			btnPanel.add(btnReset);
 			
 			return DetailedSettingPanel;

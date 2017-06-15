@@ -39,9 +39,7 @@ import javax.swing.UIManager;
 
 
 public class SettingsPanel extends JPanel {
-	///
-	private JTextField textFieldTitle;
-	private JTextField textFieldDay;
+
 	private JTextField textFieldName;
 	private JTextField textFieldEmail;
 	private JTextField textFieldContactNum;
@@ -53,44 +51,70 @@ public class SettingsPanel extends JPanel {
 	 */
 	public SettingsPanel() {
 		setSize(new Dimension(640, 485));
-		setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout());
 
 		JLabel lblSettings = new JLabel("Settings");
 		lblSettings.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSettings.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblSettings, BorderLayout.NORTH);
+		this.add(lblSettings, BorderLayout.NORTH);
+		this.add(settingsScrollPane(),BorderLayout.CENTER);
 
-		Image profilePic = new ImageIcon(this.getClass().getResource("profile.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		
 
+
+		
+	}
+	
+	private JScrollPane settingsScrollPane(){
 		JScrollPane settingsScrollPane = new JScrollPane();
-		this.add(settingsScrollPane,BorderLayout.CENTER);
 
-		JPanel generalSettingspanel = new JPanel();
-		settingsScrollPane.setViewportView(generalSettingspanel);
-		GridBagLayout gbl_generalSettingspanel = new GridBagLayout();
-		gbl_generalSettingspanel.columnWidths = new int[]{0, 0};
-		gbl_generalSettingspanel.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_generalSettingspanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_generalSettingspanel.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		generalSettingspanel.setLayout(gbl_generalSettingspanel);
-
+		JPanel settingspanel = new JPanel();
+		settingsScrollPane.setViewportView(settingspanel);
+		
+		GridBagLayout gbl_settingspanel = new GridBagLayout();
+		gbl_settingspanel.columnWidths = new int[]{0, 0};
+		gbl_settingspanel.rowHeights = new int[] {0, 0, 0};
+		gbl_settingspanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_settingspanel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		settingspanel.setLayout(gbl_settingspanel);
+		
+		GridBagConstraints gbc_profilePanel = new GridBagConstraints();
+		gbc_profilePanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_profilePanel.gridx=0;
+		gbc_profilePanel.gridy=0;
+		settingspanel.add(profilePanel(), gbc_profilePanel);
+		
+		GridBagConstraints gbc_mainSettingsPanel = new GridBagConstraints();
+		gbc_mainSettingsPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_mainSettingsPanel.gridx=0;
+		gbc_mainSettingsPanel.gridy=1;
+		settingspanel.add(createMainPanel(), gbc_mainSettingsPanel);
+		
+		GridBagConstraints gbc_appearancePanel = new GridBagConstraints();
+		gbc_appearancePanel.weighty = 1.0;
+		gbc_appearancePanel.fill = GridBagConstraints.BOTH;
+		gbc_appearancePanel.gridx=0;
+		gbc_appearancePanel.gridy=2;
+		settingspanel.add(createApprerancePanel(), gbc_appearancePanel);
+		
+		return settingsScrollPane;
+	}
+	
+	
+	private JPanel profilePanel(){
 		JPanel profileSettingsPanel = new JPanel();
 		profileSettingsPanel.setBorder(new TitledBorder(null, "Select Profile Photo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_profileSettingsPanel = new GridBagConstraints();
-		gbc_profileSettingsPanel.fill = GridBagConstraints.BOTH;
-		gbc_profileSettingsPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_profileSettingsPanel.gridx = 0;
-		gbc_profileSettingsPanel.gridy = 0;
-		generalSettingspanel.add(profileSettingsPanel, gbc_profileSettingsPanel);
+	
+
 		GridBagLayout gbl_profileSettingsPanel = new GridBagLayout();
-		gbl_profileSettingsPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_profileSettingsPanel.rowHeights = new int[]{0, 0};
 		gbl_profileSettingsPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		gbl_profileSettingsPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		profileSettingsPanel.setLayout(gbl_profileSettingsPanel);
+		
 		JLabel imgLabel = new JLabel("");
+		Image profilePic = new ImageIcon(this.getClass().getResource("profile.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+
 		imgLabel.setIcon(new ImageIcon(profilePic));
-		imgLabel.setAlignmentX(1.0f);
 		GridBagConstraints gbc_imgLabel = new GridBagConstraints();
 		gbc_imgLabel.insets = new Insets(12, 12, 12, 12);
 		gbc_imgLabel.gridx = 0;
@@ -105,15 +129,13 @@ public class SettingsPanel extends JPanel {
 		gbc_btnBrowse.gridy = 0;
 		profileSettingsPanel.add(btnBrowse, gbc_btnBrowse);
 
+		return profileSettingsPanel;
+	}
+	
+	private JPanel createMainPanel(){
 		JPanel mainSettingsPanel = new JPanel();
 		mainSettingsPanel.setBorder(new TitledBorder(null, "Main Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_mainSettingsPanel = new GridBagConstraints();
-		gbc_mainSettingsPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_mainSettingsPanel.weighty = 1.0;
-		gbc_mainSettingsPanel.fill = GridBagConstraints.BOTH;
-		gbc_mainSettingsPanel.gridx = 0;
-		gbc_mainSettingsPanel.gridy = 1;
-		generalSettingspanel.add(mainSettingsPanel, gbc_mainSettingsPanel);
+
 		GridBagLayout gbl_mainSettingsPanel = new GridBagLayout();
 		gbl_mainSettingsPanel.columnWidths = new int[]{0, 0, 0};
 		gbl_mainSettingsPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -210,15 +232,14 @@ public class SettingsPanel extends JPanel {
 		gbc_textFieldLanguage.gridx = 1;
 		gbc_textFieldLanguage.gridy = 4;
 		mainSettingsPanel.add(textFieldLanguage, gbc_textFieldLanguage);
-
+		
+		return mainSettingsPanel;
+	}
+	
+	private JPanel createApprerancePanel(){
 		JPanel AppearanceSettingsPanel = new JPanel();
 		AppearanceSettingsPanel.setBorder(new TitledBorder(null, "Appearence Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_AppearanceSettingsPanel = new GridBagConstraints();
-		gbc_AppearanceSettingsPanel.weighty = 1.0;
-		gbc_AppearanceSettingsPanel.fill = GridBagConstraints.BOTH;
-		gbc_AppearanceSettingsPanel.gridx = 0;
-		gbc_AppearanceSettingsPanel.gridy = 2;
-		generalSettingspanel.add(AppearanceSettingsPanel, gbc_AppearanceSettingsPanel);
+		 
 		GridBagLayout gbl_AppearanceSettingsPanel = new GridBagLayout();
 		gbl_AppearanceSettingsPanel.columnWidths = new int[]{33, 180, 0, 0};
 		gbl_AppearanceSettingsPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
@@ -311,8 +332,7 @@ public class SettingsPanel extends JPanel {
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 3;
 		AppearanceSettingsPanel.add(btnCancel, gbc_btnCancel);
-
-
+		return AppearanceSettingsPanel;
 	}
 
 }
