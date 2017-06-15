@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
 import javax.swing.ListSelectionModel;
 import javax.swing.JSpinner;
 import javax.swing.Box;
@@ -54,45 +55,51 @@ public class SettingsPanel extends JPanel {
 		setLayout(new BorderLayout());
 
 		JLabel lblSettings = new JLabel("Settings");
-		lblSettings.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblSettings.setFont(MedicationManagement.HEADER_FONT);
 		lblSettings.setHorizontalAlignment(SwingConstants.CENTER);
-		this.add(lblSettings, BorderLayout.NORTH);
-		this.add(settingsScrollPane(),BorderLayout.CENTER);
-
 		
-
-
 		
+		this.add(lblSettings, BorderLayout.NORTH);	// Add settings label 
+		this.add(settingsScrollPane(),BorderLayout.CENTER);	// Addnsettings scroll Pane
+	
 	}
 	
+	/**
+	 * Creates and returns scroll pane that adds other three panels in it 
+	 * @return settingsScrollPane - JScrollPane
+	 */
 	private JScrollPane settingsScrollPane(){
 		JScrollPane settingsScrollPane = new JScrollPane();
 
+		// Panel to add as the viewPort view
 		JPanel settingspanel = new JPanel();
 		settingsScrollPane.setViewportView(settingspanel);
 		
+		// Panel on viewport uses Gridbag layout
 		GridBagLayout gbl_settingspanel = new GridBagLayout();
 		gbl_settingspanel.columnWidths = new int[]{0, 0};
 		gbl_settingspanel.rowHeights = new int[] {0, 0, 0};
 		gbl_settingspanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_settingspanel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_settingspanel.rowWeights = new double[]{0.0, 0.0, 1.0};
 		settingspanel.setLayout(gbl_settingspanel);
 		
+		///////////// Adds first panel on ROW 1///////////////////////////
 		GridBagConstraints gbc_profilePanel = new GridBagConstraints();
 		gbc_profilePanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_profilePanel.gridx=0;
 		gbc_profilePanel.gridy=0;
 		settingspanel.add(profilePanel(), gbc_profilePanel);
 		
+		///////////////// Adds second panel on ROW 2 ///////////////////////
 		GridBagConstraints gbc_mainSettingsPanel = new GridBagConstraints();
 		gbc_mainSettingsPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_mainSettingsPanel.gridx=0;
 		gbc_mainSettingsPanel.gridy=1;
 		settingspanel.add(createMainPanel(), gbc_mainSettingsPanel);
 		
+		///////////////// Adds third panel on ROW 3 ////////////////////////
 		GridBagConstraints gbc_appearancePanel = new GridBagConstraints();
-		gbc_appearancePanel.weighty = 1.0;
-		gbc_appearancePanel.fill = GridBagConstraints.BOTH;
+		gbc_appearancePanel.fill = GridBagConstraints.BOTH;	// fill in the rest pf the available place verticaly by this panel
 		gbc_appearancePanel.gridx=0;
 		gbc_appearancePanel.gridy=2;
 		settingspanel.add(createApprerancePanel(), gbc_appearancePanel);
@@ -101,19 +108,23 @@ public class SettingsPanel extends JPanel {
 	}
 	
 	
+	/**
+	 * Creates and returns profile panel to be used in the scroll pane as the first row
+	 * @return profileSettingsPanel - JPanel
+	 */
 	private JPanel profilePanel(){
+		
 		JPanel profileSettingsPanel = new JPanel();
-		profileSettingsPanel.setBorder(new TitledBorder(null, "Select Profile Photo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		profileSettingsPanel.setBorder(BorderFactory.createTitledBorder("Select Profile Photo"));
 	
-
 		GridBagLayout gbl_profileSettingsPanel = new GridBagLayout();
-		gbl_profileSettingsPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_profileSettingsPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_profileSettingsPanel.columnWeights = new double[]{0.0, 1.0};
+		gbl_profileSettingsPanel.rowWeights = new double[]{1.0};
 		profileSettingsPanel.setLayout(gbl_profileSettingsPanel);
 		
+		// Add Profile Image 
 		JLabel imgLabel = new JLabel("");
 		Image profilePic = new ImageIcon(this.getClass().getResource("profile.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-
 		imgLabel.setIcon(new ImageIcon(profilePic));
 		GridBagConstraints gbc_imgLabel = new GridBagConstraints();
 		gbc_imgLabel.insets = new Insets(12, 12, 12, 12);
@@ -121,6 +132,7 @@ public class SettingsPanel extends JPanel {
 		gbc_imgLabel.gridy = 0;
 		profileSettingsPanel.add(imgLabel, gbc_imgLabel);
 
+		// Add Button BROWSE
 		JButton btnBrowse = new JButton("Browse");
 		GridBagConstraints gbc_btnBrowse = new GridBagConstraints();
 		gbc_btnBrowse.insets = new Insets(0, 12, 0, 0);
@@ -132,19 +144,23 @@ public class SettingsPanel extends JPanel {
 		return profileSettingsPanel;
 	}
 	
+	/**
+	 * Creates and returns the mainPanel to be used as the second row in the scrollPane
+	 * @return mainSettingsPanel - JPanel
+	 */
 	private JPanel createMainPanel(){
 		JPanel mainSettingsPanel = new JPanel();
-		mainSettingsPanel.setBorder(new TitledBorder(null, "Main Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		mainSettingsPanel.setBorder(BorderFactory.createTitledBorder("Main Settings"));
 
 		GridBagLayout gbl_mainSettingsPanel = new GridBagLayout();
-		gbl_mainSettingsPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_mainSettingsPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
-		gbl_mainSettingsPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_mainSettingsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_mainSettingsPanel.columnWeights = new double[]{0.0, 1.0};
+		gbl_mainSettingsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0};
 		mainSettingsPanel.setLayout(gbl_mainSettingsPanel);
 
+		/////////////////////////////////////// ROW 1 /////////////////////////////////////
 		JLabel lblName = new JLabel("Name");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblName.setFont(MedicationManagement.BODY_FONT);
+		
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.EAST;
 		gbc_lblName.insets = new Insets(12, 0, 5, 12);
@@ -153,16 +169,18 @@ public class SettingsPanel extends JPanel {
 		mainSettingsPanel.add(lblName, gbc_lblName);
 
 		textFieldName = new JTextField();
-		textFieldName.setColumns(10);
+		textFieldName.setColumns(20);	// Set the text fields size to 20
 		GridBagConstraints gbc_textFieldName = new GridBagConstraints();
-		gbc_textFieldName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldName.anchor = GridBagConstraints.WEST;
 		gbc_textFieldName.insets = new Insets(12, 0, 5, 12);
+		
 		gbc_textFieldName.gridx = 1;
 		gbc_textFieldName.gridy = 0;
 		mainSettingsPanel.add(textFieldName, gbc_textFieldName);
 
+		///////////////////////////////// ROW 2 //////////////////////////////////////////
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblEmail.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 12);
@@ -171,9 +189,9 @@ public class SettingsPanel extends JPanel {
 		mainSettingsPanel.add(lblEmail, gbc_lblEmail);
 
 		textFieldEmail = new JTextField();
-		textFieldEmail.setColumns(10);
+		textFieldEmail.setColumns(20);
 		GridBagConstraints gbc_textFieldEmail = new GridBagConstraints();
-		gbc_textFieldEmail.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldEmail.anchor = GridBagConstraints.WEST;
 		gbc_textFieldEmail.insets = new Insets(0, 0, 5, 12);
 		gbc_textFieldEmail.gridx = 1;
 		gbc_textFieldEmail.gridy = 1;
@@ -191,6 +209,7 @@ public class SettingsPanel extends JPanel {
 		textFieldContactNum = new JTextField();
 		textFieldContactNum.setColumns(10);
 		GridBagConstraints gbc_textFieldContactNum = new GridBagConstraints();
+		gbc_textFieldContactNum.anchor = GridBagConstraints.WEST;
 		gbc_textFieldContactNum.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldContactNum.insets = new Insets(0, 0, 5, 12);
 		gbc_textFieldContactNum.gridx = 1;
@@ -209,6 +228,7 @@ public class SettingsPanel extends JPanel {
 		textFieldAddress = new JTextField();
 		textFieldAddress.setColumns(10);
 		GridBagConstraints gbc_textFieldAddress = new GridBagConstraints();
+		gbc_textFieldAddress.anchor = GridBagConstraints.WEST;
 		gbc_textFieldAddress.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldAddress.insets = new Insets(0, 0, 5, 12);
 		gbc_textFieldAddress.gridx = 1;
@@ -227,6 +247,7 @@ public class SettingsPanel extends JPanel {
 		textFieldLanguage = new JTextField();
 		textFieldLanguage.setColumns(10);
 		GridBagConstraints gbc_textFieldLanguage = new GridBagConstraints();
+		gbc_textFieldLanguage.anchor = GridBagConstraints.WEST;
 		gbc_textFieldLanguage.insets = new Insets(0, 0, 12, 12);
 		gbc_textFieldLanguage.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldLanguage.gridx = 1;
