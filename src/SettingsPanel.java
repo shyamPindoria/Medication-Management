@@ -197,8 +197,9 @@ public class SettingsPanel extends JPanel {
 		gbc_textFieldEmail.gridy = 1;
 		mainSettingsPanel.add(textFieldEmail, gbc_textFieldEmail);
 
+		/////////////////////////////// ROW 3 ////////////////////////////////////////
 		JLabel lblContactNum = new JLabel("Contact Number");
-		lblContactNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblContactNum.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblContactNum = new GridBagConstraints();
 		gbc_lblContactNum.anchor = GridBagConstraints.EAST;
 		gbc_lblContactNum.insets = new Insets(0, 0, 5, 12);
@@ -207,17 +208,17 @@ public class SettingsPanel extends JPanel {
 		mainSettingsPanel.add(lblContactNum, gbc_lblContactNum);
 
 		textFieldContactNum = new JTextField();
-		textFieldContactNum.setColumns(10);
+		textFieldContactNum.setColumns(20);
 		GridBagConstraints gbc_textFieldContactNum = new GridBagConstraints();
 		gbc_textFieldContactNum.anchor = GridBagConstraints.WEST;
-		gbc_textFieldContactNum.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldContactNum.insets = new Insets(0, 0, 5, 12);
 		gbc_textFieldContactNum.gridx = 1;
 		gbc_textFieldContactNum.gridy = 2;
 		mainSettingsPanel.add(textFieldContactNum, gbc_textFieldContactNum);
 
+		///////////////////////////////////// ROW 4 ///////////////////////////////////////
 		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAddress.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblAddress = new GridBagConstraints();
 		gbc_lblAddress.anchor = GridBagConstraints.EAST;
 		gbc_lblAddress.insets = new Insets(0, 0, 5, 12);
@@ -226,17 +227,17 @@ public class SettingsPanel extends JPanel {
 		mainSettingsPanel.add(lblAddress, gbc_lblAddress);
 
 		textFieldAddress = new JTextField();
-		textFieldAddress.setColumns(10);
 		GridBagConstraints gbc_textFieldAddress = new GridBagConstraints();
 		gbc_textFieldAddress.anchor = GridBagConstraints.WEST;
-		gbc_textFieldAddress.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldAddress.fill = GridBagConstraints.HORIZONTAL;	// Fill horizontally
 		gbc_textFieldAddress.insets = new Insets(0, 0, 5, 12);
 		gbc_textFieldAddress.gridx = 1;
 		gbc_textFieldAddress.gridy = 3;
 		mainSettingsPanel.add(textFieldAddress, gbc_textFieldAddress);
 
+		///////////////////////////////////////// ROW 5 /////////////////////////////////////
 		JLabel lblLanguage = new JLabel("Preferred Language");
-		lblLanguage.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblLanguage.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblLanguage = new GridBagConstraints();
 		gbc_lblLanguage.anchor = GridBagConstraints.EAST;
 		gbc_lblLanguage.insets = new Insets(0, 12, 12, 12);
@@ -245,11 +246,10 @@ public class SettingsPanel extends JPanel {
 		mainSettingsPanel.add(lblLanguage, gbc_lblLanguage);
 
 		textFieldLanguage = new JTextField();
-		textFieldLanguage.setColumns(10);
+		textFieldLanguage.setColumns(20);
 		GridBagConstraints gbc_textFieldLanguage = new GridBagConstraints();
 		gbc_textFieldLanguage.anchor = GridBagConstraints.WEST;
 		gbc_textFieldLanguage.insets = new Insets(0, 0, 12, 12);
-		gbc_textFieldLanguage.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFieldLanguage.gridx = 1;
 		gbc_textFieldLanguage.gridy = 4;
 		mainSettingsPanel.add(textFieldLanguage, gbc_textFieldLanguage);
@@ -257,19 +257,23 @@ public class SettingsPanel extends JPanel {
 		return mainSettingsPanel;
 	}
 	
+	/**
+	 * Creates and returns the apperance panel to be used on the 3ed row in the scrollpane
+	 * @return AppearanceSettingsPanel - JPanel
+	 */
 	private JPanel createApprerancePanel(){
+		
 		JPanel AppearanceSettingsPanel = new JPanel();
-		AppearanceSettingsPanel.setBorder(new TitledBorder(null, "Appearence Settings", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		AppearanceSettingsPanel.setBorder(BorderFactory.createTitledBorder("Appearence Settings"));
 		 
 		GridBagLayout gbl_AppearanceSettingsPanel = new GridBagLayout();
-		gbl_AppearanceSettingsPanel.columnWidths = new int[]{33, 180, 0, 0};
-		gbl_AppearanceSettingsPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
 		gbl_AppearanceSettingsPanel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_AppearanceSettingsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		AppearanceSettingsPanel.setLayout(gbl_AppearanceSettingsPanel);
 
+		//////////////////////////////////////// ROW 1 //////////////////////////////////////////
 		JLabel lblFontType = new JLabel("Font ");
-		lblFontType.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFontType.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblFontType = new GridBagConstraints();
 		gbc_lblFontType.anchor = GridBagConstraints.EAST;
 		gbc_lblFontType.insets = new Insets(12, 12, 5, 12);
@@ -279,7 +283,7 @@ public class SettingsPanel extends JPanel {
 
 		JComboBox ComboBoxFont = new JComboBox();
 		ComboBoxFont.setPreferredSize(new Dimension(100, 22));
-		ComboBoxFont.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		ComboBoxFont.setFont(MedicationManagement.BODY_FONT);
 		ComboBoxFont.setModel(new DefaultComboBoxModel(new String[] {"Arial", "Cosmic", "Fancy"}));
 		GridBagConstraints gbc_ComboBoxFont = new GridBagConstraints();
 		gbc_ComboBoxFont.anchor = GridBagConstraints.WEST;
@@ -288,8 +292,9 @@ public class SettingsPanel extends JPanel {
 		gbc_ComboBoxFont.gridy = 0;
 		AppearanceSettingsPanel.add(ComboBoxFont, gbc_ComboBoxFont);
 
+		///////////////////////////////////////// ROW 2 ///////////////////////////////////////////
 		JLabel lblFontColour = new JLabel("Font Colour");
-		lblFontColour.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFontColour.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblFontColour = new GridBagConstraints();
 		gbc_lblFontColour.insets = new Insets(0, 12, 5, 12);
 		gbc_lblFontColour.anchor = GridBagConstraints.EAST;
@@ -299,7 +304,7 @@ public class SettingsPanel extends JPanel {
 
 		JComboBox comboBoxColor = new JComboBox();
 		comboBoxColor.setPreferredSize(new Dimension(100, 22));
-		comboBoxColor.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		comboBoxColor.setFont(MedicationManagement.BODY_FONT);
 		comboBoxColor.setModel(new DefaultComboBoxModel(new String[] {"Black", "Red", "Blue", "Brown"}));
 		GridBagConstraints gbc_comboBoxColor = new GridBagConstraints();
 		gbc_comboBoxColor.fill = GridBagConstraints.VERTICAL;
@@ -309,8 +314,9 @@ public class SettingsPanel extends JPanel {
 		gbc_comboBoxColor.gridy = 1;
 		AppearanceSettingsPanel.add(comboBoxColor, gbc_comboBoxColor);
 
+		////////////////////////////////////////// ROW 3 /////////////////////////////////////
 		JLabel lblFontSize = new JLabel("Font Size");
-		lblFontSize.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblFontSize.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblFontSize = new GridBagConstraints();
 		gbc_lblFontSize.anchor = GridBagConstraints.EAST;
 		gbc_lblFontSize.insets = new Insets(0, 12, 5, 12);
@@ -319,7 +325,7 @@ public class SettingsPanel extends JPanel {
 		AppearanceSettingsPanel.add(lblFontSize, gbc_lblFontSize);
 
 		JSlider sliderFontSize = new JSlider();
-		sliderFontSize.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		sliderFontSize.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_sliderFontSize = new GridBagConstraints();
 		gbc_sliderFontSize.insets = new Insets(0, 0, 5, 5);
 		gbc_sliderFontSize.fill = GridBagConstraints.HORIZONTAL;
@@ -327,8 +333,10 @@ public class SettingsPanel extends JPanel {
 		gbc_sliderFontSize.gridy = 2;
 		AppearanceSettingsPanel.add(sliderFontSize, gbc_sliderFontSize);
 
+		
+		//////////////////////////////////// ROW 4 ///////////////////////////////////////
 		JButton btnDefault = new JButton("Default");
-		btnDefault.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnDefault.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnDefault = new GridBagConstraints();
 		gbc_btnDefault.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_btnDefault.insets = new Insets(0, 12, 12, 5);
@@ -337,7 +345,7 @@ public class SettingsPanel extends JPanel {
 		AppearanceSettingsPanel.add(btnDefault, gbc_btnDefault);
 
 		JButton btnSave = new JButton("Save");
-		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnSave.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
 		gbc_btnSave.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_btnSave.insets = new Insets(0, 0, 12, 12);
@@ -346,13 +354,14 @@ public class SettingsPanel extends JPanel {
 		AppearanceSettingsPanel.add(btnSave, gbc_btnSave);
 
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCancel.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 12, 12);
 		gbc_btnCancel.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 3;
 		AppearanceSettingsPanel.add(btnCancel, gbc_btnCancel);
+		
 		return AppearanceSettingsPanel;
 	}
 

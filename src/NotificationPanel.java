@@ -27,11 +27,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import javafx.scene.control.DatePicker;
+
 import java.awt.ComponentOrientation;
 import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.awt.event.ActionEvent;
 
 public class NotificationPanel extends JPanel{
 
@@ -133,13 +140,13 @@ public class NotificationPanel extends JPanel{
 
 			textFieldTitle = new JTextField();
 			textFieldTitle.setFont(MedicationManagement.BODY_FONT);
+			textFieldTitle.setColumns(20);
 			GridBagConstraints gbc_textFieldTitle = new GridBagConstraints();
-			gbc_textFieldTitle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_textFieldTitle.insets = new Insets(0, 0, 5, 12);
+			gbc_textFieldTitle.anchor=GridBagConstraints.WEST;
 			gbc_textFieldTitle.gridx = 1;
 			gbc_textFieldTitle.gridy = 0;
 			DetailedSettingPanel.add(textFieldTitle, gbc_textFieldTitle);
-			textFieldTitle.setColumns(10);
 
 			////////////////////////////// ROW 2 ///////////////////////////////////////
 			// Add Desc and scroll pan with textArea embeded into it at row 2
@@ -181,13 +188,14 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(lblDay, gbc_lblDay);
 
 			textFieldDay = new JTextField();
-			textFieldDay.setColumns(10);	// textfiled of the size of upto 10 columns
-			GridBagConstraints gbc_textFieldDay = new GridBagConstraints();
-			gbc_textFieldDay.insets = new Insets(0, 0, 5, 12);
-			gbc_textFieldDay.anchor= GridBagConstraints.LINE_START;
-			gbc_textFieldDay.gridx = 1;
-			gbc_textFieldDay.gridy = 2;
-			DetailedSettingPanel.add(textFieldDay, gbc_textFieldDay);
+			textFieldDay.setFont(MedicationManagement.BODY_FONT);
+			GridBagConstraints gcb_datePicker = new GridBagConstraints();
+			
+			gcb_datePicker.anchor= GridBagConstraints.WEST;
+			gcb_datePicker.gridx=1;
+			gcb_datePicker.gridy=2;
+			textFieldDay.setColumns(10);			
+			DetailedSettingPanel.add(textFieldDay,gcb_datePicker);
 			
 
 			/////////////////////////////// ROW 4 ///////////////////////////////////////////
@@ -201,33 +209,19 @@ public class NotificationPanel extends JPanel{
 			gbc_lblTime.gridy = 3;
 			DetailedSettingPanel.add(lblTime, gbc_lblTime);
 
-			// create panel having 2 spinners for hour and minutes
-			JPanel panelTime = new JPanel();
-			FlowLayout fl_panelTime = (FlowLayout) panelTime.getLayout();
-			fl_panelTime.setAlignment(FlowLayout.LEFT);
-			GridBagConstraints gbc_panelTime = new GridBagConstraints();
-			gbc_panelTime.anchor = GridBagConstraints.WEST;
-			gbc_panelTime.insets = new Insets(0, 0, 5, 12);
-			gbc_panelTime.fill = GridBagConstraints.BOTH;
-			gbc_panelTime.gridx = 1;
-			gbc_panelTime.gridy = 3;
-			DetailedSettingPanel.add(panelTime, gbc_panelTime);
 
-			// H and spinner for it
-			JLabel lblH = new JLabel("H");
-			lblH.setFont(MedicationManagement.BODY_FONT);
-			panelTime.add(lblH);
-			JSpinner spinnerHour = new JSpinner();
-			spinnerHour.setPreferredSize(new Dimension(50, 22));
-			panelTime.add(spinnerHour);
+			JSpinner timeSpinner = new JSpinner(new SpinnerDateModel() );
+			JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
+			timeSpinner.setEditor(timeEditor);
+			GridBagConstraints gbc_timeSpinner = new GridBagConstraints();
+			gbc_timeSpinner.insets = new Insets(0, 0, 5, 12);
+			gbc_timeSpinner.anchor= GridBagConstraints.LINE_START;
+			gbc_timeSpinner.gridx = 1;
+			gbc_timeSpinner.gridy = 3;
+			DetailedSettingPanel.add(timeSpinner, gbc_timeSpinner);
+			
 
-			// M and spinner for it
-			JLabel lblM = new JLabel("M");
-			lblM.setFont(MedicationManagement.BODY_FONT);
-			panelTime.add(lblM);
-			JSpinner spinnerMin = new JSpinner();
-			spinnerMin.setPreferredSize(new Dimension(50, 20));
-			panelTime.add(spinnerMin);
+			
 
 			////////////////////////////////// ROW 5 //////////////////////////////
 			// Add Intervals label and spinner for it at row 5
