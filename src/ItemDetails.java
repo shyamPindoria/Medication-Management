@@ -142,10 +142,7 @@ public class ItemDetails extends JPanel implements ActionListener{
 		this.collapse = new JButton();
 		Image image = new ImageIcon(this.getClass().getResource("collapse.png")).getImage().getScaledInstance(15, 5, Image.SCALE_SMOOTH);
 		this.collapse.setIcon(new ImageIcon(image));
-		this.collapse.setContentAreaFilled(false);
-		this.collapse.setBorder(null);
 		this.collapse.setText("Collapse Contents");
-		this.collapse.setBorderPainted(false);
 		this.collapse.setActionCommand("Collapse");
 		this.collapse.addActionListener(this);
 		this.add(collapse, c);
