@@ -5,12 +5,14 @@ import javax.swing.JOptionPane;
 
 public class MedicationManagement{
 
-	protected static Font BODY_FONT = new Font("Lucida Grande", Font.PLAIN, 18);
-	protected static Font HEADER_FONT = new Font("Century Gothic", Font.PLAIN, 20);
+	protected static Font BODY_FONT = new Font("Arial", Font.PLAIN, 18);
+	protected static Font HEADER_FONT = new Font("Arial", Font.PLAIN, 20);
 	protected static Color MENU_BUTTON_UNSELECTED = new Color(0, 255, 220);
 	protected static Color MENU_BUTTON_SELECTED =  new Color(238, 238, 238);
 	protected static Color MENU_BUTTON_HOVER = new Color(225, 255, 255);
 	protected static Color MENU_BACKGROUND = new Color(37, 48, 49);
+	
+	static MainFrame main;
 	
 	public static void main(String[] args) {
 		
@@ -18,8 +20,13 @@ public class MedicationManagement{
 		//For testing purposes the username and password will be displayed
 		//JOptionPane.showMessageDialog(login, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		
-		MainFrame main = new MainFrame();
+		main = new MainFrame();
 
+	}
+
+	public static void refreshUI() {
+		main.repaint();
+		
 	}
 
 }
