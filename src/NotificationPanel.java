@@ -11,6 +11,7 @@ import java.awt.Insets;
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -26,11 +28,13 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListDataListener;
 import javax.swing.text.html.ListView;
 
 import javafx.scene.control.DatePicker;
@@ -38,6 +42,7 @@ import javafx.scene.control.DatePicker;
 import java.awt.ComponentOrientation;
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
@@ -45,7 +50,11 @@ public class NotificationPanel extends JPanel implements ActionListener{
 
 	
 		private JTextField textFieldTitle;
+		private JTextArea textAreaDesc;
 		private JTextField textFieldDay;
+		private JSpinner spinnerTime;
+		private JSpinner spinnerIntervals;
+		private JCheckBox checkBoxSmartCabinet;
 		private JButton btnCreate;
 		private JButton btnRemove;
 		private JButton btnReset;
@@ -99,6 +108,7 @@ public class NotificationPanel extends JPanel implements ActionListener{
 			
 			// Jlist to store reminders in a list
 			previousNotifications = new JList();
+			previousNotifications.setVisibleRowCount(10);
 			previousNotifications.setFont(MedicationManagement.BODY_FONT);
 			
 			// add this list to the panel
@@ -174,12 +184,12 @@ public class NotificationPanel extends JPanel implements ActionListener{
 			DetailedSettingPanel.add(scrollPaneDesc, gbc_scrollPaneDesc);
 
 			// TextArea to accept texts from user
-			JTextArea descTextArea = new JTextArea();
-			descTextArea.setName("");
-			descTextArea.setMaximumSize(new Dimension(50, 50));
-			descTextArea.setFont(MedicationManagement.BODY_FONT);
-			descTextArea.setDropMode(DropMode.INSERT);
-			scrollPaneDesc.setViewportView(descTextArea);
+			textAreaDesc = new JTextArea();
+			textAreaDesc.setName("");
+			textAreaDesc.setMaximumSize(new Dimension(50, 50));
+			textAreaDesc.setFont(MedicationManagement.BODY_FONT);
+			textAreaDesc.setDropMode(DropMode.INSERT);
+			scrollPaneDesc.setViewportView(textAreaDesc);
 
 			///////////////////////////////// ROW 3 /////////////////////////////////////////
 			// Add Day label and textfield at row 3
@@ -216,15 +226,15 @@ public class NotificationPanel extends JPanel implements ActionListener{
 			DetailedSettingPanel.add(lblTime, gbc_lblTime);
 
 
-			JSpinner timeSpinner = new JSpinner(new SpinnerDateModel() );
-			JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
-			timeSpinner.setEditor(timeEditor);
+			spinnerTime = new JSpinner(new SpinnerDateModel() );
+			JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinnerTime, "HH:mm:ss");
+			spinnerTime.setEditor(timeEditor);
 			GridBagConstraints gbc_timeSpinner = new GridBagConstraints();
 			gbc_timeSpinner.insets = new Insets(0, 0, 5, 12);
 			gbc_timeSpinner.anchor= GridBagConstraints.LINE_START;
 			gbc_timeSpinner.gridx = 1;
 			gbc_timeSpinner.gridy = 3;
-			DetailedSettingPanel.add(timeSpinner, gbc_timeSpinner);
+			DetailedSettingPanel.add(spinnerTime, gbc_timeSpinner);
 			
 
 			
@@ -240,19 +250,20 @@ public class NotificationPanel extends JPanel implements ActionListener{
 			gbc_lblSendIntervalsmin.gridy = 4;
 			DetailedSettingPanel.add(lblSendIntervalsmin, gbc_lblSendIntervalsmin);
 
-			JSpinner spinnerInterval = new JSpinner();
-			spinnerInterval.setPreferredSize(new Dimension(50, 22));
-			spinnerInterval.setMinimumSize(new Dimension(50, 22));
+			spinnerIntervals = new JSpinner();
+			spinnerIntervals.setPreferredSize(new Dimension(50, 22));
+			spinnerIntervals.setMinimumSize(new Dimension(50, 22));
 			GridBagConstraints gbc_spinnerInterval = new GridBagConstraints();
 			gbc_spinnerInterval.anchor = GridBagConstraints.WEST;
 			gbc_spinnerInterval.insets = new Insets(0, 0, 5, 12);
 			gbc_spinnerInterval.gridx = 1;
 			gbc_spinnerInterval.gridy = 4;
-			DetailedSettingPanel.add(spinnerInterval, gbc_spinnerInterval);
+			DetailedSettingPanel.add(spinnerIntervals, gbc_spinnerInterval);
 
+			
 			/////////////////////////////// ROW 6 ////////////////////////////////////
 			// Add checklist and texts for it at row 6 column 2
-			JCheckBox checkBoxSmartCabinet = new JCheckBox("Activate Smart Medicine Cabinet");
+			checkBoxSmartCabinet = new JCheckBox("Activate Smart Medicine Cabinet");
 			checkBoxSmartCabinet.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gbc_checkBoxSmartCabinet = new GridBagConstraints();
 			gbc_checkBoxSmartCabinet.anchor = GridBagConstraints.WEST;
@@ -293,6 +304,7 @@ public class NotificationPanel extends JPanel implements ActionListener{
 			
 			
 			 btnRemove = new JButton("Remove");
+			 btnRemove.setEnabled(false);
 			btnRemove.setFont(MedicationManagement.BODY_FONT);
 			btnRemove.addActionListener(this);
 			btnPanel.add(btnRemove);
@@ -303,26 +315,93 @@ public class NotificationPanel extends JPanel implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 
+			
 			if((JButton)e.getSource() == btnCreate){
-				String str = textFieldTitle.getText()+" - "+textFieldDay.getText();
-				previousNotifications.add(newLabel(str));
+				// if the values are not empty
+				if(!textFieldTitle.getText().isEmpty() && !textFieldDay.getText().isEmpty()){
+					String str = textFieldTitle.getText()+" - "+textFieldDay.getText();
+					// Call to the addElemnt method to append items to the list
+					addElement(str);
+					// Resets values
+					resetDetails();
+					//Enable remove button
+					btnRemove.setEnabled(true);
+				}
+				else{
+					JOptionPane.showMessageDialog(this, ":( Everything has name but I don't.\n Please Enter Title AND Day ","Selection Error",JOptionPane.ERROR_MESSAGE);
 
+				}
+				
+				
 				
 			}
 			else if((JButton)e.getSource()==btnRemove){
+				int selectedIndex =previousNotifications.getSelectedIndex();
 				
+				// if there is an item selected
+				if(selectedIndex!=-1){
+					removeElement(selectedIndex);
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "Umm, Looks like there is no Reminder selected","Selection Error",JOptionPane.ERROR_MESSAGE);
+				}
+				
+				if(previousNotifications.getModel().getSize()==0){
+					btnRemove.setEnabled(false);
+				}
 			}
 			else{
+				// When reset is selected reset values
+				resetDetails();
 				
 			}
-				
 		}
 		
+		/**
+		 * method to Add item to the previousMedication list
+		 * @param item - String An item to add
+		 */
+		private void addElement(String item){
+			ArrayList<String> items = new ArrayList<String>();
+			
+			// copy available all items from the list and add it to the arrayList
+			for(int i=0;i<previousNotifications.getModel().getSize();i++){				
+				items.add((String) previousNotifications.getModel().getElementAt(i));
+			}
+			// Append item from argument to the  arrayList
+			items.add(item);
+			
+			// Re-set the model of previous notifications
+			previousNotifications.setModel(new DefaultComboBoxModel(items.toArray()));	
+		}
 		
-		private JLabel newLabel(String title){
-			JLabel lbl = new JLabel(title);
-			lbl.setFont(MedicationManagement.BODY_FONT);
-			return lbl;
+		/**
+		 * method to Remove item to the previousMedication list
+		 * @param item - String An item to add
+		 */
+		private void removeElement(int index){
+			ArrayList<String> items = new ArrayList<String>();
+			
+			// copy available all items from the list and add it to the arrayList
+			for(int i=0;i<previousNotifications.getModel().getSize();i++){				
+				items.add((String) previousNotifications.getModel().getElementAt(i));
+			}
+			// delete item from the arrayList at index
+			items.remove(index);
+			
+			// Re-set the model of previous notifications
+			previousNotifications.setModel(new DefaultComboBoxModel(items.toArray()));	
+		}
+
+		/**
+		 * Resets all the values to the defalults 
+		 */
+		private void resetDetails(){
+			this.textFieldTitle.setText("");
+			this.textAreaDesc.setText("");
+			this.textFieldDay.setText("");
+			this.spinnerIntervals.setValue(0);
+			this.checkBoxSmartCabinet.setSelected(false);
 			
 		}
 }
