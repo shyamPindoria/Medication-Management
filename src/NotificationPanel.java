@@ -31,6 +31,7 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.html.ListView;
 
 import javafx.scene.control.DatePicker;
 
@@ -40,18 +41,22 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
-public class NotificationPanel extends JPanel{
+public class NotificationPanel extends JPanel implements ActionListener{ 
 
-	///
+	
 		private JTextField textFieldTitle;
 		private JTextField textFieldDay;
+		private JButton btnCreate;
+		private JButton btnRemove;
+		private JButton btnReset;
+		private JList previousNotifications;
 
 		/**
 		 * Create the panel.
 		 */
 		public NotificationPanel() {
 			setSize(new Dimension(640, 485));
-			setLayout(new BorderLayout(0, 0));
+			setLayout(new BorderLayout());
 			
 			
 
@@ -93,11 +98,11 @@ public class NotificationPanel extends JPanel{
 			previousReminderPanel.setBorder(BorderFactory.createTitledBorder("Previous Nofications"));
 			
 			// Jlist to store reminders in a list
-			JList list = new JList();
-			list.setFont(MedicationManagement.BODY_FONT);
+			previousNotifications = new JList();
+			previousNotifications.setFont(MedicationManagement.BODY_FONT);
 			
 			// add this list to the panel
-			previousReminderPanel.add(list, BorderLayout.CENTER);
+			previousReminderPanel.add(previousNotifications, BorderLayout.CENTER);
 			return previousReminderPanel;
 		}
 		
@@ -190,6 +195,7 @@ public class NotificationPanel extends JPanel{
 			textFieldDay = new JTextField();
 			textFieldDay.setFont(MedicationManagement.BODY_FONT);
 			GridBagConstraints gcb_datePicker = new GridBagConstraints();
+			gcb_datePicker.insets = new Insets(0, 0, 5, 0);
 			
 			gcb_datePicker.anchor= GridBagConstraints.WEST;
 			gcb_datePicker.gridx=1;
@@ -254,9 +260,23 @@ public class NotificationPanel extends JPanel{
 			gbc_checkBoxSmartCabinet.gridx = 1;
 			gbc_checkBoxSmartCabinet.gridy = 5;
 			DetailedSettingPanel.add(checkBoxSmartCabinet, gbc_checkBoxSmartCabinet);
-		
+			
+			
 			
 			//////////////////////////////// ROW 7 ///////////////////////////////////
+			btnReset = new JButton("Reset");
+			btnReset.setFont(MedicationManagement.BODY_FONT);
+			btnReset.addActionListener(this);
+			
+			
+			GridBagConstraints gbc_btnReset = new GridBagConstraints();
+			gbc_btnReset.anchor = GridBagConstraints.SOUTHWEST;
+			gbc_btnReset.insets = new Insets(0, 12, 5, 0);
+			gbc_btnReset.gridx = 0;
+			gbc_btnReset.gridy = 6;
+			DetailedSettingPanel.add(btnReset, gbc_btnReset);
+		
+			
 			// Add panel having two buttons in it at row 7
 			JPanel btnPanel = new JPanel();
 			GridBagConstraints gbc_btnPanel = new GridBagConstraints();
@@ -266,13 +286,43 @@ public class NotificationPanel extends JPanel{
 			DetailedSettingPanel.add(btnPanel, gbc_btnPanel);
 			
 			// Create panel with create and Reset button
-			JButton btnCreate = new JButton("Create");
+			btnCreate = new JButton("Create");
 			btnCreate.setFont(MedicationManagement.BODY_FONT);
+			btnCreate.addActionListener(this);
 			btnPanel.add(btnCreate);
-			JButton btnReset = new JButton("Reset");
-			btnReset.setFont(MedicationManagement.BODY_FONT);
-			btnPanel.add(btnReset);
+			
+			
+			 btnRemove = new JButton("Remove");
+			btnRemove.setFont(MedicationManagement.BODY_FONT);
+			btnRemove.addActionListener(this);
+			btnPanel.add(btnRemove);
 			
 			return DetailedSettingPanel;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			if((JButton)e.getSource() == btnCreate){
+				String str = textFieldTitle.getText()+" - "+textFieldDay.getText();
+				previousNotifications.add(newLabel(str));
+
+				
+			}
+			else if((JButton)e.getSource()==btnRemove){
+				
+			}
+			else{
+				
+			}
+				
+		}
+		
+		
+		private JLabel newLabel(String title){
+			JLabel lbl = new JLabel(title);
+			lbl.setFont(MedicationManagement.BODY_FONT);
+			return lbl;
+			
 		}
 }
