@@ -13,13 +13,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class HistoryPanel extends JPanel {
+public class HistoryPanel extends JPanel implements ActionListener{
 	
 	private JTextField textFieldSearch;
-	
+	ItemDetails panadol, sambucol, glucophage, hydrocodone, simvastatin;
+
 	/**
 	 * Create and populate the history panel
 	 */
@@ -154,9 +158,9 @@ public class HistoryPanel extends JPanel {
 		JPanel panelBody = new JPanel();
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelBody.setLayout(gbl_panel);
 
 		//ROW 0
@@ -208,12 +212,24 @@ public class HistoryPanel extends JPanel {
 		Image expandIcon = new ImageIcon(this.getClass().getResource("expand.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnExpand1.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand_1 = new GridBagConstraints();
+		btnExpand1.setActionCommand("Panadol");
+		btnExpand1.addActionListener(this);
 		gbc_btnExpand_1.anchor = GridBagConstraints.EAST;
 		gbc_btnExpand_1.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand_1.gridx = 3;
 		gbc_btnExpand_1.gridy = 1;
 		panelBody.add(btnExpand1, gbc_btnExpand_1);
-
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		panadol = new ItemDetails(ItemDetails.Medicine.Panadol);
+		panadol.setVisible(false);
+		panelBody.add(this.panadol, c);
 
 		//ROW 2
 		//Item label
@@ -241,12 +257,24 @@ public class HistoryPanel extends JPanel {
 		btnExpand2.setFont(MedicationManagement.BODY_FONT);
 		btnExpand2.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand_2 = new GridBagConstraints();
+		btnExpand2.setActionCommand("Sambucol");
+		btnExpand2.addActionListener(this);
 		gbc_btnExpand_2.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand_2.gridx = 3;
 		gbc_btnExpand_2.gridy = 2;
 		panelBody.add(btnExpand2, gbc_btnExpand_2);
 
-
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		sambucol = new ItemDetails(ItemDetails.Medicine.Sambucol);
+		sambucol.setVisible(false);
+		panelBody.add(this.sambucol, c);
+		
 		//ROW 3
 		//Item label
 		JLabel lblItem3 = new JLabel("Diabetes");
@@ -272,11 +300,24 @@ public class HistoryPanel extends JPanel {
 		btnExpand3.setFont(MedicationManagement.BODY_FONT);
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_buttonExpand_3 = new GridBagConstraints();
+		btnExpand3.setActionCommand("Glucophage");
+		btnExpand3.addActionListener(this);
 		gbc_buttonExpand_3.insets = new Insets(0, 0, 5, 12);
 		gbc_buttonExpand_3.gridx = 3;
 		gbc_buttonExpand_3.gridy = 3;
 		panelBody.add(btnExpand3, gbc_buttonExpand_3);
-
+		
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.glucophage = new ItemDetails(ItemDetails.Medicine.Glucophage);
+		this.glucophage.setVisible(false);
+		panelBody.add(this.glucophage, c);
+		
 		//ROW 4
 		//Item label
 		JLabel lblItem4 = new JLabel("Body Pain");
@@ -302,12 +343,23 @@ public class HistoryPanel extends JPanel {
 		btnExpand4.setFont(MedicationManagement.BODY_FONT);
 		btnExpand4.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_buttonExpand_4 = new GridBagConstraints();
+		btnExpand4.setActionCommand("Hydrocodone");
+		btnExpand4.addActionListener(this);
 		gbc_buttonExpand_4.insets = new Insets(0, 0, 5, 12);
 		gbc_buttonExpand_4.gridx = 3;
 		gbc_buttonExpand_4.gridy = 4;
 		panelBody.add(btnExpand4, gbc_buttonExpand_4);
 
-
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.hydrocodone = new ItemDetails(ItemDetails.Medicine.Hydrocodone);
+		this.hydrocodone.setVisible(false);
+		panelBody.add(this.hydrocodone, c);
 		//ROW 5
 		//Item label
 		JLabel lblItem5 = new JLabel("High Cholesterol");
@@ -333,12 +385,39 @@ public class HistoryPanel extends JPanel {
 		btnExpand5.setFont(MedicationManagement.BODY_FONT);
 		btnExpand5.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_buttonExpand_5 = new GridBagConstraints();
+		btnExpand5.setActionCommand("Simvastatin");
+		btnExpand5.addActionListener(this);
 		gbc_buttonExpand_5.insets = new Insets(0, 0, 0, 12);
 		gbc_buttonExpand_5.gridx = 3;
 		gbc_buttonExpand_5.gridy = 5;
 		panelBody.add(btnExpand5, gbc_buttonExpand_5);
 
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 10;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.simvastatin = new ItemDetails(ItemDetails.Medicine.Simvastatin);
+		this.simvastatin.setVisible(false);
+		panelBody.add(this.simvastatin, c);
 		return panelBody;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("Panadol"))
+			panadol.setVisible(true);
+		else if(e.getActionCommand().equals("Sambucol"))
+			sambucol.setVisible(true);
+		else if(e.getActionCommand().equals("Glucophage"))
+			this.glucophage.setVisible(true);
+		else if(e.getActionCommand().equals("Hydrocodone"))
+			this.hydrocodone.setVisible(true);
+		else if(e.getActionCommand().equals("Simvastatin"))
+			this.simvastatin.setVisible(true);
+		
 	}
 
 }

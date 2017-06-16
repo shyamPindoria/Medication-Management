@@ -1,8 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
@@ -14,10 +17,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
-public class MedicationPanel extends JPanel {
+public class MedicationPanel extends JPanel implements ActionListener{
 	
 	private JTextField textFieldSearch;
-
+	ItemDetails panadol, sambucol, glucophage, hydrocodone, simvastatin;
 	/**
 	 * Create the Medication Panel
 	 */
@@ -149,9 +152,9 @@ public class MedicationPanel extends JPanel {
 		JPanel panelBody = new JPanel();
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelBody.setLayout(gbl_panel);
 
 		//ROW 0
@@ -159,7 +162,7 @@ public class MedicationPanel extends JPanel {
 		lblName.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.WEST;
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblName.insets = new Insets(0, 20, 5, 5);
 		gbc_lblName.gridx = 1;
 		gbc_lblName.gridy = 0;
 		panelBody.add(lblName, gbc_lblName);
@@ -201,13 +204,25 @@ public class MedicationPanel extends JPanel {
 		Image expandIcon = new ImageIcon(this.getClass().getResource("expand.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnExpand1.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand1 = new GridBagConstraints();
+		btnExpand1.setActionCommand("Panadol");
+		btnExpand1.addActionListener(this);
 		gbc_btnExpand1.anchor = GridBagConstraints.EAST;
 		gbc_btnExpand1.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand1.gridx = 3;
 		gbc_btnExpand1.gridy = 1;
 		panelBody.add(btnExpand1, gbc_btnExpand1);
 
-
+		GridBagConstraints c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		panadol = new ItemDetails(ItemDetails.Medicine.Panadol);
+		panadol.setVisible(false);
+		panelBody.add(this.panadol, c);
+		
 		//ROW 2
 		//Item label
 		JLabel lblItem2 = new JLabel("Sambucol Cols & Flu");
@@ -217,7 +232,7 @@ public class MedicationPanel extends JPanel {
 		gbc_lblItem2.weightx = 1.0;
 		gbc_lblItem2.insets = new Insets(0, 20, 5, 5);
 		gbc_lblItem2.gridx = 1;
-		gbc_lblItem2.gridy = 2;
+		gbc_lblItem2.gridy = 3;
 		panelBody.add(lblItem2, gbc_lblItem2);
 
 		//Dose label
@@ -226,19 +241,31 @@ public class MedicationPanel extends JPanel {
 		GridBagConstraints gbc_lblDose2 = new GridBagConstraints();
 		gbc_lblDose2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDose2.gridx = 2;
-		gbc_lblDose2.gridy = 2;
+		gbc_lblDose2.gridy = 3;
 		panelBody.add(lblDose2, gbc_lblDose2);
 
 		//Expand button
 		JButton btnExpand2 = new JButton("Expand");
 		btnExpand2.setFont(MedicationManagement.BODY_FONT);
 		btnExpand2.setIcon(new ImageIcon(expandIcon));
+		btnExpand2.setActionCommand("Sambucol");
+		btnExpand2.addActionListener(this);
 		GridBagConstraints gbc_btnExpand2 = new GridBagConstraints();
 		gbc_btnExpand2.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand2.gridx = 3;
-		gbc_btnExpand2.gridy = 2;
+		gbc_btnExpand2.gridy = 3;
 		panelBody.add(btnExpand2, gbc_btnExpand2);
 
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		sambucol = new ItemDetails(ItemDetails.Medicine.Sambucol);
+		sambucol.setVisible(false);
+		panelBody.add(this.sambucol, c);
 
 		//ROW 3
 		//Item label
@@ -248,7 +275,7 @@ public class MedicationPanel extends JPanel {
 		gbc_lblItem3.anchor = GridBagConstraints.WEST;
 		gbc_lblItem3.insets = new Insets(0, 20, 5, 5);
 		gbc_lblItem3.gridx = 1;
-		gbc_lblItem3.gridy = 3;
+		gbc_lblItem3.gridy = 5;
 		panelBody.add(lblItem3, gbc_lblItem3);
 
 		//Dose label
@@ -257,7 +284,7 @@ public class MedicationPanel extends JPanel {
 		GridBagConstraints gbc_lblDose3 = new GridBagConstraints();
 		gbc_lblDose3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDose3.gridx = 2;
-		gbc_lblDose3.gridy = 3;
+		gbc_lblDose3.gridy = 5;
 		panelBody.add(lblDose3, gbc_lblDose3);
 
 		//Expand button
@@ -265,11 +292,24 @@ public class MedicationPanel extends JPanel {
 		btnExpand3.setFont(MedicationManagement.BODY_FONT);
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_button8 = new GridBagConstraints();
+		btnExpand3.setActionCommand("Glucophage");
+		btnExpand3.addActionListener(this);
 		gbc_button8.insets = new Insets(0, 0, 5, 12);
 		gbc_button8.gridx = 3;
-		gbc_button8.gridy = 3;
+		gbc_button8.gridy = 5;
 		panelBody.add(btnExpand3, gbc_button8);
 
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.glucophage = new ItemDetails(ItemDetails.Medicine.Glucophage);
+		this.glucophage.setVisible(false);
+		panelBody.add(this.glucophage, c);
+		
 		//ROW 4
 		//Item label
 		JLabel lblItem4 = new JLabel("Hydrocodone");
@@ -278,7 +318,7 @@ public class MedicationPanel extends JPanel {
 		gbc_lblItem4.anchor = GridBagConstraints.WEST;
 		gbc_lblItem4.insets = new Insets(0, 20, 5, 5);
 		gbc_lblItem4.gridx = 1;
-		gbc_lblItem4.gridy = 4;
+		gbc_lblItem4.gridy = 7;
 		panelBody.add(lblItem4, gbc_lblItem4);
 		
 		//Dose label
@@ -287,7 +327,7 @@ public class MedicationPanel extends JPanel {
 		GridBagConstraints gbc_lblDose4 = new GridBagConstraints();
 		gbc_lblDose4.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDose4.gridx = 2;
-		gbc_lblDose4.gridy = 4;
+		gbc_lblDose4.gridy = 7;
 		panelBody.add(lblDose4, gbc_lblDose4);
 
 		//Expand button
@@ -295,12 +335,24 @@ public class MedicationPanel extends JPanel {
 		btnExpand4.setFont(MedicationManagement.BODY_FONT);
 		btnExpand4.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_button_9 = new GridBagConstraints();
+		btnExpand4.setActionCommand("Hydrocodone");
+		btnExpand4.addActionListener(this);
 		gbc_button_9.insets = new Insets(0, 0, 5, 12);
 		gbc_button_9.gridx = 3;
-		gbc_button_9.gridy = 4;
+		gbc_button_9.gridy = 7;
 		panelBody.add(btnExpand4, gbc_button_9);
 
-
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.hydrocodone = new ItemDetails(ItemDetails.Medicine.Hydrocodone);
+		this.hydrocodone.setVisible(false);
+		panelBody.add(this.hydrocodone, c);
+		
 		//ROW 5
 		//Item label
 		JLabel lblItem5 = new JLabel("Simvastatin");
@@ -309,7 +361,7 @@ public class MedicationPanel extends JPanel {
 		gbc_lblItem5.anchor = GridBagConstraints.WEST;
 		gbc_lblItem5.insets = new Insets(0, 20, 0, 5);
 		gbc_lblItem5.gridx = 1;
-		gbc_lblItem5.gridy = 5;
+		gbc_lblItem5.gridy = 9;
 		panelBody.add(lblItem5, gbc_lblItem5);
 
 		//Dose label
@@ -318,7 +370,7 @@ public class MedicationPanel extends JPanel {
 		GridBagConstraints gbc_lblDose5 = new GridBagConstraints();
 		gbc_lblDose5.insets = new Insets(0, 0, 0, 5);
 		gbc_lblDose5.gridx = 2;
-		gbc_lblDose5.gridy = 5;
+		gbc_lblDose5.gridy = 9;
 		panelBody.add(lblDose5, gbc_lblDose5);
 
 		//Expand button
@@ -326,12 +378,38 @@ public class MedicationPanel extends JPanel {
 		btnExpand5.setFont(MedicationManagement.BODY_FONT);
 		btnExpand5.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_button_10 = new GridBagConstraints();
+		btnExpand5.setActionCommand("Simvastatin");
+		btnExpand5.addActionListener(this);
 		gbc_button_10.insets = new Insets(0, 0, 0, 12);
 		gbc_button_10.gridx = 3;
-		gbc_button_10.gridy = 5;
+		gbc_button_10.gridy = 9;
 		panelBody.add(btnExpand5, gbc_button_10);
 
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 10;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.simvastatin = new ItemDetails(ItemDetails.Medicine.Simvastatin);
+		this.simvastatin.setVisible(false);
+		panelBody.add(this.simvastatin, c);
 		return panelBody;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg) {
+		if(arg.getActionCommand().equals("Panadol"))
+			panadol.setVisible(true);
+		else if(arg.getActionCommand().equals("Sambucol"))
+			sambucol.setVisible(true);
+		else if(arg.getActionCommand().equals("Glucophage"))
+			this.glucophage.setVisible(true);
+		else if(arg.getActionCommand().equals("Hydrocodone"))
+			this.hydrocodone.setVisible(true);
+		else if(arg.getActionCommand().equals("Simvastatin"))
+			this.simvastatin.setVisible(true);
 	}
 	
 }

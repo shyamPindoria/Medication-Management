@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,9 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
-public class ContactsPanel extends JPanel {
+public class ContactsPanel extends JPanel implements ActionListener{
 	private JTextField textFieldSearch;
-	
+	private ContactDetails smith, william, jane, isaac, robert;
 	public ContactsPanel() {
 		//Size of the panel
 		setSize(new Dimension(640, 485));
@@ -153,9 +155,9 @@ public class ContactsPanel extends JPanel {
 		//Set a grid bag layout to the contact pane list
 		GridBagLayout gbl_panelContactList = new GridBagLayout();
 		gbl_panelContactList.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panelContactList.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_panelContactList.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panelContactList.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panelContactList.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelContactList.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panelContactList.setLayout(gbl_panelContactList);
 		
 		//Add labels for names and phone numbers to the pane
@@ -165,7 +167,7 @@ public class ContactsPanel extends JPanel {
 		lblName.setFont(MedicationManagement.HEADER_FONT);
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
 		gbc_lblName.anchor = GridBagConstraints.WEST;
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblName.insets = new Insets(0, 20, 5, 5);
 		gbc_lblName.gridx = 1;
 		gbc_lblName.gridy = 0;
 		panelContactList.add(lblName, gbc_lblName);
@@ -207,11 +209,24 @@ public class ContactsPanel extends JPanel {
 		btnExpand1.setFont(MedicationManagement.BODY_FONT);
 		btnExpand1.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand1 = new GridBagConstraints();
+		btnExpand1.setActionCommand("Smith");
+		btnExpand1.addActionListener(this);
 		gbc_btnExpand1.anchor = GridBagConstraints.EAST;
 		gbc_btnExpand1.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand1.gridx = 3;
 		gbc_btnExpand1.gridy = 1;
 		panelContactList.add(btnExpand1, gbc_btnExpand1);
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		smith = new ContactDetails(ContactDetails.Name.Smith, "0412345678");
+		smith.setVisible(false);
+		panelContactList.add(this.smith, c);
 		
 		//ROW 2
 		//Name label
@@ -222,7 +237,7 @@ public class ContactsPanel extends JPanel {
 		gbc_name2.anchor = GridBagConstraints.WEST;
 		gbc_name2.insets = new Insets(0, 20, 5, 5);
 		gbc_name2.gridx = 1;
-		gbc_name2.gridy = 2;
+		gbc_name2.gridy = 3;
 		panelContactList.add(name2, gbc_name2);
 		
 		//Phone label
@@ -231,7 +246,7 @@ public class ContactsPanel extends JPanel {
 		GridBagConstraints gbc_phone2 = new GridBagConstraints();
 		gbc_phone2.insets = new Insets(0, 0, 5, 5);
 		gbc_phone2.gridx = 2;
-		gbc_phone2.gridy = 2;
+		gbc_phone2.gridy = 3;
 		panelContactList.add(phone2, gbc_phone2);
 		
 		//Expand button
@@ -239,10 +254,23 @@ public class ContactsPanel extends JPanel {
 		btnExpand2.setFont(MedicationManagement.BODY_FONT);
 		btnExpand2.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand2 = new GridBagConstraints();
+		btnExpand2.setActionCommand("William");
+		btnExpand2.addActionListener(this);
 		gbc_btnExpand2.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand2.gridx = 3;
-		gbc_btnExpand2.gridy = 2;
+		gbc_btnExpand2.gridy = 3;
 		panelContactList.add(btnExpand2, gbc_btnExpand2);
+		
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		william = new ContactDetails(ContactDetails.Name.William, "0498765432");
+		william.setVisible(false);
+		panelContactList.add(this.william, c);
 		
 		//ROW 3
 		//Name label
@@ -252,7 +280,7 @@ public class ContactsPanel extends JPanel {
 		gbc_name3.anchor = GridBagConstraints.WEST;
 		gbc_name3.insets = new Insets(0, 20, 5, 5);
 		gbc_name3.gridx = 1;
-		gbc_name3.gridy = 3;
+		gbc_name3.gridy = 5;
 		panelContactList.add(name3, gbc_name3);
 		
 		//Phone label
@@ -261,7 +289,7 @@ public class ContactsPanel extends JPanel {
 		GridBagConstraints gbc_phone3 = new GridBagConstraints();
 		gbc_phone3.insets = new Insets(0, 0, 5, 5);
 		gbc_phone3.gridx = 2;
-		gbc_phone3.gridy = 3;
+		gbc_phone3.gridy = 5;
 		panelContactList.add(phone3, gbc_phone3);
 		
 		//Expand button
@@ -269,10 +297,23 @@ public class ContactsPanel extends JPanel {
 		btnExpand3.setIcon(new ImageIcon(expandIcon));
 		btnExpand3.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnExpand3 = new GridBagConstraints();
+		btnExpand3.setActionCommand("Jane");
+		btnExpand3.addActionListener(this);
 		gbc_btnExpand3.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand3.gridx = 3;
-		gbc_btnExpand3.gridy = 3;
+		gbc_btnExpand3.gridy = 5;
 		panelContactList.add(btnExpand3, gbc_btnExpand3);
+		
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.jane = new ContactDetails(ContactDetails.Name.Jane, "0491827364");
+		this.jane.setVisible(false);
+		panelContactList.add(this.jane, c);
 		
 		//ROW 4
 		//Name label
@@ -282,7 +323,7 @@ public class ContactsPanel extends JPanel {
 		gbc_name4.anchor = GridBagConstraints.WEST;
 		gbc_name4.insets = new Insets(0, 20, 5, 5);
 		gbc_name4.gridx = 1;
-		gbc_name4.gridy = 4;
+		gbc_name4.gridy = 7;
 		panelContactList.add(name4, gbc_name4);
 		
 		//Phone label
@@ -291,7 +332,7 @@ public class ContactsPanel extends JPanel {
 		GridBagConstraints gbc_phone4 = new GridBagConstraints();
 		gbc_phone4.insets = new Insets(0, 0, 5, 5);
 		gbc_phone4.gridx = 2;
-		gbc_phone4.gridy = 4;
+		gbc_phone4.gridy = 7;
 		panelContactList.add(phone4, gbc_phone4);
 		
 		//Expand button
@@ -299,10 +340,23 @@ public class ContactsPanel extends JPanel {
 		btnExpand4.setIcon(new ImageIcon(expandIcon));
 		btnExpand4.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnExpand4 = new GridBagConstraints();
+		btnExpand4.setActionCommand("Isaac");
+		btnExpand4.addActionListener(this);
 		gbc_btnExpand4.insets = new Insets(0, 0, 5, 12);
 		gbc_btnExpand4.gridx = 3;
-		gbc_btnExpand4.gridy = 4;
+		gbc_btnExpand4.gridy = 7;
 		panelContactList.add(btnExpand4, gbc_btnExpand4);
+		
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.isaac = new ContactDetails(ContactDetails.Name.Isaac, "0457483920");
+		this.isaac.setVisible(false);
+		panelContactList.add(this.isaac, c);
 		
 		//ROW 5
 		//Name label
@@ -312,7 +366,7 @@ public class ContactsPanel extends JPanel {
 		gbc_name5.anchor = GridBagConstraints.WEST;
 		gbc_name5.insets = new Insets(0, 20, 0, 5);
 		gbc_name5.gridx = 1;
-		gbc_name5.gridy = 5;
+		gbc_name5.gridy = 9;
 		panelContactList.add(name5, gbc_name5);
 		
 		//Phone label
@@ -321,7 +375,7 @@ public class ContactsPanel extends JPanel {
 		GridBagConstraints gbc_phone5 = new GridBagConstraints();
 		gbc_phone5.insets = new Insets(0, 0, 0, 5);
 		gbc_phone5.gridx = 2;
-		gbc_phone5.gridy = 5;
+		gbc_phone5.gridy = 9;
 		panelContactList.add(phone5, gbc_phone5);
 		
 		//Expand button
@@ -329,12 +383,39 @@ public class ContactsPanel extends JPanel {
 		btnExpand5.setFont(MedicationManagement.BODY_FONT);
 		btnExpand5.setIcon(new ImageIcon(expandIcon));
 		GridBagConstraints gbc_btnExpand5 = new GridBagConstraints();
+		btnExpand5.setActionCommand("Robert");
+		btnExpand5.addActionListener(this);
 		gbc_btnExpand5.insets = new Insets(0, 0, 0, 12);
 		gbc_btnExpand5.gridx = 3;
-		gbc_btnExpand5.gridy = 5;
+		gbc_btnExpand5.gridy = 9;
 		panelContactList.add(btnExpand5, gbc_btnExpand5);
 		
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 10;
+		c.gridwidth = 5;
+		c.insets = new Insets(10,10,10,10);
+		this.robert = new ContactDetails(ContactDetails.Name.Robert, "0401987654");
+		this.robert.setVisible(false);
+		panelContactList.add(this.robert, c);
 		return panelContactList;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("Smith"))
+			smith.setVisible(true);
+		else if(e.getActionCommand().equals("William"))
+			william.setVisible(true);
+		else if(e.getActionCommand().equals("Jane"))
+			this.jane.setVisible(true);
+		else if(e.getActionCommand().equals("Isaac"))
+			this.isaac.setVisible(true);
+		else if(e.getActionCommand().equals("Robert"))
+			this.robert.setVisible(true);
+		
 	}
 
 }

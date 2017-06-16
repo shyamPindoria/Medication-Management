@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -22,7 +23,6 @@ public class MedicationManagement{
 		//JOptionPane.showMessageDialog(login, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		
 		main = new MainFrame();
-
 	}
 
 	public static void refreshUI() {

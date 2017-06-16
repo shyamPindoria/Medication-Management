@@ -377,7 +377,7 @@ public class NotificationPanel extends JPanel implements ActionListener{
 		
 		/**
 		 * method to Remove item to the previousMedication list
-		 * @param item - String An item to add
+		 * @param panadol - String An item to add
 		 */
 		private void removeElement(int index){
 			ArrayList<String> items = new ArrayList<String>();
