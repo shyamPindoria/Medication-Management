@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.GridBagLayout;
@@ -11,10 +14,14 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -29,6 +36,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	private JComboBox<String> comboBoxFont;
 	private JComboBox<String> comboBoxTheme;
 	private JSlider sliderFontSize;
+	
 
 	/**
 	 * Create the panel.
@@ -36,6 +44,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	public SettingsPanel() {
 		setSize(new Dimension(793, 673));
 		setLayout(new BorderLayout());
+		
+		
 
 		JLabel lblSettings = new JLabel("Settings");
 		lblSettings.setFont(MedicationManagement.HEADER_FONT);
@@ -257,7 +267,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		 
 		GridBagLayout gbl_AppearanceSettingsPanel = new GridBagLayout();
 		gbl_AppearanceSettingsPanel.columnWeights = new double[]{0.0, 1.0, 0.0};
-		gbl_AppearanceSettingsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0};
+		gbl_AppearanceSettingsPanel.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0};
 		AppearanceSettingsPanel.setLayout(gbl_AppearanceSettingsPanel);
 
 		//////////////////////////////////////// ROW 1 //////////////////////////////////////////
@@ -324,7 +334,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_sliderFontSize.gridx = 1;
 		gbc_sliderFontSize.gridy = 2;
 		AppearanceSettingsPanel.add(sliderFontSize, gbc_sliderFontSize);
-
+		
 		
 		//////////////////////////////////// ROW 4 ///////////////////////////////////////
 		JButton btnDefault = new JButton("Default");
@@ -360,7 +370,7 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {	
 		//Save button cLicked
 		if (e.getActionCommand().equals("Save")) {
 			String fontType = String.valueOf(comboBoxFont.getSelectedItem());
@@ -377,5 +387,11 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		}
 		
 	}
+	
+	
+	
+	
+
+
 
 }
