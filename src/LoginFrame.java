@@ -18,7 +18,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 
 public class LoginFrame extends JFrame implements ActionListener{
 
@@ -66,6 +68,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
+		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.gridx = 0;
 		gbc_lblUsername.gridy = 0;
@@ -74,6 +77,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		//User name text field
 		usernameTxt = new JTextField();
 		GridBagConstraints gbc_usernameTxt = new GridBagConstraints();
+		gbc_usernameTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_usernameTxt.fill = GridBagConstraints.HORIZONTAL;
 		gbc_usernameTxt.gridx = 1;
 		gbc_usernameTxt.gridy = 0;
@@ -84,6 +88,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.gridx = 0;
 		gbc_lblPassword.gridy = 1;
@@ -92,6 +97,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		//Password text field
 		passwordTxt = new JPasswordField();
 		GridBagConstraints gbc_passwordTxt = new GridBagConstraints();
+		gbc_passwordTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordTxt.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordTxt.gridx = 1;
 		gbc_passwordTxt.gridy = 1;
@@ -100,9 +106,11 @@ public class LoginFrame extends JFrame implements ActionListener{
 		
 		//Create login button
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setPreferredSize(new Dimension(200, 30)); //Button size
+		btnLogin.setIconTextGap(6);
+		btnLogin.setPreferredSize(new Dimension(220, 30)); //Button size
 		btnLogin.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
+		gbc_btnLogin.insets = new Insets(0, 0, 0, 5);
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.gridx = 0;
 		gbc_btnLogin.gridy = 2;
@@ -112,6 +120,22 @@ public class LoginFrame extends JFrame implements ActionListener{
 		btnLogin.addActionListener(this);
 		btnLogin.setActionCommand("Login");
 		loginArea.add(btnLogin, gbc_btnLogin);
+		
+		//Create Help button
+		JButton btnHelp = new JButton("Help");
+		btnHelp.setHorizontalTextPosition(SwingConstants.LEFT);
+		btnHelp.setPreferredSize(new Dimension(75, 30));
+		Image helpIcon = new ImageIcon(this.getClass().getResource("help.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+		btnHelp.setIcon(new ImageIcon(helpIcon));
+		btnHelp.setFont(MedicationManagement.BODY_FONT);
+		GridBagConstraints gbc_btnHelp = new GridBagConstraints();
+		gbc_btnHelp.anchor = GridBagConstraints.WEST;
+		gbc_btnHelp.fill = GridBagConstraints.VERTICAL;
+		gbc_btnHelp.gridx = 2;
+		gbc_btnHelp.gridy = 2;
+		btnHelp.addActionListener(this);
+		btnHelp.setActionCommand("Help");
+		loginArea.add(btnHelp, gbc_btnHelp);
 		
 		return loginArea;
 	}
@@ -165,6 +189,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "The username or password you entered is incorrect.", "Unable to login", JOptionPane.ERROR_MESSAGE);
 			}
 
+		}
+		//If help button is clicked
+		else if (e.getActionCommand().equals("Help")) {
+			//Display username and password
+			//For testing purposes only
+			JOptionPane.showMessageDialog(this, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		}
 		
 	}

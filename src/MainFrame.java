@@ -35,12 +35,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		setMinimumSize(new Dimension(740, 485));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 740, 485);
+		setBounds(100, 100, 1024, 720);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
 		
 		panelMenu = new MenuPanel();
+		panelMenu.setPreferredSize(new Dimension(120, 235));
 		contentPane.add(panelMenu, BorderLayout.WEST);
 		
 		panelBody = createBodyPanel();

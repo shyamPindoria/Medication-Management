@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class MenuPanel extends JPanel {
+public class MenuPanel extends JPanel implements MouseListener {
 	
 	JButton btnCurrent;
 	JButton btnHistory;
@@ -30,11 +32,11 @@ public class MenuPanel extends JPanel {
 	 */
 	public MenuPanel() {
 		
-		this.setBackground(Color.DARK_GRAY);
+		this.setBackground(MedicationManagement.MENU_BACKGROUND);
 		GridBagLayout gbl_panelMenu = new GridBagLayout();
 		gbl_panelMenu.columnWidths = new int[]{51, 0};
 		gbl_panelMenu.rowHeights = new int[]{16, 0, 16, 0, 0, 0, 0, 0};
-		gbl_panelMenu.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panelMenu.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_panelMenu.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.setLayout(gbl_panelMenu);
 		
@@ -103,6 +105,7 @@ public class MenuPanel extends JPanel {
 		
 		this.btnLogOut = createLogOutBtn();
 		GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
+		gbc_btnLogOut.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnLogOut.weighty = 1.0;
 		gbc_btnLogOut.anchor = GridBagConstraints.SOUTH;
 		gbc_btnLogOut.insets = new Insets(5, 0, 0, 0);
@@ -126,6 +129,7 @@ public class MenuPanel extends JPanel {
 		btnCurrent.setOpaque(true); //To allow the background color to show
 		btnCurrent.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnCurrent.setBackground(MedicationManagement.MENU_BUTTON_SELECTED); //Set the background color
+		btnCurrent.addMouseListener(this); //Add mouse listener to button
 		return btnCurrent;
 	}
 
@@ -144,7 +148,7 @@ public class MenuPanel extends JPanel {
 		btnHistory.setOpaque(true); //To allow the background color to show
 		btnHistory.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnHistory.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
-		
+		btnHistory.addMouseListener(this); //Add mouse listener to button
 		return btnHistory;
 	}
 	
@@ -163,7 +167,7 @@ public class MenuPanel extends JPanel {
 		btnContacts.setOpaque(true); //To allow the background color to show
 		btnContacts.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnContacts.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
-		
+		btnContacts.addMouseListener(this); //Add mouse listener to button
 		return btnContacts;
 	}
 
@@ -182,6 +186,7 @@ public class MenuPanel extends JPanel {
 		btnUpload.setOpaque(true); //To allow the background color to show
 		btnUpload.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnUpload.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
+		btnUpload.addMouseListener(this); //Add mouse listener to button
 		return btnUpload;
 		
 	}
@@ -200,6 +205,7 @@ public class MenuPanel extends JPanel {
 		btnHelp.setOpaque(true); //To allow the background color to show
 		btnHelp.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnHelp.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
+		btnHelp.addMouseListener(this); //Add mouse listener to button
 		return btnHelp;
 	}
 	
@@ -217,6 +223,7 @@ public class MenuPanel extends JPanel {
 		btnSettings.setOpaque(true); //To allow the background color to show
 		btnSettings.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnSettings.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
+		btnSettings.addMouseListener(this); //Add mouse listener to button
 		return btnSettings;
 	}
 
@@ -234,6 +241,7 @@ public class MenuPanel extends JPanel {
 		btnNotification.setOpaque(true); //To allow the background color to show
 		btnNotification.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnNotification.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
+		btnNotification.addMouseListener(this); //Add mouse listener to button
 		return btnNotification;
 	}
 	
@@ -251,6 +259,7 @@ public class MenuPanel extends JPanel {
 		btnLogOut.setOpaque(true); //To allow the background color to show
 		btnLogOut.setBorder(new EmptyBorder(0, 12, 0, 0)); //Set an empty border to push the image off the left edge
 		btnLogOut.setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED); //Set the background color
+		btnLogOut.addMouseListener(this); //Add mouse listener to button
 		return btnLogOut;
 	}
 
@@ -287,6 +296,40 @@ public class MenuPanel extends JPanel {
 		this.btnSettings.addActionListener(listener);
 		this.btnLogOut.addActionListener(listener);
 		this.btnNotification.addActionListener(listener);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		//Do not change the selected button
+		if (((JButton) e.getSource()).getBackground() != MedicationManagement.MENU_BUTTON_SELECTED) {
+			((JButton) e.getSource()).setBackground(MedicationManagement.MENU_BUTTON_HOVER);
+		}
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		//Do not change the selected button
+		if (((JButton) e.getSource()).getBackground() != MedicationManagement.MENU_BUTTON_SELECTED) {
+			((JButton) e.getSource()).setBackground(MedicationManagement.MENU_BUTTON_UNSELECTED);
+		}
 	}
 	
 }
