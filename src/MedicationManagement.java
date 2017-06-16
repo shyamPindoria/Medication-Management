@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class MedicationManagement{
 
@@ -25,7 +26,9 @@ public class MedicationManagement{
 	}
 
 	public static void refreshUI() {
-		main.repaint();
+		
+		new MainFrame().setVisible(true);
+		main.dispose();
 		
 	}
 
