@@ -21,6 +21,7 @@ public class MedicationPanel extends JPanel implements ActionListener{
 	
 	private JTextField textFieldSearch;
 	ItemDetails panadol, sambucol, glucophage, hydrocodone, simvastatin;
+	JButton buttonAdd;
 	/**
 	 * Create the Medication Panel
 	 */
@@ -86,13 +87,14 @@ public class MedicationPanel extends JPanel implements ActionListener{
 		panelToolBar.setLayout(gbl_panelToolBar);
 		
 		//Add button
-		JButton buttonAdd = new JButton("Add");
+		buttonAdd = new JButton("Add");
 		buttonAdd.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_buttonAdd = new GridBagConstraints();
 		gbc_buttonAdd.insets = new Insets(0, 0, 0, 5);
 		gbc_buttonAdd.gridx = 0;
 		gbc_buttonAdd.gridy = 0;
 		panelToolBar.add(buttonAdd, gbc_buttonAdd);
+		buttonAdd.addActionListener(this);
 		
 		//Remove Button
 		JButton buttonRemove = new JButton("Remove");
@@ -400,6 +402,9 @@ public class MedicationPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg) {
+		if (arg.getSource() == buttonAdd) {
+			AddMedicationPage newM = new AddMedicationPage();
+		}
 		if(arg.getActionCommand().equals("Panadol"))
 			panadol.setVisible(true);
 		else if(arg.getActionCommand().equals("Sambucol"))

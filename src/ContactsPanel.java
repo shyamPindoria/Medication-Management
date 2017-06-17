@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 public class ContactsPanel extends JPanel implements ActionListener{
 	private JTextField textFieldSearch;
 	private ContactDetails smith, william, jane, isaac, robert;
+	JButton buttonAdd;
 	public ContactsPanel() {
 		//Size of the panel
 		setSize(new Dimension(640, 485));
@@ -98,13 +99,14 @@ public class ContactsPanel extends JPanel implements ActionListener{
 		panelToolBar.setLayout(gbl_panelToolBar);
 		
 		//Add button
-		JButton buttonAdd = new JButton("Add");
+		buttonAdd = new JButton("Add");
 		buttonAdd.setFont(MedicationManagement.BODY_FONT);
 		GridBagConstraints gbc_buttonAdd = new GridBagConstraints();
 		gbc_buttonAdd.insets = new Insets(0, 12, 0, 5);
 		gbc_buttonAdd.gridx = 0;
 		gbc_buttonAdd.gridy = 0;
 		panelToolBar.add(buttonAdd, gbc_buttonAdd);
+		buttonAdd.addActionListener(this);
 		
 		//Remove button
 		JButton buttonRemove = new JButton("Remove");
@@ -405,6 +407,9 @@ public class ContactsPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == buttonAdd) {
+			AddContactPage newC = new AddContactPage();
+		}
 		if(e.getActionCommand().equals("Smith"))
 			smith.setVisible(true);
 		else if(e.getActionCommand().equals("William"))
