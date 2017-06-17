@@ -52,6 +52,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Add panels to the main body panel
+	 * @return
+	 */
 	private JPanel createBodyPanel() {
 		
 		panelBody = new JPanel();

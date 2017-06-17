@@ -4,9 +4,6 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.GridBagLayout;
@@ -14,14 +11,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.Image;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -243,9 +236,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_lblLanguage.gridy = 4;
 		mainSettingsPanel.add(lblLanguage, gbc_lblLanguage);
 		
-		JComboBox comboBoxLang = new JComboBox();
+		JComboBox<String> comboBoxLang = new JComboBox<String>();
 		comboBoxLang.setFont(MedicationManagement.BODY_FONT);
-		comboBoxLang.setModel(new DefaultComboBoxModel(new String[] {"English", "Spanish", "French", "Chinese", "Hindi"}));
+		comboBoxLang.setModel(new DefaultComboBoxModel<String>(new String[] {"English", "Spanish", "French", "Chinese", "Hindi"}));
 		comboBoxLang.setPreferredSize(new Dimension(252, 27));
 		GridBagConstraints gbc_comboBoxLang = new GridBagConstraints();
 		gbc_comboBoxLang.anchor = GridBagConstraints.WEST;
@@ -280,10 +273,10 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_lblFontType.gridy = 0;
 		AppearanceSettingsPanel.add(lblFontType, gbc_lblFontType);
 
-		comboBoxFont = new JComboBox();
+		comboBoxFont = new JComboBox<String>();
 		comboBoxFont.setPreferredSize(new Dimension(180, 22));
 		comboBoxFont.setFont(MedicationManagement.BODY_FONT);
-		comboBoxFont.setModel(new DefaultComboBoxModel(new String[] {"Arial", "Georgia", "Tahoma", "Verdana"}));
+		comboBoxFont.setModel(new DefaultComboBoxModel<String>(new String[] {"Arial", "Georgia", "Tahoma", "Verdana"}));
 		comboBoxFont.setSelectedItem(MedicationManagement.BODY_FONT.getFontName());
 		GridBagConstraints gbc_comboBoxFont = new GridBagConstraints();
 		gbc_comboBoxFont.anchor = GridBagConstraints.WEST;
@@ -302,10 +295,11 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_lblTheme.gridy = 1;
 		AppearanceSettingsPanel.add(lblTheme, gbc_lblTheme);
 
-		comboBoxTheme = new JComboBox();
+		comboBoxTheme = new JComboBox<String>();
 		comboBoxTheme.setPreferredSize(new Dimension(180, 22));
 		comboBoxTheme.setFont(MedicationManagement.BODY_FONT);
-		comboBoxTheme.setModel(new DefaultComboBoxModel(new String[] {"Normal", "Dark", "Light"}));
+		comboBoxTheme.setModel(new DefaultComboBoxModel<String>(new String[] {"Red", "Blue", "Green"}));
+		comboBoxTheme.setSelectedItem(MedicationManagement.THEME);
 		GridBagConstraints gbc_comboBoxTheme = new GridBagConstraints();
 		gbc_comboBoxTheme.fill = GridBagConstraints.VERTICAL;
 		gbc_comboBoxTheme.insets = new Insets(0, 0, 5, 5);
@@ -379,17 +373,18 @@ public class SettingsPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {	
 		//Save button cLicked
 		if (e.getActionCommand().equals("Save")) {
+			//Font type
 			String fontType = String.valueOf(comboBoxFont.getSelectedItem());
-			int fontSize = 18;
+			int fontSize = 18; //Font size
 			if (this.sliderFontSize.getValue() == 1) {
 				fontSize = 16;
 			} else if (this.sliderFontSize.getValue() == 3) {
 				fontSize = 20;
 			}
-			System.out.println(fontType);
+			MedicationManagement.setTheme(String.valueOf(this.comboBoxTheme.getSelectedItem())); //Theme
 			MedicationManagement.BODY_FONT = new Font(fontType, Font.PLAIN, fontSize);
 			MedicationManagement.HEADER_FONT = new Font(fontType, Font.PLAIN, fontSize + 2);
-			MedicationManagement.refreshUI();
+			MedicationManagement.refreshUI(); //Apply changes
 		}
 		
 	}
