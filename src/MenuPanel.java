@@ -122,6 +122,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 
 		JButton btnCurrent = new JButton("Medication"); //Creates button with text
 		btnCurrent.setHorizontalAlignment(SwingConstants.LEFT);  //Sets the alignment to left
+		btnCurrent.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnCurrent.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image medicationIcon = new ImageIcon(this.getClass().getResource("medication.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnCurrent.setIcon(new ImageIcon(medicationIcon)); //Add the medication image to the button
@@ -141,6 +142,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 		
 		JButton btnHistory = new JButton("History"); //Creates button with text
 		btnHistory.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnHistory.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnHistory.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image historyIcon = new ImageIcon(this.getClass().getResource("history.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnHistory.setIcon(new ImageIcon(historyIcon)); //Add the history image to the button
@@ -160,6 +162,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 		
 		JButton btnContacts = new JButton("Contacts"); //Creates button with text
 		btnContacts.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnContacts.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnContacts.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image contactsIcon = new ImageIcon(this.getClass().getResource("contacts.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnContacts.setIcon(new ImageIcon(contactsIcon)); //Add the contact image to the button
@@ -179,6 +182,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 		
 		JButton btnUpload = new JButton("Upload"); //Creates button with text
 		btnUpload.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnUpload.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnUpload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image uploadIcon = new ImageIcon(this.getClass().getResource("upload.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnUpload.setIcon(new ImageIcon(uploadIcon)); //Add the upload image to the button
@@ -198,6 +202,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 	private JButton createHelpBtn() {
 		JButton btnHelp = new JButton("Help"); //Creates button with text
 		btnHelp.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnHelp.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnHelp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image helpIcon = new ImageIcon(this.getClass().getResource("help.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnHelp.setIcon(new ImageIcon(helpIcon)); //Add the help image to the button
@@ -216,6 +221,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 	private JButton createSettingsBtn() {
 		JButton btnSettings = new JButton("Settings"); //Creates button with text
 		btnSettings.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnSettings.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnSettings.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image settingsIcon = new ImageIcon(this.getClass().getResource("settings.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnSettings.setIcon(new ImageIcon(settingsIcon)); //Add the settings image to the button
@@ -234,6 +240,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 	private JButton createNotificationBtn() {
 		JButton btnNotification = new JButton("Notification"); //Creates button with text
 		btnNotification.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnNotification.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnNotification.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image notificationIcon = new ImageIcon(this.getClass().getResource("notification.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnNotification.setIcon(new ImageIcon(notificationIcon)); //Add the settings image to the button
@@ -252,6 +259,7 @@ public class MenuPanel extends JPanel implements MouseListener {
 	private JButton createLogOutBtn() {
 		JButton btnLogOut = new JButton("Log Out"); //Creates button with text
 		btnLogOut.setHorizontalAlignment(SwingConstants.LEFT); //Sets the alignment to left
+		btnLogOut.setFont(MedicationManagement.BODY_FONT); //Set font
 		btnLogOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Changes the mouse over cursor to a hand cursor
 		Image logOutIcon = new ImageIcon(this.getClass().getResource("lock.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnLogOut.setIcon(new ImageIcon(logOutIcon)); //Add the lock image to the button

@@ -31,8 +31,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 	/**
 	 * Create the login frame
 	 */
-	public LoginFrame() {
-		setMinimumSize(new Dimension(740, 485)); //Set the size of the frame
+	public LoginFrame(Point location) {
+		setMinimumSize(new Dimension(1080, 740));
+		setLocation(location);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -183,7 +184,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 			if (usernameTxt.getText().equals("usr00001") && Arrays.equals(passwordTxt.getPassword(), password)) {
 				Point mainFrameLoc = this.getLocation(); //Get location of current frame
 				this.dispose(); //Close current frame
-				new MainFrame().setLocation(mainFrameLoc); //Open main frame
+				new MainFrame(mainFrameLoc); //Open main frame
 			} else {
 				//Display error message if username or password is incorrect
 				JOptionPane.showMessageDialog(this, "The username or password you entered is incorrect.", "Unable to login", JOptionPane.ERROR_MESSAGE);

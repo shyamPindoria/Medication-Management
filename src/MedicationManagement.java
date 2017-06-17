@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,20 +21,20 @@ public class MedicationManagement{
 	
 	public static void main(String[] args) {
 		
-		//LoginFrame login = new LoginFrame();
+		//LoginFrame login = new LoginFrame(new Point(50,50));
 		//For testing purposes the username and password will be displayed
 		//JOptionPane.showMessageDialog(login, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		
-		main = new MainFrame();
+		main = new MainFrame(new Point(50,50));
 		
 	}
 
 	public static void refreshUI() {
 		
-		
 		new SplashScreen().setVisible(true);
-		new MainFrame().setVisible(true);
+		MainFrame temp = new MainFrame(main.getLocation());
 		main.dispose();
+		main = temp;
 	
 	
 	

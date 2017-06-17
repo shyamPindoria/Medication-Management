@@ -281,9 +281,10 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		AppearanceSettingsPanel.add(lblFontType, gbc_lblFontType);
 
 		comboBoxFont = new JComboBox();
-		comboBoxFont.setPreferredSize(new Dimension(195, 22));
+		comboBoxFont.setPreferredSize(new Dimension(180, 22));
 		comboBoxFont.setFont(MedicationManagement.BODY_FONT);
 		comboBoxFont.setModel(new DefaultComboBoxModel(new String[] {"Arial", "Georgia", "Tahoma", "Verdana"}));
+		comboBoxFont.setSelectedItem(MedicationManagement.BODY_FONT.getFontName());
 		GridBagConstraints gbc_comboBoxFont = new GridBagConstraints();
 		gbc_comboBoxFont.anchor = GridBagConstraints.WEST;
 		gbc_comboBoxFont.insets = new Insets(12, 0, 5, 5);
@@ -302,9 +303,9 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		AppearanceSettingsPanel.add(lblTheme, gbc_lblTheme);
 
 		comboBoxTheme = new JComboBox();
-		comboBoxTheme.setPreferredSize(new Dimension(195, 22));
+		comboBoxTheme.setPreferredSize(new Dimension(180, 22));
 		comboBoxTheme.setFont(MedicationManagement.BODY_FONT);
-		comboBoxTheme.setModel(new DefaultComboBoxModel(new String[] {"Black", "Red", "Blue", "Brown"}));
+		comboBoxTheme.setModel(new DefaultComboBoxModel(new String[] {"Normal", "Dark", "Light"}));
 		GridBagConstraints gbc_comboBoxTheme = new GridBagConstraints();
 		gbc_comboBoxTheme.fill = GridBagConstraints.VERTICAL;
 		gbc_comboBoxTheme.insets = new Insets(0, 0, 5, 5);
@@ -324,13 +325,18 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		AppearanceSettingsPanel.add(lblFontSize, gbc_lblFontSize);
 
 		sliderFontSize = new JSlider();
-		sliderFontSize.setValue(2);
+		sliderFontSize.setSnapToTicks(true);
 		sliderFontSize.setMinimum(1);
 		sliderFontSize.setMaximum(3);
-		sliderFontSize.setFont(MedicationManagement.BODY_FONT);
+		sliderFontSize.setValue(2);
+		if (MedicationManagement.BODY_FONT.getSize() == 16) {
+			sliderFontSize.setValue(1);
+		} else if (MedicationManagement.BODY_FONT.getSize() == 20) {
+			sliderFontSize.setValue(3);
+		}
 		GridBagConstraints gbc_sliderFontSize = new GridBagConstraints();
+		gbc_sliderFontSize.anchor = GridBagConstraints.WEST;
 		gbc_sliderFontSize.insets = new Insets(0, 0, 5, 5);
-		gbc_sliderFontSize.fill = GridBagConstraints.HORIZONTAL;
 		gbc_sliderFontSize.gridx = 1;
 		gbc_sliderFontSize.gridy = 2;
 		AppearanceSettingsPanel.add(sliderFontSize, gbc_sliderFontSize);

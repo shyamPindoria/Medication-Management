@@ -31,17 +31,17 @@ public class MainFrame extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame() {
+	public MainFrame(Point location) {
 		
-		setMinimumSize(new Dimension(740, 485));
+		setMinimumSize(new Dimension(1080, 740));
+		setLocation(location);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 720);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
 		
 		panelMenu = new MenuPanel();
-		panelMenu.setPreferredSize(new Dimension(120, 235));
+		panelMenu.setPreferredSize(new Dimension(150, 235));
 		contentPane.add(panelMenu, BorderLayout.WEST);
 		
 		panelBody = createBodyPanel();
@@ -88,8 +88,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		//Check if button pressed was log out button
 		if(e.getSource().equals(panelMenu.btnLogOut)) {
 			Point mainFrameLoc = this.getLocation(); //Get location of current frame
+			new LoginFrame(mainFrameLoc); //Open login frame
 			this.dispose(); //Close current frame
-			new LoginFrame().setLocation(mainFrameLoc); //Open login frame
 		} else {
 			cardLayout.show(panelBody, ((JButton) e.getSource()).getText()); //Change the panel according to the button pressed
 		}
