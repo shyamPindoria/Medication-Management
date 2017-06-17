@@ -4,6 +4,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -27,6 +28,10 @@ public class LoginFrame extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField usernameTxt;
 	private JPasswordField passwordTxt;
+	private JLabel lockIcon;
+	private Timer animationTimer;
+	private Timer sleepTimer;
+	private int initialXLock;
 
 	/**
 	 * Create the login frame
@@ -38,6 +43,13 @@ public class LoginFrame extends JFrame implements ActionListener{
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
+		
+		//Initialize the timers
+		animationTimer = new Timer(5, this);
+		animationTimer.setActionCommand("Animation");
+		
+		sleepTimer = new Timer(500, this);
+		sleepTimer.setActionCommand("Sleep");
 		
 		//Login label
 		JLabel lblLogInTo = new JLabel("Log In");
@@ -119,6 +131,16 @@ public class LoginFrame extends JFrame implements ActionListener{
 		btnLogin.setIcon(new ImageIcon(goIcon)); //Add an image to the button
 		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT); //Set the image to the right of the text
 		btnLogin.addActionListener(this);
+		
+		lockIcon = new JLabel("");
+		GridBagConstraints gbc_lockIcon = new GridBagConstraints();
+		gbc_lockIcon.anchor = GridBagConstraints.WEST;
+		Image lockImage = new ImageIcon(this.getClass().getResource("lock.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		lockIcon.setIcon(new ImageIcon(lockImage));
+		gbc_lockIcon.insets = new Insets(0, 0, 5, 0);
+		gbc_lockIcon.gridx = 2;
+		gbc_lockIcon.gridy = 1;
+		loginArea.add(lockIcon, gbc_lockIcon);
 		btnLogin.setActionCommand("Login");
 		loginArea.add(btnLogin, gbc_btnLogin);
 		
@@ -174,17 +196,16 @@ public class LoginFrame extends JFrame implements ActionListener{
 		//If sign up button was pressed
 		if (e.getActionCommand().equals("Sign Up")) {
 			//Display the username and password
-			JOptionPane.showMessageDialog(this, "Your username is: usr00001\nYour password is abc00001", "Sign Up Successful", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Your username is: usr1\nYour password is abc1", "Sign Up Successful", JOptionPane.PLAIN_MESSAGE);
 		}
 		//If login button was pressed
 		else if (e.getActionCommand().equals("Login")) {
 			//Correct password
-			char[] password = {'a', 'b', 'c', '0', '0', '0', '0', '1'};
+			char[] password = {'a', 'b', 'c', '1'};
 			//Check if the username and password are correct
-			if (usernameTxt.getText().equals("usr00001") && Arrays.equals(passwordTxt.getPassword(), password)) {
-				Point mainFrameLoc = this.getLocation(); //Get location of current frame
-				this.dispose(); //Close current frame
-				new MainFrame(mainFrameLoc); //Open main frame
+			if (usernameTxt.getText().equals("usr1") && Arrays.equals(passwordTxt.getPassword(), password)) {
+				initialXLock = lockIcon.getX();
+				animationTimer.start();
 			} else {
 				//Display error message if username or password is incorrect
 				JOptionPane.showMessageDialog(this, "The username or password you entered is incorrect.", "Unable to login", JOptionPane.ERROR_MESSAGE);
@@ -195,7 +216,33 @@ public class LoginFrame extends JFrame implements ActionListener{
 		else if (e.getActionCommand().equals("Help")) {
 			//Display username and password
 			//For testing purposes only
-			JOptionPane.showMessageDialog(this, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Your username is: usr1\nYour password is abc1", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
+		}
+		else if (e.getActionCommand().equals("Animation")) {
+			//Move the label to the right
+			if (this.lockIcon.getX() - initialXLock < 50) {
+				this.lockIcon.setLocation(this.lockIcon.getX() + 1, this.lockIcon.getY());
+				//Change the icon on the way
+				if (this.lockIcon.getX() - initialXLock > 45) {
+					Image unlockIcon = new ImageIcon(this.getClass().getResource("unlock.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+					this.lockIcon.setIcon(new ImageIcon(unlockIcon));
+				}
+			} else {
+				//Stop the timer
+				animationTimer.stop();
+				//Load the main frame in the background
+				this.setAlwaysOnTop(true);
+				this.setEnabled(false);
+				Point mainFrameLoc = this.getLocation(); //Get location of current frame
+				new MainFrame(mainFrameLoc); //Open main frame
+				//Give half a second for the main frame to load
+				sleepTimer.start();
+			}
+		}
+		if (e.getActionCommand().equals("Sleep")) {
+			//Close the login frame
+			this.dispose(); //Close current frame
+			sleepTimer.stop();
 		}
 		
 	}

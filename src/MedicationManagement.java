@@ -23,7 +23,7 @@ public class MedicationManagement{
 		
 		//LoginFrame login = new LoginFrame(new Point(50,50));
 		//For testing purposes the username and password will be displayed
-		//JOptionPane.showMessageDialog(login, "Your username is: usr00001\nYour password is abc00001", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
+		//JOptionPane.showMessageDialog(login, "Your username is: usr1\nYour password is abc1", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		
 		main = new MainFrame(new Point(50,50));
 		
