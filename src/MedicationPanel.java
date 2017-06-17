@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
-public class MedicationPanel extends JPanel implements ActionListener{
+public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 	
 	private JTextField textFieldSearch;
 	ItemDetails panadol, sambucol, glucophage, hydrocodone, simvastatin;
@@ -403,7 +403,12 @@ public class MedicationPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg) {
 		if (arg.getSource() == buttonAdd) {
-			AddMedicationPage newM = new AddMedicationPage();
+			LoadingScreen screen = new LoadingScreen();
+			Thread sT = new Thread(screen);
+			sT.start();
+			screen.setLocation(MainFrame.LOCATION);
+			Thread pT = new Thread(this);
+			pT.start();
 		}
 		if(arg.getActionCommand().equals("Panadol"))
 			panadol.setVisible(true);
@@ -415,6 +420,18 @@ public class MedicationPanel extends JPanel implements ActionListener{
 			this.hydrocodone.setVisible(true);
 		else if(arg.getActionCommand().equals("Simvastatin"))
 			this.simvastatin.setVisible(true);
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(750);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AddMedicationPage newM = new AddMedicationPage();
+		newM.setLocationRelativeTo(this);
 	}
 	
 }

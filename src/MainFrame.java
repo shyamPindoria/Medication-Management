@@ -27,6 +27,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private SettingsPanel panelSettings;
 	private NotificationPanel panelNotification;
 	
+	public static Dimension SIZE;
+	public static Point LOCATION;
 	
 	/**
 	 * Create the frame.
@@ -34,7 +36,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	public MainFrame(Point location) {
 		
 		setMinimumSize(new Dimension(1080, 740));
+		SIZE = this.getSize();
 		setLocation(location);
+		LOCATION = location;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		setContentPane(contentPane);

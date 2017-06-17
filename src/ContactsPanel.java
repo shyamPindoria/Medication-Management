@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
-public class ContactsPanel extends JPanel implements ActionListener{
+public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 	private JTextField textFieldSearch;
 	private ContactDetails smith, william, jane, isaac, robert;
 	JButton buttonAdd;
@@ -408,7 +408,11 @@ public class ContactsPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonAdd) {
-			AddContactPage newC = new AddContactPage();
+			LoadingScreen screen = new LoadingScreen();
+			Thread sT = new Thread(screen);
+			sT.start();
+			screen.setLocation(MainFrame.LOCATION);
+			
 		}
 		if(e.getActionCommand().equals("Smith"))
 			smith.setVisible(true);
@@ -421,6 +425,17 @@ public class ContactsPanel extends JPanel implements ActionListener{
 		else if(e.getActionCommand().equals("Robert"))
 			this.robert.setVisible(true);
 		
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(750);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		AddContactPage newC = new AddContactPage();
+		newC.setLocationRelativeTo(this);
 	}
 
 }
