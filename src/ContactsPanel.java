@@ -412,7 +412,8 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 			Thread sT = new Thread(screen);
 			sT.start();
 			screen.setLocation(MainFrame.LOCATION);
-			
+			Thread cT = new Thread(this);
+			cT.start();
 		}
 		if(e.getActionCommand().equals("Smith"))
 			smith.setVisible(true);

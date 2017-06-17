@@ -28,7 +28,6 @@ public class LoadingScreen extends JFrame implements Runnable{
 	public void run() {
 		try {
 			Thread.sleep(700);
-
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
