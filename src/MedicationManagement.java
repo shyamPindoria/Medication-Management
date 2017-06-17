@@ -33,8 +33,12 @@ public class MedicationManagement{
 	 * Relaunches the app for settings to take place
 	 */
 	public static void refreshUI() {
+		// Create animation by displaying splashScreen
 		new SplashScreen().setVisible(true);
+		// create new mainFrame to refresh the changes
 		MainFrame temp = new MainFrame(main.getLocation());
+		
+		// Close previous and set newly created main frame as main
 		main.dispose();
 		main = temp;
 	}
