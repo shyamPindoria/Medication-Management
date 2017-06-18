@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
  * @author Rushi Patel - patry019
  *
  */
-public class MedicationPanel extends JPanel implements ActionListener, Runnable{
+public class MedicationPanel extends JPanel implements ActionListener{
 	
 	private JTextField textFieldSearch;
 	ItemDetails panadol, sambucol, glucophage, hydrocodone, simvastatin;
@@ -407,16 +407,13 @@ public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 		return panelBody;
 	}
 
+	/**
+	 *When finishing adding medication, the window has to refresh, there will be a refreshing progress
+	**/
 	@Override
 	public void actionPerformed(ActionEvent arg) {
 		if (arg.getSource() == buttonAdd) {
-			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
-			screen.setLocationRelativeTo(this);
-			Thread sT = new Thread(screen);//create a thread for the loading screen
-			sT.start();//start the thread and execute the run method 
-			//screen.setLocation(MainFrame.LOCATION);
-			Thread pT = new Thread(this);//create a thread for the MedicationPanel
-			pT.start();//start the thread and execute the run method 
+			AddMedicationPage newM = new AddMedicationPage(); //shows up the add medication window
 		}
 		if(arg.getActionCommand().equals("Panadol"))
 			panadol.setVisible(true);
@@ -428,16 +425,6 @@ public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 			this.hydrocodone.setVisible(true);
 		else if(arg.getActionCommand().equals("Simvastatin"))
 			this.simvastatin.setVisible(true);
-	}
-
-	@Override
-	public void run() {
-		try {
-			Thread.sleep(750);//make the add window appear late
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		AddMedicationPage newM = new AddMedicationPage();
 	}
 	
 }

@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddContactPage extends JFrame implements ActionListener{
+public class AddContactPage extends JFrame implements ActionListener {
 	JLabel titleLabel;
 	JComboBox titleBox;
 	JLabel nameLabel;
@@ -30,7 +30,7 @@ public class AddContactPage extends JFrame implements ActionListener{
 	JButton clearButton;
 
 	public AddContactPage() {
-		this.setSize(300, 150); 
+		this.setSize(300, 150);
 		this.setTitle("Add Contact");
 		mainPanel = new JPanel();
 		getContentPane().add(mainPanel);
@@ -38,13 +38,15 @@ public class AddContactPage extends JFrame implements ActionListener{
 		secondPanel = new JPanel(new GridBagLayout());
 		mainPanel.add(secondPanel);
 
-		
-		GridBagConstraints c = new GridBagConstraints(); //Specific layout of the GridBagLayout
+		GridBagConstraints c = new GridBagConstraints(); // Specific layout of
+															// the GridBagLayout
 		c.gridx = 0;
 		c.gridy = 0;
-		
-		String[] tileTypes = {"Dr. ", "Mr. ", "Miss. ", "Mrs. "}; //the values of combobox
-		
+
+		String[] tileTypes = { "Dr. ", "Mr. ", "Miss. ", "Mrs. " }; // the
+																	// values of
+																	// combobox
+
 		titleLabel = new JLabel("Title");
 		secondPanel.add(titleLabel, c);
 		c.gridx++;
@@ -52,7 +54,7 @@ public class AddContactPage extends JFrame implements ActionListener{
 		secondPanel.add(titleBox, c);
 		c.gridy++;
 		c.gridx--;
-		
+
 		nameLabel = new JLabel("Name");
 		secondPanel.add(nameLabel, c);
 		c.gridx++;
@@ -65,8 +67,8 @@ public class AddContactPage extends JFrame implements ActionListener{
 		dosageLabel = new JLabel("Number");
 		secondPanel.add(dosageLabel, c);
 		c.gridx++;
-		
-		//the number JTextField only accepts integers
+
+		// the number JTextField only accepts integers
 		NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
 		DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
 		decimalFormat.setGroupingUsed(false);
@@ -76,25 +78,33 @@ public class AddContactPage extends JFrame implements ActionListener{
 		c.gridy++;
 		c.gridx--;
 
-		//create buttons
+		// create buttons
 		addButton = new JButton("Add");
+		addButton.addActionListener(this);
 		secondPanel.add(addButton, c);
-		c.gridx ++;
+		c.gridx++;
 		clearButton = new JButton("Clear");
-		clearButton .addActionListener(this);
+		clearButton.addActionListener(this);
 		secondPanel.add(clearButton, c);
-		c.gridy ++;
-		c.gridx --;
-		
+		c.gridy++;
+		c.gridx--;
+
 		this.setLocationRelativeTo(this);
 		this.setVisible(true);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if(e.getSource() == clearButton){
-			 nameText.setText("");
-			 dosageText.setText("");
-		 }
+		if (e.getSource() == clearButton) {
+			nameText.setText("");
+			dosageText.setText("");
+		}
+		if (e.getSource() == addButton) {
+			this.dispose();
+			LoadingScreen screen = new LoadingScreen();// shows up the loading
+			screen.setLocationRelativeTo(this);
+			Thread sT = new Thread(screen);// create a thread for the loading
+			sT.start();// start the thread and execute the run method
+		}
 	}
 }

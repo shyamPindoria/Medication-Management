@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
  * @author Rushi Patel - patry019
  *
  */
-public class ContactsPanel extends JPanel implements ActionListener, Runnable{
+public class ContactsPanel extends JPanel implements ActionListener{
 	private JTextField textFieldSearch;
 	private ContactDetails smith, william, jane, isaac, robert;
 	JButton buttonAdd;
@@ -411,18 +411,14 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 		panelContactList.add(this.robert, c);
 		return panelContactList;
 	}
-
+	/**
+	 *When finishing adding contact, the window has to refresh, there will be a refreshing progress
+	**/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonAdd) {
-			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
-			screen.setLocation(new Point((this.getX() + this.getWidth() + screen.getWidth()) /2 ,
-					(this.getY() + this.getHeight() - screen.getHeight()) / 2));
-			screen.setLocationRelativeTo(this);
-			Thread sT = new Thread(screen);//create a thread for the loading screen
-			sT.start();//start the thread and execute the run method 
-			Thread cT = new Thread(this); //create a thread for the MedicationPanel
-			cT.start();//start the thread and execute the run method 
+			AddContactPage newC = new AddContactPage();
+
 		}
 		if(e.getActionCommand().equals("Smith"))
 			smith.setVisible(true);
@@ -434,17 +430,6 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 			this.isaac.setVisible(true);
 		else if(e.getActionCommand().equals("Robert"))
 			this.robert.setVisible(true);
-		
-	}
-
-	@Override
-	public void run() {
-		try {
-			Thread.sleep(750); //make the add window appear late
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		AddContactPage newC = new AddContactPage();
 		
 	}
 
