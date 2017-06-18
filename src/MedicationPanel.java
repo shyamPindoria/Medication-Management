@@ -403,12 +403,12 @@ public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 	@Override
 	public void actionPerformed(ActionEvent arg) {
 		if (arg.getSource() == buttonAdd) {
-			LoadingScreen screen = new LoadingScreen();
-			Thread sT = new Thread(screen);
-			sT.start();
+			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
+			Thread sT = new Thread(screen);//create a thread for the loading screen
+			sT.start();//start the thread and execute the run method 
 			screen.setLocation(MainFrame.LOCATION);
-			Thread pT = new Thread(this);
-			pT.start();
+			Thread pT = new Thread(this);//create a thread for the MedicationPanel
+			pT.start();//start the thread and execute the run method 
 		}
 		if(arg.getActionCommand().equals("Panadol"))
 			panadol.setVisible(true);
@@ -425,9 +425,8 @@ public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(750);
+			Thread.sleep(750);//make the add window appear late
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		AddMedicationPage newM = new AddMedicationPage();

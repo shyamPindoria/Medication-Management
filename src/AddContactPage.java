@@ -30,7 +30,7 @@ public class AddContactPage extends JFrame implements ActionListener{
 	JButton clearButton;
 
 	public AddContactPage() {
-		this.setSize(300, 150);
+		this.setSize(300, 150); 
 		this.setTitle("Add Contact");
 		mainPanel = new JPanel();
 		getContentPane().add(mainPanel);
@@ -38,11 +38,12 @@ public class AddContactPage extends JFrame implements ActionListener{
 		secondPanel = new JPanel(new GridBagLayout());
 		mainPanel.add(secondPanel);
 
-		GridBagConstraints c = new GridBagConstraints();
+		
+		GridBagConstraints c = new GridBagConstraints(); //Specific layout of the GridBagLayout
 		c.gridx = 0;
 		c.gridy = 0;
 		
-		String[] tileTypes = {"Dr. ", "Mr. ", "Miss. ", "Mrs. "};
+		String[] tileTypes = {"Dr. ", "Mr. ", "Miss. ", "Mrs. "}; //the values of combobox
 		
 		titleLabel = new JLabel("Title");
 		secondPanel.add(titleLabel, c);
@@ -75,6 +76,7 @@ public class AddContactPage extends JFrame implements ActionListener{
 		c.gridy++;
 		c.gridx--;
 
+		//create buttons
 		addButton = new JButton("Add");
 		secondPanel.add(addButton, c);
 		c.gridx ++;
@@ -84,7 +86,6 @@ public class AddContactPage extends JFrame implements ActionListener{
 		c.gridy ++;
 		c.gridx --;
 
-		this.setLocationRelativeTo(this);
 		this.setVisible(true);
 	}
 	

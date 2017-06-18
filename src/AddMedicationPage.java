@@ -29,7 +29,7 @@ public class AddMedicationPage extends JFrame implements ActionListener{
 		secondPanel = new JPanel(new GridBagLayout());
 		mainPanel.add(secondPanel);
 		
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints c = new GridBagConstraints();//Specific layout of the GridBagLayout
 		c.gridx = 0;
 		c.gridy = 0;
 		
@@ -51,6 +51,7 @@ public class AddMedicationPage extends JFrame implements ActionListener{
 		c.gridy ++;
 		c.gridx --;
 		
+		//create buttons
 		addButton = new JButton("Add");
 		secondPanel.add(addButton, c);
 		c.gridx ++;

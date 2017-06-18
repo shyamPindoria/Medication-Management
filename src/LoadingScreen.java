@@ -13,7 +13,7 @@ public class LoadingScreen extends JFrame implements Runnable{
 					p.UpdateProgress(i);
 					p.repaint();
 					try {
-						Thread.sleep(5);
+						Thread.sleep(5); //determine the loading speed
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -27,7 +27,7 @@ public class LoadingScreen extends JFrame implements Runnable{
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(700);
+			Thread.sleep(700); 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

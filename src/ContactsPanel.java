@@ -408,12 +408,12 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonAdd) {
-			LoadingScreen screen = new LoadingScreen();
-			Thread sT = new Thread(screen);
-			sT.start();
-			screen.setLocation(MainFrame.LOCATION);
-			Thread cT = new Thread(this);
-			cT.start();
+			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
+			Thread sT = new Thread(screen);//create a thread for the loading screen
+			sT.start();//start the thread and execute the run method 
+			screen.setLocation(MainFrame.LOCATION); 
+			Thread cT = new Thread(this); //create a thread for the MedicationPanel
+			cT.start();//start the thread and execute the run method 
 		}
 		if(e.getActionCommand().equals("Smith"))
 			smith.setVisible(true);
@@ -431,7 +431,7 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(750);
+			Thread.sleep(750); //make the add window appear late
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
