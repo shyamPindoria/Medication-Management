@@ -126,6 +126,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_btnBrowse.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_btnBrowse.gridx = 1;
 		gbc_btnBrowse.gridy = 0;
+		btnBrowse.addActionListener(this);
+		btnBrowse.setActionCommand("Browse");
 		profileSettingsPanel.add(btnBrowse, gbc_btnBrowse);
 
 		return profileSettingsPanel;
@@ -344,6 +346,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_btnDefault.insets = new Insets(0, 12, 12, 5);
 		gbc_btnDefault.gridx = 0;
 		gbc_btnDefault.gridy = 3;
+		btnDefault.addActionListener(this);
+		btnDefault.setActionCommand("Default");
 		AppearanceSettingsPanel.add(btnDefault, gbc_btnDefault);
 
 		JButton btnSave = new JButton("Save");
@@ -364,6 +368,8 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		gbc_btnCancel.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 3;
+		btnCancel.addActionListener(this);
+		btnCancel.setActionCommand("Cancel");
 		AppearanceSettingsPanel.add(btnCancel, gbc_btnCancel);
 		
 		return AppearanceSettingsPanel;
@@ -385,6 +391,15 @@ public class SettingsPanel extends JPanel implements ActionListener {
 			MedicationManagement.BODY_FONT = new Font(fontType, Font.PLAIN, fontSize);
 			MedicationManagement.HEADER_FONT = new Font(fontType, Font.PLAIN, fontSize + 2);
 			MedicationManagement.refreshUI(); //Apply changes
+		}
+		else if(e.getActionCommand().equals("Default")){
+			// when default is clicked
+		}
+		else if(e.getActionCommand().equals("Cancel")){
+			
+		}
+		else if(e.getActionCommand().equals("Browse")){
+			
 		}
 		
 	}
