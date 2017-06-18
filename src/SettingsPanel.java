@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -20,7 +21,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSlider;
 
-
+/**
+ * Settings Panel
+ * @author Rushi Patel - patry019
+ *
+ */
 public class SettingsPanel extends JPanel implements ActionListener {
 
 	private JTextField textFieldName;
@@ -394,12 +399,16 @@ public class SettingsPanel extends JPanel implements ActionListener {
 		}
 		else if(e.getActionCommand().equals("Default")){
 			// when default is clicked
+			MedicationManagement.setTheme("Green"); //Theme
+			MedicationManagement.BODY_FONT = new Font("Arial", Font.PLAIN, 18);
+			MedicationManagement.HEADER_FONT = new Font("Arial", Font.PLAIN, 20);
+			MedicationManagement.refreshUI(); //Apply changes
 		}
 		else if(e.getActionCommand().equals("Cancel")){
-			
+			MedicationManagement.refreshUI();
 		}
 		else if(e.getActionCommand().equals("Browse")){
-			
+			JOptionPane.showMessageDialog(this, "Picture browser will be implemented here.", "Browse Picture", JOptionPane.PLAIN_MESSAGE);
 		}
 		
 	}

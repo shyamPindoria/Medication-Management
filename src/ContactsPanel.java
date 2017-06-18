@@ -16,6 +16,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
+/**
+ * Contacts Panel
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 	private JTextField textFieldSearch;
 	private ContactDetails smith, william, jane, isaac, robert;

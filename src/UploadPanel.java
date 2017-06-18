@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,6 +28,11 @@ import java.awt.Component;
 import javax.swing.JToggleButton;
 import javax.swing.JScrollPane;
 
+/**
+ * Upload Panel
+ * @author Shyam Pindoria - pinsy004
+ *
+ */
 public class UploadPanel extends JPanel implements ActionListener, ChangeListener {
 	
 	private JTextField textFieldEmail;

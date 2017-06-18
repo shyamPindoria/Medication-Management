@@ -19,10 +19,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 
+/**
+ * 
+ * @author Shyam Pindoria - pinsy004
+ *
+ */
 public class LoginFrame extends JFrame implements ActionListener{
 
 	private JPanel contentPane;

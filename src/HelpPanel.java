@@ -12,6 +12,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.CardLayout;
 
+/**
+ * Help Panel
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class HelpPanel extends JPanel implements TreeSelectionListener {
 
 	private JPanel panelHelpBody;

@@ -1,13 +1,10 @@
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 

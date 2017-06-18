@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -17,6 +16,13 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 
+
+/**
+ * Current Medication Panel
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 	
 	private JTextField textFieldSearch;

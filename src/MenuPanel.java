@@ -1,11 +1,9 @@
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,6 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Menu Panel
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class MenuPanel extends JPanel implements MouseListener {
 	
 	JButton btnCurrent;

@@ -10,6 +10,12 @@ import java.awt.Point;
 import java.awt.CardLayout;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Main Frame
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class MainFrame extends JFrame implements ActionListener {
 	
 	private JPanel contentPane;

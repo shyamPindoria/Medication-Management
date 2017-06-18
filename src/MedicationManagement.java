@@ -1,15 +1,16 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Rectangle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
+/**
+ * Main Class to launch the program
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ */
 public class MedicationManagement{
-
+	
 	protected static Font BODY_FONT = new Font("Arial", Font.PLAIN, 18);
 	protected static Font HEADER_FONT = new Font("Arial", Font.PLAIN, 20);
 	protected static Color MENU_BUTTON_UNSELECTED = new Color(0, 255, 220);
@@ -21,11 +22,11 @@ public class MedicationManagement{
 	
 	public static void main(String[] args) {
 		
-		//LoginFrame login = new LoginFrame(new Point(50,50));
+		LoginFrame login = new LoginFrame(new Point(50,50));
 		//For testing purposes the username and password will be displayed
-		//JOptionPane.showMessageDialog(login, "Your username is: usr1\nYour password is abc1", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(login, "Your username is: usr1\nYour password is abc1", "Need help logging in?", JOptionPane.PLAIN_MESSAGE);
 		
-		main = new MainFrame(new Point(50,50));
+		//main = new MainFrame(new Point(50,50));
 		
 	}
 

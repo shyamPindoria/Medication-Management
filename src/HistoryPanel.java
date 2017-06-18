@@ -19,6 +19,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * History Panel
+ * @author Shyam Pindoria - pinsy004
+ * @author Rushi Patel - patry019
+ *
+ */
 public class HistoryPanel extends JPanel implements ActionListener{
 	
 	private JTextField textFieldSearch;
