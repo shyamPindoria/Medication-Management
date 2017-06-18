@@ -6,6 +6,7 @@ public class LoadingScreen extends JFrame implements Runnable{
 	ProgressPage p = new ProgressPage();
 	public LoadingScreen() {
 		this.setSize(200,200);
+		
 		this.setUndecorated(true);
 		this.setBackground(new Color(0,225,0,0));
 		this.setVisible(true);
