@@ -1,9 +1,13 @@
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 public class LoadingScreen extends JFrame implements Runnable{
 	ProgressPage p = new ProgressPage();
 	public LoadingScreen() {
-		this.setSize(MainFrame.SIZE);
+		this.setSize(200,200);
+		this.setUndecorated(true);
+		this.setBackground(new Color(0,225,0,0));
 		this.setVisible(true);
 		this.add(p);
 		new Thread(new Runnable() {

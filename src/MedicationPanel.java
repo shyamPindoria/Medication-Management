@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridBagConstraints;
@@ -410,9 +411,11 @@ public class MedicationPanel extends JPanel implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent arg) {
 		if (arg.getSource() == buttonAdd) {
 			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
+			screen.setLocation(new Point((this.getX() + this.getWidth() + screen.getWidth()) /2 ,
+										(this.getY() + this.getHeight() - screen.getHeight()) / 2));
 			Thread sT = new Thread(screen);//create a thread for the loading screen
 			sT.start();//start the thread and execute the run method 
-			screen.setLocation(MainFrame.LOCATION);
+			//screen.setLocation(MainFrame.LOCATION);
 			Thread pT = new Thread(this);//create a thread for the MedicationPanel
 			pT.start();//start the thread and execute the run method 
 		}

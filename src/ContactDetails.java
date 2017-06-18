@@ -9,6 +9,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**
+ * Contact details class
+ * This class is created to suppot expansion features of contact fields
+ * @author Minh Phuoc Nguyen (ID:110164198)
+ *
+ */
 public class ContactDetails extends JPanel implements ActionListener {
 	/**
 	 * 

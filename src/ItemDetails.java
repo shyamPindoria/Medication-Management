@@ -2,7 +2,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
+/**
+ * Items details class
+ * This class is created to suppot expansion features of item fields
+ * @author Minh Phuoc Nguyen (ID:110164198)
+ *
+ */
 public class ItemDetails extends JPanel implements ActionListener{
 	/**
 	 * 

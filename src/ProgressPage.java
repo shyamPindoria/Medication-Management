@@ -25,8 +25,8 @@ public class ProgressPage extends JPanel {
 		g2.rotate(Math.toRadians(270));
 		Arc2D.Float arc = new Arc2D.Float(Arc2D.PIE);
 		Ellipse2D circle = new Ellipse2D.Float(0, 0, 110, 110);
-		arc.setFrameFromCenter(new Point(0, 0), new Point(120, 120));
-		circle.setFrameFromCenter(new Point(0, 0),new Point(110, 110));
+		arc.setFrameFromCenter(new Point(0, 0), new Point(60, 60));
+		circle.setFrameFromCenter(new Point(0, 0),new Point(50, 50));
 		arc.setAngleStart(1); //set the start angle
 		arc.setAngleExtent(-progress * 3.6); //determine the rotate direction
 		g2.setColor(Color.BLUE);
