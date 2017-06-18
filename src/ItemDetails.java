@@ -21,7 +21,7 @@ public class ItemDetails extends JPanel implements ActionListener{
 		Simvastatin;
 	};
 	JLabel title, indication, action, dose, sideEffects,
-			indicationDes, actionDes, doseDes, sideEffectsDes;
+			indicationDes, actionDes, doseDes, sideEffectsDes, startLine, desBy;
 	JButton collapse;
 	public ItemDetails(Medicine name){
 		this.SetupPanelComponentBases();
@@ -138,11 +138,31 @@ public class ItemDetails extends JPanel implements ActionListener{
 		this.sideEffectsDes.setFont(descriptionFont);
 		this.add(sideEffectsDes, c);
 		
+		// Set up start line
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridy = 9;
+		c.insets = new Insets(0, 0, 20, 0);
+		this.startLine = new JLabel("***");
+		this.startLine.setFont(titleFont);
+		this.add(startLine, c);
+		
+		// Set DescribedBy Label
+		c = new GridBagConstraints();
+		c.anchor = GridBagConstraints.WEST;
+		c.gridx = 0;
+		c.gridy = 10;
+		c.insets = new Insets(0, 20, 20, 0);
+		this.desBy = new JLabel();
+		this.desBy.setFont(aspectFont);
+		this.add(desBy, c);
+		
 		// Set up button
 		c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.WEST;
 		c.gridx = 0;
-		c.gridy = 9;
+		c.gridy = 11;
 		c.insets = new Insets(0, 10, 10, 0);
 		this.collapse = new JButton();
 		Image image = new ImageIcon(this.getClass().getResource("collapse.png")).getImage().getScaledInstance(15, 5, Image.SCALE_SMOOTH);
@@ -185,6 +205,9 @@ public class ItemDetails extends JPanel implements ActionListener{
 		// Set side effects description
 		this.sideEffectsDes.setText("<html>Side effects are rare. You may experience nausea, indigestion, "
 				+ "allergic reactions or blood disorders.</html>");
+		
+		// Set description by
+		this.desBy.setText("<html>This prescription was provided by Dr.Smith at 13:21:19 in 23 of June, 2014</html>");
 	}
 	
 	private void CreateSambucolDetails(){
@@ -213,6 +236,9 @@ public class ItemDetails extends JPanel implements ActionListener{
 		
 		// Set side effects description
 		this.sideEffectsDes.setText("<html>There is no side effect.</html>");
+		
+		// Set description by
+		this.desBy.setText("<html>This prescription was provided by Dr.Isaac at 15:11:19 in 10 of May, 2015</html>");
 	}
 	
 	private void CreateNoDetailAppearance(Medicine name){
@@ -230,6 +256,9 @@ public class ItemDetails extends JPanel implements ActionListener{
 		
 		// Set side effects description
 		this.sideEffectsDes.setText("No details shown");
+		
+		// Set description by
+		this.desBy.setText("<html>This prescription was provided by Dr.Robert at 08:21:19 in 20 of Sep, 2016</html>");
 	}
 
 	@Override
