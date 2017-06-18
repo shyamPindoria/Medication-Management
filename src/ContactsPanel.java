@@ -411,6 +411,7 @@ public class ContactsPanel extends JPanel implements ActionListener{
 		panelContactList.add(this.robert, c);
 		return panelContactList;
 	}
+	
 	/**
 	 *When finishing adding contact, the window has to refresh, there will be a refreshing progress
 	**/
