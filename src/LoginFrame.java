@@ -245,7 +245,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 				this.setAlwaysOnTop(true);
 				this.setEnabled(false);
 				Point mainFrameLoc = this.getLocation(); //Get location of current frame
-				new MainFrame(mainFrameLoc); //Open main frame
+				MedicationManagement.main=new MainFrame(mainFrameLoc); //Open main frame
 				//Give half a second for the main frame to load
 				sleepTimer.start();
 			}
