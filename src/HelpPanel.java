@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -51,7 +52,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 
 		JSplitPane splitPane = new JSplitPane();
 		//Place where to split from
-		splitPane.setResizeWeight(0.03);
+		splitPane.setResizeWeight(0.2);
 
 		//Set tree to left component
 		splitPane.setLeftComponent(createTree());
@@ -124,6 +125,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				"We will run you through the necessary steps to help you through with whatever you area stuck with";
 		JTextArea welcomeArea = new JTextArea(); 
 		welcomeArea.insert(welcomeText, 0);
+		welcomeArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneWelcome.setViewportView(welcomeArea);
 
 		//Current medic scroll pane
@@ -144,9 +146,10 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				"Once it has been expand it we can reduce the information by clicking the -Collapse Content button" +
 				"\n" + "\n" +
 				"Adding Medication" + "\n" +
-				"To add medication we simply click the add button on the left hand corner of the screen, fill in all details and click conrfirm";
+				"To add medication we simply click the add button on the left hand corner of the screen,\nfill in all details and click conrfirm";
 		JTextArea currentMedicationArea = new JTextArea(); 
 		currentMedicationArea.insert(currentMedicationText, 0);
+		currentMedicationArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneCurrent.setViewportView(currentMedicationArea);
 
 		//History scroll pane
@@ -163,6 +166,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				"you can also use search for any medication";
 		JTextArea historyArea = new JTextArea(); 
 		historyArea.insert(historyText, 0);
+		historyArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneHistory.setViewportView(historyArea);
 
 		//Email scroll pane
@@ -179,6 +183,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				"Simply click upload and you will be finished ";
 		JTextArea emailArea = new JTextArea(); 
 		emailArea.insert(emailText, 0);
+		emailArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneEmail.setViewportView(emailArea);
 
 		//Phone scroll pane
@@ -196,6 +201,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				"Simply click upload and you will be finished ";
 		JTextArea phoneArea = new JTextArea(); 
 		phoneArea.insert(phoneText, 0);
+		phoneArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPanePhone.setViewportView(phoneArea);
 
 		//Blue tooth scroll pane
@@ -214,6 +220,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		
 		JTextArea  blueToothArea = new JTextArea(); 
 		blueToothArea.insert(blueToothText, 0);
+		blueToothArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneBluetooth.setViewportView(blueToothArea);
 
 		//USB scroll pane
@@ -226,9 +233,10 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		String usbText = "\n"+
 				"Welcome to the upload by USB help menu"+"\n"+ "\n"+
 				"connect the usb cable and click refresh to see the available PC"+"\n";
-		JTextArea usbToothArea = new JTextArea(); 
-		usbToothArea.insert(usbText, 0);
-		scrollPaneUSB.setViewportView(usbToothArea);
+		JTextArea usbArea = new JTextArea(); 
+		usbArea.insert(usbText, 0);
+		usbArea.setMargin(new Insets(10, 10, 10, 10));
+		scrollPaneUSB.setViewportView(usbArea);
 
 		//About scroll pane
 		JScrollPane scrollPaneAbout = new JScrollPane();
@@ -242,6 +250,7 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 				
 		JTextArea aboutArea = new JTextArea(); 
 		aboutArea.insert(aboutText, 0);
+		aboutArea.setMargin(new Insets(10, 10, 10, 10));
 		scrollPaneAbout.setViewportView(aboutArea);
 
 		return panelHelpBody;
