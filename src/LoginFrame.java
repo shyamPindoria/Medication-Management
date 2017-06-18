@@ -23,7 +23,7 @@ import java.awt.Image;
 import java.awt.Insets;
 
 /**
- * 
+ * Login Frame
  * @author Shyam Pindoria - pinsy004
  *
  */
