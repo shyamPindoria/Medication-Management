@@ -85,7 +85,8 @@ public class AddContactPage extends JFrame implements ActionListener{
 		secondPanel.add(clearButton, c);
 		c.gridy ++;
 		c.gridx --;
-
+		
+		this.setLocationRelativeTo(this);
 		this.setVisible(true);
 	}
 	

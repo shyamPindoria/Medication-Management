@@ -417,7 +417,7 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
 			Thread sT = new Thread(screen);//create a thread for the loading screen
 			sT.start();//start the thread and execute the run method 
-			screen.setLocation(MainFrame.LOCATION); 
+			screen.setLocationRelativeTo(this);
 			Thread cT = new Thread(this); //create a thread for the MedicationPanel
 			cT.start();//start the thread and execute the run method 
 		}
@@ -442,7 +442,7 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 			e.printStackTrace();
 		}
 		AddContactPage newC = new AddContactPage();
-		newC.setLocationRelativeTo(this);
+		
 	}
 
 }
