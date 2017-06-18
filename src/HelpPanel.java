@@ -7,6 +7,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -108,12 +109,19 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		panelHelpBody.setLayout(cardLayout);
 		
 		//Welcome scroll pane
+
 		JScrollPane scrollPaneWelcome = new JScrollPane();
 		panelHelpBody.add(scrollPaneWelcome, "Welcome"); //Add the scroll pane to the body panel
 		JLabel lblWelcome = new JLabel("Welcome"); //Header label for the scroll panel
 		lblWelcome.setFont(MedicationManagement.BODY_FONT); //Font for the label
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER); //Align the label to the center
 		scrollPaneWelcome.setColumnHeaderView(lblWelcome); //Add the label to the header section of the scroll pane
+		String welcomeText = "\n"+
+				   "I am"+"\n"+
+				   "welcome"+"\n";
+		JTextArea welcomeArea = new JTextArea(); 
+		welcomeArea.insert(welcomeText, 0);
+		scrollPaneWelcome.setViewportView(welcomeArea);
 		
 		//Current medic scroll pane
 		JScrollPane scrollPaneCurrent = new JScrollPane();
@@ -122,6 +130,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblCurrentMedication.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCurrentMedication.setFont(MedicationManagement.BODY_FONT);
 		scrollPaneCurrent.setColumnHeaderView(lblCurrentMedication);
+		String currentMedicationText = "\n"+
+				   "I am"+"\n"+ 
+				   "current medication"+"\n";
+		JTextArea currentMedicationArea = new JTextArea(); 
+		currentMedicationArea.insert(currentMedicationText, 0);
+		scrollPaneCurrent.setViewportView(currentMedicationArea);
 		
 		//History scroll pane
 		JScrollPane scrollPaneHistory = new JScrollPane();
@@ -130,6 +144,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblHistory.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHistory.setFont(MedicationManagement.BODY_FONT);
 		scrollPaneHistory.setColumnHeaderView(lblHistory);
+		String historyText = "\n"+
+				   "I am"+"\n"+
+				   "history"+"\n";
+		JTextArea historyArea = new JTextArea(); 
+		historyArea.insert(historyText, 0);
+		scrollPaneHistory.setViewportView(historyArea);
 		
 		//Email scroll pane
 		JScrollPane scrollPaneEmail = new JScrollPane();
@@ -138,6 +158,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblEmail.setFont(MedicationManagement.BODY_FONT);
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPaneEmail.setColumnHeaderView(lblEmail);
+		String emailText = "\n"+
+				   "I am"+"\n"+
+				   "email"+"\n";
+		JTextArea emailArea = new JTextArea(); 
+		emailArea.insert(emailText, 0);
+		scrollPaneEmail.setViewportView(emailArea);
 		
 		//Phone scroll pane
 		JScrollPane scrollPanePhone = new JScrollPane();
@@ -146,6 +172,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblPhone.setFont(MedicationManagement.BODY_FONT);
 		lblPhone.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPanePhone.setColumnHeaderView(lblPhone);
+		String phoneText = "\n"+
+				   "I am"+"\n"+
+				   "phone"+"\n";
+		JTextArea phoneArea = new JTextArea(); 
+		phoneArea.insert(phoneText, 0);
+		scrollPanePhone.setViewportView(phoneArea);
 		
 		//Blue tooth scroll pane
 		JScrollPane scrollPaneBluetooth = new JScrollPane();
@@ -154,6 +186,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblBluetooth.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBluetooth.setFont(MedicationManagement.BODY_FONT);
 		scrollPaneBluetooth.setColumnHeaderView(lblBluetooth);
+		String blueToothText = "\n"+
+				   "I am"+"\n"+
+				   "bluetooth"+"\n";
+		JTextArea  blueToothArea = new JTextArea(); 
+		blueToothArea.insert(blueToothText, 0);
+		scrollPaneBluetooth.setViewportView(blueToothArea);
 		
 		//USB scroll pane
 		JScrollPane scrollPaneUSB = new JScrollPane();
@@ -162,6 +200,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblUsbConnection.setFont(MedicationManagement.BODY_FONT);
 		lblUsbConnection.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPaneUSB.setColumnHeaderView(lblUsbConnection);
+		String usbText = "\n"+
+				   "I am"+"\n"+
+				   "usb"+"\n";
+		JTextArea usbToothArea = new JTextArea(); 
+		usbToothArea.insert(usbText, 0);
+		scrollPaneUSB.setViewportView(usbToothArea);
 		
 		//About scroll pane
 		JScrollPane scrollPaneAbout = new JScrollPane();
@@ -170,6 +214,12 @@ public class HelpPanel extends JPanel implements TreeSelectionListener {
 		lblAbout.setFont(MedicationManagement.BODY_FONT);
 		lblAbout.setHorizontalAlignment(SwingConstants.CENTER);
 		scrollPaneAbout.setColumnHeaderView(lblAbout);
+		String aboutText = "\n"+
+				   "I am"+"\n"+
+				   "about"+"\n";
+		JTextArea aboutArea = new JTextArea(); 
+		aboutArea.insert(aboutText, 0);
+		scrollPaneAbout.setViewportView(aboutArea);
 		
 		return panelHelpBody;
 		
