@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -415,9 +416,10 @@ public class ContactsPanel extends JPanel implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonAdd) {
 			LoadingScreen screen = new LoadingScreen();//shows up the loading screen
+			screen.setLocation(new Point((this.getX() + this.getWidth() + screen.getWidth()) /2 ,
+					(this.getY() + this.getHeight() - screen.getHeight()) / 2));
 			Thread sT = new Thread(screen);//create a thread for the loading screen
 			sT.start();//start the thread and execute the run method 
-			screen.setLocation(MainFrame.LOCATION); 
 			Thread cT = new Thread(this); //create a thread for the MedicationPanel
 			cT.start();//start the thread and execute the run method 
 		}
