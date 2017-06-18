@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Font;
 
 /**
  * Login Frame
@@ -55,12 +56,6 @@ public class LoginFrame extends JFrame implements ActionListener{
 		sleepTimer = new Timer(500, this);
 		sleepTimer.setActionCommand("Sleep");
 		
-		//Login label
-		JLabel lblLogInTo = new JLabel("Log In");
-		lblLogInTo.setFont(MedicationManagement.HEADER_FONT);
-		lblLogInTo.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblLogInTo, BorderLayout.NORTH);
-		
 		//Add login area
 		contentPane.add(createLoginArea(), BorderLayout.CENTER);
 		
@@ -81,6 +76,18 @@ public class LoginFrame extends JFrame implements ActionListener{
 		GridBagLayout gbl_loginArea = new GridBagLayout();
 		loginArea.setLayout(gbl_loginArea);
 		
+		//Login label
+		JLabel lblLogInTo = new JLabel("Log In");
+		GridBagConstraints gbc_lblLogInTo = new GridBagConstraints();
+		gbc_lblLogInTo.anchor = GridBagConstraints.NORTH;
+		gbc_lblLogInTo.gridwidth = 2;
+		gbc_lblLogInTo.insets = new Insets(0, 0, 12, 5);
+		gbc_lblLogInTo.gridx = 0;
+		gbc_lblLogInTo.gridy = 0;
+		loginArea.add(lblLogInTo, gbc_lblLogInTo);
+		lblLogInTo.setFont(new Font("Arial", Font.PLAIN, 27));
+		lblLogInTo.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		//User name label
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(MedicationManagement.BODY_FONT);
@@ -88,7 +95,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.gridx = 0;
-		gbc_lblUsername.gridy = 0;
+		gbc_lblUsername.gridy = 1;
 		loginArea.add(lblUsername, gbc_lblUsername);
 		
 		//User name text field
@@ -97,7 +104,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_usernameTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_usernameTxt.fill = GridBagConstraints.HORIZONTAL;
 		gbc_usernameTxt.gridx = 1;
-		gbc_usernameTxt.gridy = 0;
+		gbc_usernameTxt.gridy = 1;
 		loginArea.add(usernameTxt, gbc_usernameTxt);
 		usernameTxt.setColumns(10);
 		
@@ -108,7 +115,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.gridx = 0;
-		gbc_lblPassword.gridy = 1;
+		gbc_lblPassword.gridy = 2;
 		loginArea.add(lblPassword, gbc_lblPassword);
 		
 		//Password text field
@@ -117,7 +124,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_passwordTxt.insets = new Insets(0, 0, 5, 5);
 		gbc_passwordTxt.fill = GridBagConstraints.HORIZONTAL;
 		gbc_passwordTxt.gridx = 1;
-		gbc_passwordTxt.gridy = 1;
+		gbc_passwordTxt.gridy = 2;
 		loginArea.add(passwordTxt, gbc_passwordTxt);
 		passwordTxt.setColumns(10);
 		
@@ -130,7 +137,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_btnLogin.insets = new Insets(0, 0, 0, 5);
 		gbc_btnLogin.gridwidth = 2;
 		gbc_btnLogin.gridx = 0;
-		gbc_btnLogin.gridy = 2;
+		gbc_btnLogin.gridy = 3;
 		Image goIcon = new ImageIcon(this.getClass().getResource("go.png")).getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
 		btnLogin.setIcon(new ImageIcon(goIcon)); //Add an image to the button
 		btnLogin.setHorizontalTextPosition(SwingConstants.LEFT); //Set the image to the right of the text
@@ -143,7 +150,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		lockIcon.setIcon(new ImageIcon(lockImage));
 		gbc_lockIcon.insets = new Insets(0, 0, 5, 0);
 		gbc_lockIcon.gridx = 2;
-		gbc_lockIcon.gridy = 1;
+		gbc_lockIcon.gridy = 2;
 		loginArea.add(lockIcon, gbc_lockIcon);
 		btnLogin.setActionCommand("Login");
 		loginArea.add(btnLogin, gbc_btnLogin);
@@ -159,7 +166,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		gbc_btnHelp.anchor = GridBagConstraints.WEST;
 		gbc_btnHelp.fill = GridBagConstraints.VERTICAL;
 		gbc_btnHelp.gridx = 2;
-		gbc_btnHelp.gridy = 2;
+		gbc_btnHelp.gridy = 3;
 		btnHelp.addActionListener(this);
 		btnHelp.setActionCommand("Help");
 		loginArea.add(btnHelp, gbc_btnHelp);
